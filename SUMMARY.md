@@ -9,6 +9,7 @@
 * [Introduction & Design](book/introduction-and-design.md)
 * [Types](book/types/README.md)
   * [Numbers](book/types/numbers.md)
+  * [Prototypes](book/types/prototypes.md)
 
 ## libraries
 
