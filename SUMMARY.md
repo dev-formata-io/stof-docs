@@ -10,6 +10,9 @@
 * [Types](book/types/README.md)
   * [Numbers](book/types/numbers.md)
   * [Prototypes](book/types/prototypes.md)
+* [Fields](book/fields.md)
+* [Root Objects](book/root-objects.md)
+* [Functions](book/functions.md)
 
 ## libraries
 
