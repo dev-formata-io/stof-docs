@@ -4,100 +4,80 @@ description: Introduction to Stof.
 
 # 🚀 Welcome
 
-[Stof](https://stof.dev) is the future of data representation and utilization. It [unifies and organizes data in layers](book/introduction-and-design.md), providing a simple, efficient, and portable interface into a complex and dynamic environment.
+[Stof](https://stof.dev) is the simplest way to create, store, share, and transform unified data.
 
-One of the data layers a Stof document can contain is a functional one (code as data & data as code), enabling Stof to manipulate itself as it moves and changes. Shifting logic from the application layer into the data layer improves scalability and security while standardizing data handling. It also provides new methods to tackle pressing challenges like data governance, security, and interoperability.
-
-Designed to work seamlessly with other data formats and standards, Stof adds value to every toolchain, either as a drop-in replacement or as a compliment to existing tools and formats.
-
-Some of the many challenges we are addressing include:
-
-* Moving lightweight logic (as data) over the wire instead of large, sensitive data payloads.
-* Unification and translation of data between systems, aiding orchestration and federation.
-* Governance, security, and access control.
-* Structuring, typing, and schematizing.
-* Portable, dynamic, and reusable interfaces (functions, transformations, and business logic).
-* Multiple, layered interfaces (code, fields, metadata, meta code, etc. combined).
-* Bridging gaps between toolchains and environments.
-
-By addressing these challenges, Stof can help lower development costs, drastically improve developer experience, and lay a better foundation for modern software.
-
-{% hint style="info" %}
-Stof is a new open-source project in active development. There's a lot to do! If you have ideas, use cases, or are passionate about these areas of exploration, please [contact us](https://stof.dev/contact-us) and [get involved](resources-and-information.md). The best way you can support us is by [sponsoring this project](https://github.com/dev-formata-io/stof).
-{% endhint %}
-
-### Hello, World!
-
-In its most basic form, Stof is just a more friendly JSON document. To begin understanding Stof, it might help to think of it as a JSON document that is turned into a program.
+* [Repository](https://github.com/dev-formata-io/stof)
+* [Discord](https://discord.gg/Up5kxdeXZt)
+* [Crates](https://crates.io/crates/stof)
+* [CLI](https://crates.io/crates/stof-cli)
+* [Contact](https://stof.dev/contact-us)
 
 {% hint style="success" %}
-**For declaring data, Stof is a superset of JSON - valid JSON will always be valid Stof.**
+Current Stof Version: `v0.8.0`
+
+Current CLI Version: `stof-cli 0.11.0`
 {% endhint %}
-
-```rust
-{
-    "message": "Hello, World!"
-    
-    fn hello() {
-        pln(self.message);
-    }
-}
-```
-
-This example is meant to show the connection to JSON, and the simplicity of Stof.
-
-However, we can rewrite this to an equivalent version that looks much nicer. The #\[main] attribute tells Stof which functions to call when we run this document.
-
-```rust
-message: "Hello, World!"
-
-#[main]
-fn hello() {
-    pln(self.message);
-}
-```
-
-{% hint style="info" %}
-See [run.md](reference/cli/run.md "mention") for more information on the Stof CLI. We'll use the CLI for examples instead of embedding Stof in host languages to keep examples centered on Stof.
-{% endhint %}
-
-```
-> stof run hello.stof
-Hello, World!
-```
 
 ### Example
 
+{% hint style="info" %}
+Stof also parses normal JSON object syntax
+{% endhint %}
+
 ```rust
-users: [
+const list users: [              // optional type and const specification for fields
     {
         name: "Joe Schmo",       // commas or semi-colons accepted, but optional
-        cm height: 6ft + 1in     // Stof adds units and declarations as expressions
+        cm height: 6ft + 1in     // Stof adds units and declarations are expressions
         age: +32;                // trailing commas or semi-colons are okay
     },                           // trailing commas in arrays are okay
 ]
 
-fn getJoe(): obj {               // Stof adds data types (casting, etc..)
-    for (user in self.users) {
-        if (user.name.toLower().contains("joe")) return user;
+fn joe() -> obj {                // functions are document data, just like fields
+    for (const user in self.users) {
+        if (user.name.lower().contains("joe")) return user;
     }
-    return null;
+    null
 }
 
-#[main]
+#[main]                          // main attribute to mark this func for 'run'
+#[custom({'ex': true})]          // metadata values (funcs, maps, objs, etc.)
 fn main() {
-    let joe = self.getJoe();
-    pln(stringify(joe, 'toml')); // any format loaded into the doc (parse too)
+    const joe = self.joe();
+    assert(this.attributes().get("custom").get("ex"));
+    
+    async {                                // async at the core (funcs & exprs too)
+        let body = stringify("toml", joe); // any loaded format (binary & parse too)
+        body.push("stof = true\n");
+        pln(body);
+    }
 }
 ```
 
-```
+```bash
 > stof run example.stof
 age = 32
 height = 185.42
 name = "Joe Schmo"
+stof = true
 ```
 
-{% hint style="info" %}
-For "height", the value is 185.42 because we told Stof the type of that field is "cm", which casts "6ft + 1in" to centimeters. Types are not required for field declarations, but can always be provided. See [units.md](common-concepts/units.md "mention") for more information on units in Stof.
-{% endhint %}
+### Motivations
+
+1. If you've ever wished you could put different data formats into a singular document and manipulate them all at once with a standard (and modern) interface, you're in the right spot.
+2. If you've wanted a singular API that could be used across servers and within different environments, well, now you can.
+3. If you've been looking for that YAML or JSON replacement/addition that adds a simple programming layer and type system that just makes sense, keep reading.
+4. If you have an embedded environment where you need to run user-sent or untrusted code (especially over the wire), you're pretty good at looking for solutions because you're here.
+5. If you've ever thought to yourself, "code is just data itself, so why can't I work with it as such?", then you're also in the right place.
+
+### How
+
+Stof can look and feel like a familiar programming interface, but it's just a document of data that comes with a runtime for manipulating itself in a sandbox you control.
+
+Because it's just a normal document of data, it can be shared, stored, combined, split, and otherwise transformed, and seamlessly works with other formats (both binary and text import/export).
+
+We say "data" instead of "field" (like other formats) because a field is just one type of data component (functions are another). Stof is built like an Entity Component System, where components (data) can be anything you'd like, even large PDF documents, 3D models, or binary voice data. All can then be organized cleanly and worked with via Stof functions.
+
+### Contributing
+
+We have an awesome and growing community, so jump in and consider supporting the project.
