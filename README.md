@@ -11,6 +11,7 @@ description: Introduction to Stof.
 * [Crates](https://crates.io/crates/stof)
 * [CLI](https://crates.io/crates/stof-cli)
 * [Contact](https://stof.dev/contact-us)
+* [Examples](https://github.com/dev-formata-io/stof/tree/main/examples)
 
 {% hint style="success" %}
 Current Stof Version: `v0.8.0`

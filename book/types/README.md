@@ -205,7 +205,7 @@ fn main() {
 
 ## Data
 
-As outlined in the [introduction-and-design.md](introduction-and-design.md "mention"), Stof organizes a lot of different types of data, even custom types. The "data" type is an opaque pointer to any data that exists on a node (object). This includes functions and fields, but also data that you could define yourself, like a PDF document, Image, or anything you'd like.
+As outlined in the [introduction-and-design.md](../introduction-and-design.md "mention"), Stof organizes a lot of different types of data, even custom types. The "data" type is an opaque pointer to any data that exists on a node (object). This includes functions and fields, but also data that you could define yourself, like a PDF document, Image, or anything you'd like.
 
 {% hint style="info" %}
 We'll go over the data concept in greater detail later on in the book.

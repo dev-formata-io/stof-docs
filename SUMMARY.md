@@ -7,7 +7,8 @@
 * [Installation](book/installation.md)
 * [Hello, World](book/hello-world.md)
 * [Introduction & Design](book/introduction-and-design.md)
-* [Types](book/types.md)
+* [Types](book/types/README.md)
+  * [Numbers](book/types/numbers.md)
 
 ## libraries
 
