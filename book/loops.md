@@ -60,7 +60,7 @@ fn main() {
 
 ## Tagging
 
-Loops can be tagged for greater control and readability.
+All loops can be tagged for greater control and readability.
 
 ```rust
 iterator: {
