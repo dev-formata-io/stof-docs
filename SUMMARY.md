@@ -13,6 +13,7 @@
 * [Fields](book/fields.md)
 * [Root Objects](book/root-objects.md)
 * [Functions](book/functions.md)
+* [Loops](book/loops.md)
 
 ## libraries
 

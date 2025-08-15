@@ -168,3 +168,31 @@ fn main() {
     async_func();
 }
 ```
+
+### As a Field
+
+There are times when functions (or function pointers "fn") end up as a field. You can call them just like normal functions!
+
+```rust
+name: "Bob Smith"
+message: (name: str = self.name): str => `Hi, ${name}`
+
+#[main]
+fn main() {
+    pln(self.message()); // "Hi, Bob Smith"
+}
+```
+
+## Return
+
+A return statement is one without a semi-colon, returning the last value on the stack. Or, an explicit "return" statement within the function.
+
+```rust
+#[main]
+fn main() -> int {
+    for (const i in 100) {
+        if (i > 50) return i; // return from the function with 51
+    }
+    -1                        // return with -1
+}
+```
