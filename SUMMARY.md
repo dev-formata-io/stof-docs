@@ -18,6 +18,7 @@
 * [Imports](book/imports.md)
 * [Exports](book/exports.md)
 * [Testing](book/testing.md)
+* [Schemas](book/schemas.md)
 
 ## libraries
 
