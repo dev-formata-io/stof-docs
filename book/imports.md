@@ -77,3 +77,23 @@ import text "./docs.md" as Object; // will create a new root Object if needed
 // Object.text field now contains the str contents of "docs.md"
 fn markdown() -> str { Object.text }
 ```
+
+## Path "@" -> "stof"
+
+If an import path contains an "@", Stof will transform it into "stof/". This is helpful for defining packages and eventually a package manager.
+
+{% hint style="info" %}
+The "pkg" format works with directories containing a "pkg.stof" file that has an "import" field with file(s) (paths) to import (all relative to the directory that contains the "pkg.stof" file).
+
+This, in combination with "@" can create a package import feel that is familiar coming from other languages.
+{% endhint %}
+
+```javascript
+import "@formata";
+import "stof/formata.stof"; // equivalent import
+
+// using the pkg format as mentioned in the hint above
+// uses an "import" field located in "stof/formata/pkg.stof"
+// string path(s) at this field location are relative to "stof/formata"
+import pkg "@formata";
+```
