@@ -21,6 +21,7 @@
 * [Testing](book/testing.md)
 * [Schemas](book/schemas.md)
 * [Object Run](book/object-run.md)
+* [Async](book/async.md)
 
 ## libraries
 
