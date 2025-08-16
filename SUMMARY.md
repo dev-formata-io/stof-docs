@@ -19,6 +19,7 @@
 * [Exports](book/exports.md)
 * [Testing](book/testing.md)
 * [Schemas](book/schemas.md)
+* [Running Objects](book/running-objects.md)
 
 ## libraries
 
