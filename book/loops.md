@@ -58,9 +58,21 @@ fn main() {
 }
 ```
 
+For loops can take values by reference as well, with the "&" operator.
+
+```rust
+#[main]
+fn main() {
+    const list = [1, 2, 3];
+    for (let val in &list) val += 2;
+    
+    assert_eq(list, [3, 4, 5]);
+}
+```
+
 ## Tagging
 
-All loops can be tagged for greater control and readability.
+All loops can be tagged for greater control and readability (while, loop, & for). Once a loop is tagged, both "continue ^tag" and "break ^tag" will control that loop, regardless of nested loop structure.
 
 ```rust
 iterator: {

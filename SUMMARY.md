@@ -13,13 +13,14 @@
 * [Fields](book/fields.md)
 * [Root Objects](book/root-objects.md)
 * [Functions](book/functions.md)
+* [Variables & References](book/variables-and-references.md)
 * [Loops](book/loops.md)
 * [Error Handling](book/error-handling.md)
 * [Imports](book/imports.md)
 * [Exports](book/exports.md)
 * [Testing](book/testing.md)
 * [Schemas](book/schemas.md)
-* [Running Objects](book/running-objects.md)
+* [Object Run](book/object-run.md)
 
 ## libraries
 

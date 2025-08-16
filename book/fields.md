@@ -97,3 +97,19 @@ fn cannot_see() {
     assert_not(self.Inner.private_field);
 }
 ```
+
+## Creating Fields
+
+While working with data, it is often needed to create new fields. This is accomplished with an assignment when assigning to a path. The field does not have to already exist, and any objects referenced in the path will be created (if not already existing) to make the path valid (including roots).
+
+```rust
+#[main]
+fn main() {
+    // creating a new field called "created" on "self"
+    self.created = Time.now();
+    assert(Time.now() >= self.created);
+    
+    // creating a new object "NewObject" on "root" and a new field called "nested"
+    root.NewObject.nested = true;
+}
+```

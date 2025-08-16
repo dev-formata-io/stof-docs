@@ -4,7 +4,7 @@ description: Special library for standard operations (print, assert, etc.).
 
 # Standard Library (Std)
 
-Functions in the 'Std' library are foundational to Stof and therefore do not require one to explicitly reference 'Std' when calling them. Within the standard library, you'll find functions for asserting values, printing to the console, throwing errors, putting processes to sleep, etc. Note for advanced users that it is possible to extend or modify this library as needed.
+Functions in the 'Std' library are foundational to Stof and therefore do not require one to reference 'Std' when calling them explicitly. Within the standard library, you'll find functions for asserting values, printing to the console, throwing errors, putting processes to sleep, etc. Note for advanced users that it is possible to extend or modify this library as needed.
 
 ### Example Usage
 
@@ -54,7 +54,7 @@ assert_not(true); // errors
 
 ## Std.blobify(format: str = "json", context: obj = null) -> blob
 
-Use a loaded format to export a binary blob from the given context (or entire graph/document). The default format is json, and the standard implementation only exports object fields. Export results will vary depending on the format, some support more than others (it is up to the format implementation to decide how it exports data). You can always create your own to use.
+Use a loaded format to export a binary blob from the given context (or entire graph/document). The default format is JSON, and the standard implementation only exports object fields. Export results will vary depending on the format; some support more than others (it is up to the format implementation to decide how it exports data). You can always create your own to use.
 
 ```rust
 const object = new { x: 3.14km, y: 42m };
@@ -64,7 +64,7 @@ assert(export.len() > 0);
 
 ## Std.callstack() -> list
 
-Return the current callstack as a list of function pointers (last function is 'this').
+Return the current call stack as a list of function pointers (last function is 'this').
 
 ```rust
 // inside a function call
@@ -98,7 +98,7 @@ Print a snapshot of the current stack.
 
 ## Std.drop(..) -> bool | list
 
-Drop fields (by str path), functions (path or fn), objects (path or obj), and data from the graph. Objects will have their #\[dropped] functions called when dropped. When dropping multiple values at once, this will return a list of booleans indicating a successful removal or not for each value.
+Drop fields (by str path), functions (path or fn), objects (path or obj), and data from the graph. Objects will have their #\[dropped] functions called when dropped. When dropping multiple values at once, this function returns a list of booleans indicating whether each value was successfully removed or not.
 
 ```rust
 const func = () => {};
@@ -117,7 +117,7 @@ err("hello, world");
 
 ## Std.exit(..) -> void
 
-Immediately terminates this (or another) Stof process. Pass a promise into this function to terminate it's processes execution.
+Immediately terminates this (or another) Stof process. Pass a promise into this function to terminate it's process execution.
 
 ```rust
 const promise = async {
@@ -222,7 +222,7 @@ assert_eq(min(1km, 2m, 3mm), 3mm);
 
 ## Std.nanoid(length: int = 21) -> str
 
-Generate a URL safe random string ID, using the nanoid algorithm with a specified length (default is 21 characters). Probability of a collision is very low, and inversely proportional to ID length.
+Generate a URL-safe random string ID, using the nanoid algorithm with a specified length (default is 21 characters). The probability of a collision is very low and inversely proportional to ID length.
 
 ```rust
 assert_neq(nanoid(), nanoid(33));
@@ -235,6 +235,15 @@ Parse data into this document/graph at the given location (default context is th
 ```rust
 parse("fn hello() -> str { \"hello\" }");
 assert_eq(self.hello(), "hello"); // can now call it
+```
+
+## Std.peek(..) -> void
+
+Trace this location within your code execution. Will print out your arguments plus process debug information and the next instructions on the instruction stack. If the last argument given is an integer value, that number of (future) instructions will be shown (very helpful for deeper debugging).
+
+```rust
+peek("Getting here"); // will print "Getting here", then output a trace of the current process info and next 10 instructions to be executed
+peek(70); // next 70 instructions
 ```
 
 ## Std.pln(..) -> void
@@ -303,7 +312,7 @@ assert_eq(b, 42);
 
 ## Std.throw(value: unknown = "Error") -> void
 
-Throw an error with an optional value. Optionally catch this value within a try-catch block. Otherwise, this process will immediately hault executing with the given error.
+Throw an error with an optional value. Optionally catch this value within a try-catch block. Otherwise, this process will immediately halt execution with the given error.
 
 ```rust
 throw("error message");
