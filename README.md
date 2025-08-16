@@ -17,29 +17,29 @@ description: Introduction to Stof.
 {% endhint %}
 
 ```rust
-const list users: [              // optional type and const specification for fields
+const list users: [              // optional field type and const
     {
         name: "Joe Schmo",       // commas or semi-colons accepted, but optional
-        cm height: 6ft + 1in     // Stof adds units and declarations are expressions
-        age: +32;                // trailing commas or semi-colons are okay
-    },                           // trailing commas in arrays are okay
+        cm height: 6ft + 1in     // unit types and declarations are expressions
+        age: +32;                // trailing commas or semi-colons
+    },                           // trailing commas in arrays
 ]
 
-fn joe() -> obj {                // functions are document data, just like fields
+fn joe() -> obj {                // functions, fields, and complex data
     for (const user in self.users) {
         if (user.name.lower().contains("joe")) return user;
     }
     null
 }
 
-#[main]                          // main attribute to mark this func for 'run'
+#[main]                          // func & field attributes for control
 #[custom({'ex': true})]          // metadata values (funcs, maps, objs, etc.)
 fn main() {
     const joe = self.joe();
     assert(this.attributes().get("custom").get("ex"));
     
     async {                                // async at the core (funcs & exprs too)
-        let body = stringify("toml", joe); // any loaded format (binary & parse too)
+        let body = stringify("toml", joe); // format I/O (binary & parse too)
         body.push("stof = true\n");
         pln(body);
     }
@@ -55,7 +55,7 @@ stof = true
 ```
 
 {% hint style="success" %}
-JSON object & field syntax is supported also.
+JSON object & field syntax is also supported.
 {% endhint %}
 
 ### Motivations
