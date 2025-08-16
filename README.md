@@ -8,18 +8,13 @@ description: Introduction to Stof.
 
 * [Repository](https://github.com/dev-formata-io/stof)
 * [Discord](https://discord.gg/Up5kxdeXZt)
-* [Crates](https://crates.io/crates/stof)
-* [CLI](https://crates.io/crates/stof-cli)
 * [Contact](https://stof.dev/contact-us)
-* [Examples](https://github.com/dev-formata-io/stof/tree/main/examples)
 
 {% hint style="success" %}
-Current Stof Version: `v0.8.0`
+[Stof](https://crates.io/crates/stof):  `v0.8.*`
 
-Current CLI Version: `stof-cli 0.11.0`
+[CLI](https://crates.io/crates/stof-cli):  `v0.11.*`
 {% endhint %}
-
-### Example
 
 {% hint style="info" %}
 Stof also parses normal JSON object syntax
