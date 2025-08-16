@@ -16,10 +16,6 @@ description: Introduction to Stof.
 [CLI](https://crates.io/crates/stof-cli):  `v0.11.*`
 {% endhint %}
 
-{% hint style="info" %}
-Stof also parses normal JSON object syntax
-{% endhint %}
-
 ```rust
 const list users: [              // optional type and const specification for fields
     {
@@ -58,22 +54,26 @@ name = "Joe Schmo"
 stof = true
 ```
 
+{% hint style="success" %}
+JSON object & field syntax is supported also.
+{% endhint %}
+
 ### Motivations
 
-1. If you've ever wished you could put different data formats into a singular document and manipulate them all at once with a standard (and modern) interface, you're in the right spot.
-2. If you've wanted a singular API that could be used across servers and within different environments, well, now you can.
+1. If you've ever wished you could put different data formats into a singular document and manipulate them at once with a standard interface, you're in the right spot.
+2. If you've wanted a singular API that could be used across servers and within different environments, well, here it is.
 3. If you've been looking for that YAML or JSON replacement/addition that adds a simple programming layer and type system that just makes sense, keep reading.
-4. If you have an embedded environment where you need to run user-sent or untrusted code (especially over the wire), you're pretty good at looking for solutions because you're here.
+4. If you have an embedded environment where you need to run user-sent or untrusted code (especially over the wire), you're looking at a good tool for it.
 5. If you've ever thought to yourself, "code is just data itself, so why can't I work with it as such?", then you're also in the right place.
 
 ### How
 
-Stof can look and feel like a familiar programming interface, but it's just a document of data that comes with a runtime for manipulating itself in a sandbox you control.
+Stof can look and feel like a familiar programming interface, but it's a document of data that comes with a runtime for manipulating itself in a sandbox you control.
 
-Because it's just a normal document of data, it can be shared, stored, combined, split, and otherwise transformed, and seamlessly works with other formats (both binary and text import/export).
+Because it's a document of data, it can be shared, stored, combined, split, and otherwise transformed, and seamlessly works with other formats (both binary and text import/export).
 
-We say "data" instead of "field" (like other formats) because a field is just one type of data component (functions are another). Stof is built like an Entity Component System, where components (data) can be anything you'd like, even large PDF documents, 3D models, or binary voice data. All can then be organized cleanly and worked with via Stof functions.
+We say "data" instead of "fields" (like other formats) because a field is just one type of data component (functions are another). Stof is built like an Entity Component System, where components (data) can be anything you'd like, even large PDF documents, 3D models, or binary voice data.
 
 ### Contributing
 
-We have an awesome and growing community, so jump in and consider supporting the project.
+We have a new, awesome, and growing community, so jump in and [contribute](https://github.com/dev-formata-io/stof). This is an excellent opportunity to get in on the ground floor of an open-source project.
