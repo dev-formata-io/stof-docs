@@ -13,12 +13,12 @@ Check out [custom-embedded.md](../book/custom-embedded.md "mention") and [import
 {% tabs %}
 {% tab title="main.stof" %}
 ```rust
-import './data'
+import "./data"
 
 #[main]
 fn main() {
-    assert_eq(self.message, 'hello, world');
-    assert_eq(self.person.name, 'Bob Smith');
+    assert_eq(self.message, "hello, world");
+    assert_eq(self.person.name, "Bob Smith");
     assert_eq(self.person.age, 42);
 }
 ```
@@ -26,9 +26,9 @@ fn main() {
 
 {% tab title="data.stof" %}
 ```rust
-message: 'hello, world'
+message: "hello, world"
 person: {
-    name: 'Bob Smith'
+    name: "Bob Smith"
     age: 42
 }
 ```

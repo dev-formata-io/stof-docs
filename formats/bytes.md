@@ -13,14 +13,14 @@ This format is handy as it allows virtually all imports (into an abstract blob).
 ```rust
 #[main]
 fn main() {
-    const bytes: blob = 'hello, world';
+    const bytes: blob = "hello, world";
     const object = new {};
-    parse(bytes, object, format = 'bytes');
+    parse(bytes, object, format = "bytes");
     
-    assert_eq(typeof object.bytes, 'blob');
-    assert_eq(object.bytes as str, 'hello, world');
+    assert_eq(typeof object.bytes, "blob");
+    assert_eq(object.bytes as str, "hello, world");
     
-    const export = blobify('bytes', object);
-    assert_eq(export as str, 'hello, world');
+    const export = blobify("bytes", object);
+    assert_eq(export as str, "hello, world");
 }
 ```

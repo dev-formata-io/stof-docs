@@ -18,15 +18,15 @@ person:
 
 {% tab title="test.stof" %}
 ```rust
-import './test.yaml';
+import "./test.yaml";
 
 #[main]
 fn main() {
-    assert_eq(self.message, 'hello, world');
-    assert_eq(self.person.name, 'Bob Smith');
+    assert_eq(self.message, "hello, world");
+    assert_eq(self.person.name, "Bob Smith");
     assert_eq(self.person.age, 42);
     
-    pln(stringify('yaml', self));
+    pln(stringify("yaml", self));
 }
 ```
 {% endtab %}

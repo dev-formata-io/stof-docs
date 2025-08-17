@@ -14,16 +14,16 @@ You've probably picked up on how formats work by now - the file extension ends u
 #[main]
 fn main() {
     const object = new {
-        a: 'hello',
+        a: "hello",
         b: 42,
         c: true,
     };
-    const encoded = stringify('urlencoded', object);
-    assert_eq(encoded, 'a=hello&b=42&c=true');
+    const encoded = stringify("urlencoded", object);
+    assert_eq(encoded, "a=hello&b=42&c=true");
     
     const import = new {};
-    parse(encoded, import, 'urlencoded');
-    assert_eq(import.a, 'hello');
+    parse(encoded, import, "urlencoded");
+    assert_eq(import.a, "hello");
     assert_eq(import.b, 42);
     assert_eq(import.c, true);
 }

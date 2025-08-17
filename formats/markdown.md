@@ -18,7 +18,7 @@ This is an example.
 
 {% tab title="test.stof" %}
 ```rust
-import './test.md'; // has both "md" and "markdown" as identifiers
+import "./test.md"; // has both "md" and "markdown" as identifiers
 
 #[main]
 fn main() {

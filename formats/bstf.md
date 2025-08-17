@@ -10,15 +10,15 @@ The "bstf" format allows an entire Stof document to be serialized into a binary 
 #[main]
 fn main() {
     const object = new {
-        msg: 'hello, world',
+        msg: "hello, world",
         val: 42,
     };
-    const bytes = blobify('bstf', object);
-    assert_eq(typeof bytes, 'blob');
+    const bytes = blobify("bstf", object);
+    assert_eq(typeof bytes, "blob");
 
     const dest = new {};
-    parse(bytes, dest, 'bstf');
-    assert_eq(dest.msg, 'hello, world');
+    parse(bytes, dest, "bstf");
+    assert_eq(dest.msg, "hello, world");
     assert_eq(dest.val, 42);
 }
 ```
