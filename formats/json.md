@@ -1,5 +1,5 @@
 ---
-description: Stof & JSON
+description: JSON format (application/json).
 ---
 
 # JSON

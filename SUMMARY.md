@@ -48,4 +48,12 @@
 
 ## formats
 
+* [Stof](formats/stof.md)
 * [JSON](formats/json.md)
+* [TOML](formats/toml.md)
+* [YAML](formats/yaml.md)
+* [Text](formats/text.md)
+* [Markdown](formats/markdown.md)
+* [Bytes](formats/bytes.md)
+* [URL-Encoded](formats/url-encoded.md)
+* [Bstf](formats/bstf.md)
