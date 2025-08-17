@@ -22,6 +22,7 @@
 * [Schemas](book/schemas.md)
 * [Object Run](book/object-run.md)
 * [Async](book/async.md)
+* [Custom Embedded](book/custom-embedded.md)
 
 ## libraries
 
@@ -44,3 +45,7 @@
 * [HTTP Network Library (Http)](libraries/http-network-library-http.md)
 * [Image Library (Image)](libraries/image-library-image.md)
 * [PDF Library (Pdf)](libraries/pdf-library-pdf.md)
+
+## formats
+
+* [JSON](formats/json.md)

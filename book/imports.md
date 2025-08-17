@@ -97,3 +97,28 @@ import "stof/formata.stof"; // equivalent import
 // string path(s) at this field location are relative to "stof/formata"
 import pkg "@formata";
 ```
+
+## Stof Importing Stof
+
+Because of how Stof is implemented as a format, you can parse and modify Stof with Stof functions, just like any other data format.
+
+{% hint style="info" %}
+You might be thinking that this is a security nightmare, but the host environment controls every aspect of how Stof can interact with it (libraries & formats).
+
+These cannot be manipulated from within Stof. This keeps the integrity of the Stof sandbox, limiting any parsed functions from touching the underlying system (even if it's external, like from an HTTP request).
+{% endhint %}
+
+```rust
+#[main]
+fn main() {
+    const stof = r#"
+        fn my_function() {
+            pln("Isn't this cool!");
+        }
+    "#;
+    parse(stof, self, format = "stof");
+    
+    // can use it immediately
+    self.my_function();
+}
+```
