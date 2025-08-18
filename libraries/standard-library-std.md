@@ -1,10 +1,12 @@
 ---
-description: Special library for standard operations (print, assert, etc.).
+description: Library for standard operations (print, assert, etc.).
 ---
 
 # Standard Library (Std)
 
-Functions in the 'Std' library are foundational to Stof and therefore do not require one to reference 'Std' when calling them explicitly. Within the standard library, you'll find functions for asserting values, printing to the console, throwing errors, putting processes to sleep, etc. Note for advanced users that it is possible to extend or modify this library as needed.
+## Standard Library (Std)
+
+Functions in the 'Std' library are foundational to Stof and therefore do not require one to explicitly reference 'Std' when calling them. Within the standard library, you'll find functions for asserting values, printing to the console, throwing errors, putting processes to sleep, etc. Note for advanced users that it is possible to extend or modify this library as needed.
 
 ### Example Usage
 
@@ -54,7 +56,7 @@ assert_not(true); // errors
 
 ## Std.blobify(format: str = "json", context: obj = null) -> blob
 
-Use a loaded format to export a binary blob from the given context (or entire graph/document). The default format is JSON, and the standard implementation only exports object fields. Export results will vary depending on the format; some support more than others (it is up to the format implementation to decide how it exports data). You can always create your own to use.
+Use a loaded format to export a binary blob from the given context (or entire graph/document). The default format is json, and the standard implementation only exports object fields. Export results will vary depending on the format; some support more than others (it is up to the format implementation to decide how it exports data). You can always create your own to use.
 
 ```rust
 const object = new { x: 3.14km, y: 42m };
@@ -98,13 +100,29 @@ Print a snapshot of the current stack.
 
 ## Std.drop(..) -> bool | list
 
-Drop fields (by str path), functions (path or fn), objects (path or obj), and data from the graph. Objects will have their #\[dropped] functions called when dropped. When dropping multiple values at once, this function returns a list of booleans indicating whether each value was successfully removed or not.
+Drop fields (by str path), functions (path or fn), objects (path or obj), and data from the graph. Objects will have their #\[dropped] functions called when dropped. When dropping multiple values at once, this will return a list of booleans indicating a successful removal or not for each value.
 
 ```rust
 const func = () => {};
 const object = new {};
 const results = drop("self.field", func, object);
 assert_eq(results, [true, true, true]);
+```
+
+## Std.env(var: str) -> str
+
+Get an environment variable by name. Requires the "system" feature flag.
+
+```rust
+const var = env("HOST");
+```
+
+## Std.env\_vars() -> map
+
+Get a map of the current environment variables (str, str). Requires the "system" feature flag.
+
+```rust
+const vars: map = env_vars();
 ```
 
 ## Std.err(..) -> void
@@ -117,7 +135,7 @@ err("hello, world");
 
 ## Std.exit(..) -> void
 
-Immediately terminates this (or another) Stof process. Pass a promise into this function to terminate it's process execution.
+Immediately terminates this (or another) Stof process. Pass a promise into this function to terminate its process execution.
 
 ```rust
 const promise = async {
@@ -239,7 +257,7 @@ assert_eq(self.hello(), "hello"); // can now call it
 
 ## Std.peek(..) -> void
 
-Trace this location within your code execution. Will print out your arguments plus process debug information and the next instructions on the instruction stack. If the last argument given is an integer value, that number of (future) instructions will be shown (very helpful for deeper debugging).
+Trace this location within your code execution. Will print out your arguments, plus process debug information and the next instructions on the instruction stack. If the last argument given is an integer value, that number of (future) instructions will be shown (very helpful for deeper debugging).
 
 ```rust
 peek("Getting here"); // will print "Getting here", then output a trace of the current process info and next 10 instructions to be executed
@@ -254,12 +272,28 @@ Prints all arguments to the standard output stream.
 pln("hello, world");
 ```
 
+## Std.remove\_env(var: str) -> void
+
+Remove an environment variable by name. Requires the "system" feature flag.
+
+```rust
+remove_env("HOST");
+```
+
 ## Std.set(..) -> set
 
 Construct a new set with the given arguments.
 
 ```rust
 assert_eq(set(1, 2, 3), {1, 2, 3});
+```
+
+## Std.set\_env(var: str, value: str) -> void
+
+Set an environment variable by name with a value. Requires the "system" feature flag.
+
+```rust
+set_env("HOST", "localhost");
 ```
 
 ## Std.shallow\_drop(..) -> bool | list
@@ -275,7 +309,7 @@ assert(object.exists()); // object was kept around
 
 ## Std.sleep(time: ms) -> void
 
-Instruct this process to sleep for an amount of time, while others continue executing. Use time units for specificity, but don't expect this to be very accurate (guaranteed it will sleep for at least this long, but maybe longer). Default unit is milliseconds.
+Instruct this process to sleep for an amount of time, while others continue executing. Use time units for specificity, but don't expect this to be very accurate (guaranteed it will sleep for at least this long, but maybe longer). The default unit is milliseconds.
 
 ```rust
 sleep(1s); // sleep for 1 second
@@ -320,7 +354,7 @@ throw("error message");
 
 ## Std.trace(..) -> void
 
-Trace this location within your code execution. Will print out your arguments plus process debug information and the current instruction stack. If the last argument given is an integer value, that number of executed instruction stack instructions will be shown (very helpful for deeper debugging).
+Trace this location within your code execution. Will print out your arguments, plus process debug information and the current instruction stack. If the last argument given is an integer value, the number of executed instruction stack instructions will be shown (very helpful for deeper debugging).
 
 ```rust
 trace("Getting here"); // will print "Getting here", then output a trace of the current process info and last 10 executed instructions
