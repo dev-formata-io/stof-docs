@@ -41,6 +41,7 @@ database: {
     const str host: env("DB_HOST") ?? "localhost" // logic & types!
     int max_connections: 100
     ms timeout: 3s                                // units!
+    GiB storage: 2TiB
     
     // validation
     fn validate() -> bool {
