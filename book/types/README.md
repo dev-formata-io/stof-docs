@@ -179,7 +179,11 @@ fn main() {
 
 ## Unknown
 
-The "unknown" type is difficult to accept as a language designer, but very needed in Stof, where languages, data, and APIs come together dynamically. Especially useful in use cases like schemas, dynamic field transformations, or when you're not sure what type of data you'll receive in a function call.
+The "unknown" type is needed in Stof, where languages, data, and APIs come together dynamically. Especially useful in use cases like schemas, dynamic field transformations, or when you're not sure what type of data you'll receive in a function call.
+
+{% hint style="info" %}
+The "unknown" type is just syntax for "match with any type". Each value always has a type, so when using "unknown" (or union types), make sure to check types yourself to ensure operations do not result in an error.
+{% endhint %}
 
 ```rust
 #[main]
