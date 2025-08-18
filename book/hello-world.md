@@ -2,7 +2,7 @@
 description: The worlds best example.
 ---
 
-# Hello, World
+# 🌎 Hello, World
 
 ```rust
 #[main]

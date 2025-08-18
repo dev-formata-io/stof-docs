@@ -5,8 +5,7 @@
 ## Book
 
 * [Installation](book/installation.md)
-* [Hello, World](book/hello-world.md)
-* [Introduction & Design](book/introduction-and-design.md)
+* [🌎 Hello, World](book/hello-world.md)
 * [Types](book/types/README.md)
   * [Numbers](book/types/numbers.md)
   * [Prototypes](book/types/prototypes.md)
@@ -23,6 +22,7 @@
 * [Object Run](book/object-run.md)
 * [Async](book/async.md)
 * [Custom Embedded](book/custom-embedded.md)
+* [Design](book/design.md)
 
 ## libraries
 

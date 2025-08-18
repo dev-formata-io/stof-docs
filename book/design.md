@@ -2,15 +2,11 @@
 description: Understand how Stof works.
 ---
 
-# Introduction & Design
+# Design
 
-At the heart of Stof is not a data format or language, but rather a tried and tested strategy for organizing and combining large amounts of diverse data types and relationships.
+Stof is a special kind of [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph) with an [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) built in. Data in Stof can be thought of as components, and the nodes of the DAG are entities. Each node is a bucket of data.
 
-Stof is a special kind of [DAG](https://en.wikipedia.org/wiki/Directed_acyclic_graph) with an [Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system) built into it. Data in Stof can be thought of as components, and the nodes of the DAG are entities. Each node is capable of housing an unknown amount of diverse data types.
-
-If those words don't make a whole lot of sense, think about Stof as a fancy version of your file explorer - directories (nodes) organize different types of files (data).
-
-The purpose of this page is to provide you with a mental model of Stof, which will help immensely in getting started and in understanding what Stof can do.
+Think about Stof as a fancy version of your file explorer - directories (nodes) organize different types of files (data).
 
 ## Mental Model
 
@@ -47,7 +43,7 @@ However, Stof, in reality, is a bit more complicated, so it can be more efficien
 
 <figure><img src="../.gitbook/assets/actual_simple.png" alt=""><figcaption></figcaption></figure>
 
-This strategy allows Stof to structure data in many ways simultaneously and more than once, without any copies, while preserving the simplicity of our mental model (behaviorally).
+This strategy allows Stof to structure data in many ways simultaneously and efficiently.
 
 Data is kept as a flat collection, completely separate from their relationships and any structure Stof introduces.
 
@@ -58,8 +54,6 @@ Importing and parsing data into documents offers a flexible way to dynamically d
 {% endhint %}
 
 ### Concrete Example
-
-For consistency, let's use the same example as before:
 
 ```rust
 person: {
@@ -78,4 +72,4 @@ fn main() {
 
 <div data-full-width="false"><figure><img src="../.gitbook/assets/actual_concrete.png" alt=""><figcaption></figcaption></figure></div>
 
-Although still a bit simplistic, this is how Stof represents data and relationships. By now, you've probably put together a lot about the language - how paths are just a dot-separated way to traverse nodes by name, or maybe how objects are just fields pointing to other nodes that contain general buckets of data (not just fields and functions).
+Although still a bit simplistic, this is generally how Stof represents data and relationships. By now, you've probably put together a lot about the language - how paths are just a dot-separated way to traverse nodes by name, or maybe how objects are just fields pointing to other nodes that contain general buckets of data (not just fields and functions).

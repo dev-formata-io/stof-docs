@@ -129,7 +129,7 @@ Unlike traditional programming languages, **everything in Stof is data**:
 * Store it in databases
 * Send it over APIs
 * Version control it
-* Merge and split files
+* Merge, split, import, & export
 * Convert to any format
 
 ```rust

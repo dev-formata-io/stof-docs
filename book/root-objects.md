@@ -5,7 +5,7 @@ description: Graph roots.
 # Root Objects
 
 {% hint style="info" %}
-Take a look at [introduction-and-design.md](introduction-and-design.md "mention"), it will help you understand this section.
+Take a look at [design.md](design.md "mention"), it will help you understand this section.
 {% endhint %}
 
 A Stof document is a graph that can have multiple root nodes. This feature is very important when combining other documents and APIs, because Stof can essentially act like a file system, storing each document or API under a separate root and treating that root like an independent graph.
