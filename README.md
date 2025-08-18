@@ -18,19 +18,19 @@ layout:
 
 # 🚀 Welcome
 
-## :zap: [Stof](https://stof.dev/): Because 47 Data Formats Weren't Enough
+## [Stof](https://stof.dev/): Because 47 Data Formats Weren't Enough
 
 {% hint style="success" %}
 **Plot twist: This one actually unifies them all.**
 {% endhint %}
 
-Stof is the simplest way to combine and transform data in a singular interface. Stop juggling YAML, JSON, TOML, and custom configs. Write once, use everywhere, with the power of a programming language built right in.
+Stop juggling YAML, JSON, TOML, and custom configs. Write once, use everywhere, with the power of a programming language built right in. Stof is the simplest way to combine and transform data in a singular interface.
 
 * [Repository](https://github.com/dev-formata-io/stof)
 * [Discord](https://discord.gg/Up5kxdeXZt)
 * [Contact](https://stof.dev/contact-us)
 
-## :dart: Why Developers Need Lots of Stof
+## :bulb: Why Developers Need Lots of Stof
 
 ### "Holy sh\*t, my configs actually work now"
 
@@ -114,15 +114,15 @@ fn process(data: WebhookData) -> obj {
 // ✅ They CAN solve their problems
 ```
 
-## :fire:Real-World Examples
+## :earth\_americas: Real-World Examples
 
-* :zap: **Data-Mesh/Orchestration** glue-layer between systems
-* :gear: **Config files** with logic and validation (smart configuration)
-* :robot: **API schemas** that can transform themselves on the fly
-* :rocket: **Data pipelines** with built-in processing
-* :page\_facing\_up: **Templates** that generate other formats
+* **Data-Mesh/Orchestration** glue-layer between systems
+* **Config files** with logic and validation (smart configuration)
+* **API request/response** transformations and [schemas](book/schemas.md)
+* **Data pipelines** with built-in processing
+* **Templates** that generate other formats
 
-## :circus\_tent: The Magic: It's All Just Data
+## :crystal\_ball: The Magic: It's All Just Data
 
 Unlike traditional programming languages, **everything in Stof is data**:
 
