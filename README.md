@@ -95,13 +95,15 @@ fn kubernetes_manifest(env: str = "staging") -> obj { /* generate k8s obj */ }
 
 ### "My users can finally script safely"
 
-With Stof's customizable sandbox:
+With Stof's customizable sandbox, control every aspect of how users can interact:
 
 ```rust
-#[webhook]
-// User writes & sends this
-fn process(data: WebhookData) -> obj {
-    new {
+#[handler]
+// Untrusted user code, sent with the request
+fn custom_endpoint_handler() -> Response {
+    let c = fs.read("path"); // error - file sys not available inside sandbox
+    
+    new Response {
         user_id: data.user.id,
         timestamp: Time.now() as seconds,
         processed: true,
