@@ -48,6 +48,25 @@ fn main() {
 }
 ```
 
+#### Unit Types
+
+Stof also has a variant of a floating-point number for units. Units can act as types on their own and are outlined in greater detail on the [numbers.md](numbers.md "mention") page.
+
+For example, the function `Time.now()` in the [time-library-time.md](../../libraries/time-library-time.md "mention"), returns a floating-point number with units of "ms". The unit "ms" can be used in place of the type "float" as a more specific type of number, enabling conversions when the number is cast.
+
+{% hint style="info" %}
+All unit types match the type "float" (Ex. function parameter).
+{% endhint %}
+
+```rust
+#[main]
+fn main() {
+    const last_week_now: hours = Time.now() - 7days; // units are so nice...
+    
+    // do something with timestamp in hours since Unix Epoch...
+}
+```
+
 ### Booleans
 
 Booleans can have one of two possible values: true or false.
@@ -188,8 +207,12 @@ The "unknown" type is just syntax for "match with any type". Each value always h
 ```rust
 #[main]
 fn main() {
-    const func = (v: unknown): unknown => v; // takes and returns any value type
-    assert_eq(func("hi"), "hi");
+    // takes and returns any type of value
+    const func = (v: unknown): unknown => {
+        if ("str" == typeof v) return v + "!!";
+        v
+    };
+    assert_eq(func("hi"), "hi!!");
     assert_eq(func.call(42), 42);
 }
 ```
@@ -247,12 +270,39 @@ fn do_pdf_things(pdf: Data<Pdf>) {
 }
 ```
 
+## Objects
+
+Objects in Stof have an "obj" type. Behind the scenes, they reference nodes and can contain much more diverse data types than just fields and functions.
+
+{% hint style="info" %}
+The map constructor syntax {"key": "value"} looks like the object syntax, but they are two completely different types.
+{% endhint %}
+
+```rust
+obj object_field: {
+    // this is a new object that can contain objects, fields, data, and functions
+    // both this field and object have the name "object_field"
+}
+
+#[main]
+fn main() {
+    const object: obj = new {
+        // this is the syntax for creating a new object within the document
+        // the "new" keyword should stand out for creating a new document node
+        // unless dropped (Std.drop(object)), this will increase the doc size
+    };
+    
+    // for comparison, this the map initialization syntax
+    const map: map = {'a': 1, 'b': 2};
+}
+```
+
 ## Prototypes
 
 Objects in Stof can be used as prototypes for other objects. There is a special #\[type] attribute for objects that, when the parser sees it, it will create a typename link to that object.
 
 {% hint style="info" %}
-We'll go over prototypes in greater detail later in the book.
+Take a look at [prototypes.md](prototypes.md "mention") for more information.
 {% endhint %}
 
 ```rust
@@ -272,5 +322,10 @@ fn main() {
     // "new" syntax will create a new object in this document
     const point = new Point { x: 2, y: 2, z: 2 };
     assert_eq(point.length().round(2), 3.46);
+    
+    // typeof will always be the general "obj" type
+    // typename is always the more specific type
+    assert_eq(typeof point, "obj");
+    assert_eq(typename point, "Point");
 }
 ```

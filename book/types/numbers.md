@@ -73,7 +73,7 @@ fn main() {
 
 In Stof, units are additional number types that can be used in place of "float". The "float" type will match all unit types (so you can have a float parameter that accepts any units); however, the unit types will not match each other and will perform conversions when cast to other unit types.
 
-All logical operators (greater than, less than, equals, etc.) and number operations consider units, performing conversions automatically when necessary (and able). Units of the same category will always have a common unit that is the larger of the two (Ex. m + mm -> m). For angles, it will always be radians if the types are mixed. Units of "undefined" are assigned if the numbers have incompatible units (Ex. m + kg).
+All logical operators (greater than, less than, equals, etc.) and number operations consider units, performing conversions automatically when necessary (and able). Units of the same category will always have a common unit that is the larger of the two (Ex. m + mm -> m). For angles, it will always be radians if the types are mixed.
 
 ### Examples
 
@@ -239,5 +239,20 @@ fn main() {
     const ton: tons = 55Ton;  // "Ton" or "tons"
     const pou: lbs = 12lb;    // "lb" or "lbs" for imperial pounds
     const ozz: ounces = 77oz; // "oz" or "ounces"
+}
+```
+
+### Incompatible Units
+
+If two units do not have compatible types (Ex. mass & time), then the units are removed.
+
+```rust
+#[test]
+fn undefined_units() {
+    // behavior should be to remove the units when they don't make sense
+    const val = 12km + 34seconds;
+    assert_eq(typeof val, 'float');
+    assert_eq(val, 46);
+    assert_not(val.has_units());
 }
 ```
