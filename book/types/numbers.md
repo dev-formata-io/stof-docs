@@ -101,6 +101,48 @@ fn main() {
 }
 ```
 
+### Memory
+
+Computer memory/storage units are helpful for configuration files, among many other use cases. Like all units, conversions between any memory unit can be done via a simple cast (either "as" or by declaring units as a type).
+
+{% hint style="info" %}
+Stof separates the binary units from the base 10 units (Ex. MiB or mebibytes vs MB or megabytes). It's common in the computer science world to use MB when talking about MiB because computers store memory in binary and its often implied (and for historical reasons). However, Stof has both because at larger sizes, this difference matters, and so does accuracy.
+
+It will probably catch some of you up because GB, MB, etc. are often used in docs or other configs when GiB, or MiB, etc. are implied, so keep this in mind (can always remove units and add new units without a conversion)!
+{% endhint %}
+
+```rust
+#[main]
+fn main() {
+    const bit_mem: bits = 1bit; // "bit" or "bits"
+    const byte_mem: bytes = 1byte; // "byte" or "bytes"
+    
+    const kb_mem: kilobytes = 1KB; // "KB" or "kilobytes"
+    const kib_mem: kibibytes = 1KiB; // "KiB" or "kibibytes"
+    
+    const mb_mem: megabytes = 1MB; // "MB" or "megabytes"
+    const mib_mem: mebibytes = 1MiB; // "MiB" or "mebibytes"
+    
+    const gb_mem: gigabytes = 1GB; // "GB" or "gigabytes"
+    const gib_mem: gibibytes = 1GiB; // "GiB" or "gibibytes"
+    
+    const tb_mem: terabytes = 1TB; // "TB" or "terabytes"
+    const tib_mem: tebibytes = 1TiB; // "TiB" or "tebibytes"
+    
+    const pb_mem: petabytes = 1PB; // "PB" or "petabytes"
+    const pib_mem: pebibytes = 1PiB; // "PiB" or "pebibytes"
+    
+    const eb_mem: exabytes = 1EB; // "EB" or "exabytes"
+    const eib_mem: exbibytes = 1EiB; // "EiB" or "exbibytes"
+    
+    const zb_mem: zettabytes = 1ZB; // "ZB" or "zettabytes"
+    const zib_mem: zebibytes = 1ZiB; // "ZiB" or "zebibytes"
+    
+    const yb_mem: yottabytes = 1YB; // "YB" or "yottabytes"
+    const yib_mem: yobibytes = 1YiB; // "YiB" or "yobibytes"
+}
+```
+
 ### Time
 
 One of the most useful applications of Stof units is with time, which is all over the place in configurations and intersystem communications.

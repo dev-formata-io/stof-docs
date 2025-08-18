@@ -188,6 +188,15 @@ const val = 10kg;
 assert(val.is_mass());
 ```
 
+## Num.is\_memory(val: int | float) -> bool
+
+Returns true if the given number has units of computer memory (bits, bytes, MB, MiB, KB, etc.).
+
+```rust
+const val = 10MiB;
+assert(val.is_memory());
+```
+
 ## Num.is\_temp(val: int | float) -> bool
 
 Returns true if the given number has temperature units.
