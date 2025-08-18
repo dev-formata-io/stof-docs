@@ -329,3 +329,48 @@ fn main() {
     assert_eq(typename point, "Point");
 }
 ```
+
+## Null
+
+Yup, Stof has a null value type. So many data formats and languages have null, that for interoperability, it was unavoidable.
+
+```rust
+int value: null // value of "null" and can be assigned with an int or null only
+
+fn takes_value(val: str) {
+    pln(val);
+}
+
+#[main]
+fn main() {
+    // can pass null values
+    self.takes_value(null);
+}
+```
+
+### Not Null Types!
+
+There is a way to combat this, though - ensuring an error is thrown when a null value is given where it shouldn't be.
+
+The answer is a "not null" type operator :tada:! Not a perfect solution, but it helps, trust me.
+
+{% hint style="info" %}
+The `!` type operator works with all types, anywhere. So use with object prototype names, units, etc.!
+{% endhint %}
+
+```rust
+int! value: null // this will now throw an error, can only be an int!
+
+fn takes_value(val: str!) {
+    pln(val);
+}
+
+#[main]
+fn main() {
+    // passing the correct value or a castable value is fine
+    self.takes_value(42); // gets cast to "42"
+
+    // passing null will result in an error
+    self.takes_value(null);
+}
+```
