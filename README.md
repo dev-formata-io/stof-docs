@@ -1,20 +1,136 @@
 ---
-description: Introduction to Stof.
+description: Introduction.
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: false
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
 ---
 
 # 🚀 Welcome
 
-[Stof](https://stof.dev) is the simplest way to create, store, share, and transform unified data.
+## :zap: [Stof](https://stof.dev/): Because 47 Data Formats Weren't Enough
+
+{% hint style="success" %}
+**Plot twist: This one actually unifies them all.**
+{% endhint %}
+
+Stof is the simplest way to combine and transform data in a singular interface. Stop juggling YAML, JSON, TOML, and custom configs. Write once, use everywhere, with the power of a programming language built right in.
 
 * [Repository](https://github.com/dev-formata-io/stof)
 * [Discord](https://discord.gg/Up5kxdeXZt)
 * [Contact](https://stof.dev/contact-us)
 
-{% hint style="success" %}
-[Stof](https://crates.io/crates/stof):  `v0.8.*`
+## :dart: Why Developers Need Lots of Stof
 
-[CLI](https://crates.io/crates/stof-cli):  `v0.11.*`
-{% endhint %}
+### "Holy sh\*t, my configs actually work now"
+
+Configurations with logic and validation will give you a full night's sleep.
+
+```rust
+database: {
+    const str host: env("DB_HOST") ?? "localhost" // logic & types!
+    int max_connections: 100
+    ms timeout: 3s                                // units!
+    
+    // validation
+    fn validate() -> bool {
+        const connections = self.max_connections;
+        connections > 0 && connections < 1_000 && self.timeout > 100ms
+    }
+    
+    // fixes itself
+    fn tune(load: int) {
+        self.max_connections = min(load * 2, 500);
+    }
+}
+
+#[main]
+// deploy with confidence
+fn deploy() {
+    assert(self.database.validate());
+    
+    // ops team will thank you
+}
+```
+
+### "Wait, I can stop maintaining 17 different files?"
+
+Before Stof, you probably had:
+
+* `docker-compose.yml` (but different for each env)
+* `kubernetes/productiion.yaml` (copy-pasted from dev)
+* `monitoring/alerts.json` (never updated)
+* so many more...
+
+#### After Stof:
+
+```rust
+import "@docker"; // I/O any type of data (Stof, JSON, TOML, PDF, DOCX, PNG, etc.)
+import "template.yml" as self.ComposeTemplate;
+
+const app: {
+    name: "my-service";  // optional comma or semi-colon (trailing too)
+    version: 1.2.3-beta  // semantic versions as a base type
+}
+
+fn docker_compose(env: str = "staging") -> DockerCompose {
+    /* generate compose using self.ComposeTemplate fields */
+}
+fn kubernetes_manifest(env: str = "staging") -> obj { /* generate k8s obj */ }
+// ... anything else you need
+
+// One source of truth, infinite possibilities
+```
+
+### "My users can finally script safely"
+
+With Stof's customizable sandbox:
+
+```rust
+#[webhook]
+// User writes & sends this
+fn process(data: WebhookData) -> obj {
+    new {
+        user_id: data.user.id,
+        timestamp: Time.now() as seconds,
+        processed: true,
+    }
+}
+
+// You sleep peacefully knowing:
+// ❌ They can't access your filesystem  
+// ❌ They can't make network calls
+// ❌ They can't see other users' data
+// ✅ They CAN solve their problems
+```
+
+## :fire:Real-World Examples
+
+* :zap: **Data-Mesh/Orchestration** glue-layer between systems
+* :gear: **Config files** with logic and validation (smart configuration)
+* :robot: **API schemas** that can transform themselves on the fly
+* :rocket: **Data pipelines** with built-in processing
+* :page\_facing\_up: **Templates** that generate other formats
+
+## :circus\_tent: The Magic: It's All Just Data
+
+Unlike traditional programming languages, **everything in Stof is data**:
+
+* Store it in databases
+* Send it over APIs
+* Version control it
+* Merge and split files
+* Convert to any format
 
 ```rust
 const list users: [              // optional field type and const
@@ -58,22 +174,10 @@ stof = true
 JSON object & field syntax is also supported.
 {% endhint %}
 
-### Motivations
+### Crates & Versions
 
-1. If you've ever wished you could put different data formats into a singular document and manipulate them at once with a standard interface, you're in the right spot.
-2. If you've wanted a singular API that could be used across servers and within different environments, well, here it is.
-3. If you've been looking for that YAML or JSON replacement/addition that adds a simple programming layer and type system that just makes sense, keep reading.
-4. If you have an embedded environment where you need to run user-sent or untrusted code (especially over the wire), you're looking at a good tool for it.
-5. If you've ever thought to yourself, "code is just data itself, so why can't I work with it as such?", then you're also in the right place.
+{% hint style="info" %}
+[Stof](https://crates.io/crates/stof):  `v0.8.*`
 
-### How
-
-Stof can look and feel like a familiar programming interface, but it's a document of data that comes with a runtime for manipulating itself in a sandbox you control.
-
-Because it's a document of data, it can be shared, stored, combined, split, and otherwise transformed, and seamlessly works with other formats (both binary and text import/export).
-
-We say "data" instead of "fields" (like other formats) because a field is just one type of data component (functions are another). Stof is built like an Entity Component System, where components (data) can be anything you'd like, even large PDF documents, 3D models, or binary voice data.
-
-### Contributing
-
-We have a new, awesome, and growing community, so jump in and [contribute](https://github.com/dev-formata-io/stof). This is an excellent opportunity to get in on the ground floor of an open-source project.
+[CLI](https://crates.io/crates/stof-cli):  `v0.11.*`
+{% endhint %}
