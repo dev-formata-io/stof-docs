@@ -196,3 +196,32 @@ fn main() -> int {
     -1                        // return with -1
 }
 ```
+
+## Static Functions
+
+Stof doesn't have a static concept like other languages, but it does have prototypes. And because prototypes have a type name, you can call functions directly on that prototype using the name instead of the object, mimicking behavior that would seem like a "static" function in another language.
+
+{% hint style="info" %}
+The syntax looks like it does because the type name is filling in the path portion of the function call. Take a look at [prototypes.md](types/prototypes.md "mention") for more information.
+
+This is important to keep in mind, though, because when calling a function like this, "self" will be the prototype object (like a normal function call), and even though this makes sense, you may not expect it.
+{% endhint %}
+
+```rust
+#[type]
+MyType: {
+    fn add(a: int, b: int) -> int {
+        a + b
+    }
+}
+
+#[main]
+fn main() {
+    const c = <MyType>.add(5, 6);
+    assert_eq(c, 11);
+}
+```
+
+{% hint style="success" %}
+Pro tip: I like to put a #\[static] attribute on the functions that I intend to call this way, so that it's obviously separated from the type interface, even though this attribute is not inherently special.
+{% endhint %}

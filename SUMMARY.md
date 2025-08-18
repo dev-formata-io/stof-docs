@@ -49,6 +49,7 @@
 ## formats
 
 * [Stof](formats/stof.md)
+* [Pkg](formats/pkg.md)
 * [JSON](formats/json.md)
 * [TOML](formats/toml.md)
 * [YAML](formats/yaml.md)
