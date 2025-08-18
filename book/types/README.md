@@ -352,10 +352,12 @@ fn main() {
 
 There is a way to combat this, though - ensuring an error is thrown when a null value is given where it shouldn't be.
 
-The answer is a "not null" type operator :tada:! Not a perfect solution, but it helps, trust me.
+The answer is a "not null" type operator :tada:! Not a perfect solution, but it helps a lot.
 
 {% hint style="info" %}
-The `!` type operator works with all types, anywhere. So use with object prototype names, units, etc.!
+The `!` postfix type operator works with all types, anywhere. So use with object prototype names, units, etc.!
+
+Also handy to use this on a return type, ensuring a function does not return null.
 {% endhint %}
 
 ```rust
