@@ -12,11 +12,11 @@ We're working on making Stof more accessible in other languages and with additio
 
 The easiest way to install the CLI currently is by installing Rust (cargo) and running a quick install command.
 
-### Install Rust
+## Install Rust
 
 Visit the [Installation page](https://doc.rust-lang.org/book/ch01-01-installation.html) for Rust and follow the instructions to install Rust on your system of choice.
 
-### Install Stof CLI
+## Install Stof CLI
 
 After installing Rust, you'll also have Rust's package manager, cargo, installed. Run the following command to install the Stof CLI binary to your cargo's bin folder.
 
@@ -30,4 +30,12 @@ After installation, check to make sure the binary is available in your PATH. If 
 stof -V
 ```
 
-This will print the installed version of the CLI. You can check to see if it is the most recent by visiting crates.io or by looking at the [..](../ "mention") page.
+This will print the installed version of the CLI. You can check to see if it is the most recent by visiting crates.io or by looking at the bottom of the [..](../ "mention") page.
+
+## VS Code Syntax Highlighting
+
+A simple VS Code extension for syntax highlighting can be found on the [marketplace](https://marketplace.visualstudio.com/items?itemName=Formata.stof). Or search for "Stof" in the VS Code extensions tab.
+
+{% hint style="info" %}
+Currently, the extension does not provide error checking, just syntax highlighting.
+{% endhint %}
