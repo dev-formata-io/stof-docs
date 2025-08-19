@@ -4,9 +4,13 @@ description: Object prototypes.
 
 # Prototypes
 
-Prototypes are an important feature of Stof, but are very easy to use and do not introduce any additional syntax (they use attributes). This is important not only for developer experience, but also to reduce complexity with format import/export.
+[Prototypes](https://en.wikipedia.org/wiki/Prototype-based_programming) are an important feature of Stof, but are very easy to use and do not introduce any additional syntax (they use attributes on normal objects). This is important not only for developer experience, but also to reduce complexity with format import/export.
 
-Any object can be used as a prototype, but the graph also maps type names with objects via the #\[type] attribute. The type name will be the object field's name, or give a name to use within the attribute as well (Ex. `#[type("MyType")]`).
+Any object can be a prototype with the #\[type] attribute. The object's name will be the type name by default, or you can give an alternate string name as the value of the type attribute (Ex. `#[type("MyType")]` - the type name will be "MyType" regardless of the object/field name).
+
+{% hint style="info" %}
+The [object-library-obj.md](../../libraries/type-libraries/object-library-obj.md "mention") gives a programmatic way to assign a type name to an object as well.
+{% endhint %}
 
 ## Type and Extends
 
@@ -32,11 +36,11 @@ Point2D: {
 
 #[type]
 //#[extends(self.Point2D)] // works too
-#[extends('Point2D')]
+#[extends('Point2D')] // only one extends (single inheritance) for now
 Point: {
     float z: 0;
 
-    #[constructor] // optional
+    #[constructor] // optional, all are called with "new"
     fn init() {
         self.initialized = true;
     }
@@ -45,7 +49,7 @@ Point: {
         Num.sqrt(self.x.pow(2) + self.y.pow(2) + self.z.pow(2))
     }
 
-    #[dropped]
+    #[dropped] // optional, all called when "drop" (Std.drop(..) - see below)
     fn dropped() {
         super.point_dropped = true;
     }
@@ -81,6 +85,12 @@ fn static_add() {
     assert_eq(<self.Point2D>.add(25, 42), 67);
 }
 ```
+
+{% hint style="info" %}
+The "new" syntax is for creating objects programmatically - that's when all #\[constructor] functions are called on that object.
+
+The `Std.drop(..)` function in the [standard-library-std.md](../../libraries/standard-library-std.md "mention") removes objects, data, fields, etc. from the document. When an object is dropped using this function, all #\[dropped] functions on that object are called.
+{% endhint %}
 
 ## Type Name Collisions
 
