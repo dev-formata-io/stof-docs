@@ -120,9 +120,11 @@ fn custom_endpoint_handler() -> Response {
 ## :earth\_americas: Real-World Examples
 
 * **Data-Mesh/Orchestration** glue-layer between systems
-* **Config files** with logic and validation (smart configuration)
+* **Smart Configs** with logic, units, and validation
+* **AI Model Configs** that package ML models with preprocessing logic
 * **API request/response** transformations and [schemas](book/schemas.md)
-* **Data pipelines** with built-in processing
+* **Self-Describing Datasets** that automatically tag and validate themselves
+* **Data pipelines** with built-in processing and optimization
 * **Templates** that generate other formats
 
 ## :crystal\_ball: The Magic: It's All Just Data
