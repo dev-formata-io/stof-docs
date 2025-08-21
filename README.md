@@ -21,7 +21,7 @@ layout:
 ## [Stof](https://stof.dev/): Because 47 Data Formats Weren't Enough
 
 {% hint style="success" %}
-**Plot twist: This one actually unifies them all.**
+**Plot twist: This one actually unifies them all (even the complex ones, like PDF, 3D, etc.).**
 {% endhint %}
 
 Stop juggling YAML, JSON, TOML, and custom configs. Write once, use everywhere, with the power of a programming language built right in. Stof is the simplest way to combine and transform data in a singular interface.

@@ -230,6 +230,43 @@ fn main() {
 }
 ```
 
+## Promises
+
+Stof supports asynchronous data manipulation and, therefore, has a promise type. A promise holds a reference to another Stof process, and when awaited, will wait for that process to finish executing before returning its result.
+
+{% hint style="info" %}
+The promise type matches its inner type, and "await" is a passthrough operation unless the value is a promise. This means you rarely need to write out the "Promise\<inner>" type - you can just use "inner" in its place.
+{% endhint %}
+
+```rust
+async fn async_function() -> Promise<str> {
+    "hello, promises"
+}
+async fn without_promise() -> str { // same result as above
+    "hello, looks"
+}
+
+// recommended over just "str" if you're expecting promises as arguments
+fn takes_promise(arg: Promise<str>) -> str {
+    await arg
+}
+
+#[main]
+fn main() {
+    const promise = self.async_function();
+    assert_eq(typeof promise, "Promise<str>");
+    assert_eq(await promise, "hello, promises");
+    
+    const without = self.without_promise();
+    assert_eq(typeof without, "Promise<str>");
+    assert_eq(self.takes_promise(without), "hello, looks");
+    
+    // str == Promise<str> for type matching
+    // await only does something when given a promise value
+    assert_eq(self.takes_promise("woah.."), "woah..");
+}
+```
+
 ## Data
 
 As outlined in the [design.md](../design.md "mention"), Stof organizes a lot of different types of data, even custom types. The "data" type is an opaque pointer to any data that exists on a node (object). This includes functions and fields, but also data that you could define yourself, like a PDF document, Image, or anything you'd like.

@@ -87,7 +87,7 @@ fn main() {
         for (let i = 10; i > 0; i -= 1) {
             if (i < 4) {
                 res = true;
-                break ^tag; // breaks the outer loop with the tag "tag"
+                break ^tag; // breaks both loops, right to the assert
             }
         }
         res = false;

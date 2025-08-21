@@ -51,6 +51,10 @@ To ensure a specific format is used, place your desired format identifier like s
 
 Unless explicitly specified, the import location will always be the calling context (self). So if you have an import statement within an object, that object will be the destination for the import data.
 
+{% hint style="info" %}
+The "as" keyword only references objects that are either existing or to be created by the import. This means it's up to each format implementation for where the data ends up. For some formats, this is many fields in the object (JSON, TOML, etc.), and for others ("text", "bytes", "md", etc.), it is a single, fixed field with a predetermined name (simple and predictable).
+{% endhint %}
+
 ```rust
 Object: {
     import "./docs.md"; // relative paths start with "./"
@@ -80,7 +84,7 @@ fn markdown() -> str { Object.text }
 
 ## Path "@" -> "stof"
 
-If an import path contains an "@", Stof will transform it into "stof/". This is helpful for defining packages and eventually a package manager.
+Each "@" character in an import path will be transformed into "stof/". This helps define packages and eventually leads to the development of a package manager.
 
 {% hint style="info" %}
 The "pkg" format works with directories containing a "pkg.stof" file that has an "import" field with file(s) (paths) to import (all relative to the directory that contains the "pkg.stof" file).
