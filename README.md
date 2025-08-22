@@ -69,7 +69,7 @@ fn deploy() {
 Before Stof, you probably had:
 
 * `docker-compose.yml` (but different for each env)
-* `kubernetes/productiion.yaml` (copy-pasted from dev)
+* `kubernetes/production.yaml` (copy-pasted from dev)
 * `monitoring/alerts.json` (never updated)
 * so many more...
 
