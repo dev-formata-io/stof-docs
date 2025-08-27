@@ -24,17 +24,15 @@ In real life, these functions may be nested, making the arena pattern even more 
 Typically, this pattern arises when using "static" functions or calling functions on [prototypes](../types/prototypes.md) directly.
 {% endhint %}
 
-{% code lineNumbers="true" %}
-```rust
-#[type] // definition of a prototype object named "Prompt"
+<pre class="language-rust" data-line-numbers><code class="lang-rust">#[type] // definition of a prototype object named "Prompt"
 Prompt: {
     str! text: ''
     list! blocks: []
 
     #[static] // optional, but recommended for human eyes
     fn new(text: str!, blocks: list = [], arena?: obj) -> Prompt {
-        new Prompt { text, blocks } on arena
-    }
+<strong>        new Prompt { text, blocks } on arena
+</strong>    }
     fn push(prompt: Prompt) {
         self.blocks.push_back(prompt);
     }
@@ -49,17 +47,17 @@ Prompt: {
 
 #[main]
 fn main() {
-    const arena = new {};
-    const top = <Prompt>.new('Title', arena = arena);
+<strong>    const arena = new {};
+</strong>    const top = &#x3C;Prompt>.new('Title', arena = arena);
     
-    const mid = <Prompt>.new('Middle', [
-        <Prompt>.new('First', arena = arena),
-        <Prompt>.new('Second', arena = arena),
+    const mid = &#x3C;Prompt>.new('Middle', [
+        &#x3C;Prompt>.new('First', arena = arena),
+        &#x3C;Prompt>.new('Second', arena = arena),
     ], arena);
     top.push(mid);
 
-    const bot = <Prompt>.new('Bottom', [
-        <Prompt>.new('First', arena = arena),
+    const bot = &#x3C;Prompt>.new('Bottom', [
+        &#x3C;Prompt>.new('First', arena = arena),
     ], arena);
     top.push(bot);
 
@@ -68,13 +66,12 @@ fn main() {
     // All of the objects allocated have been in the arena
     assert_eq(self.children().len(), 2); // Prompt type and arena obj
     assert_eq(arena.children().len(), 6);
-    drop(arena);
-
+<strong>    drop(arena);
+</strong>
     assert_eq(self.children().len(), 1); // just the Prompt object
     assert_not(arena.exists()); // all prompts have been removed from the document
 }
-```
-{% endcode %}
+</code></pre>
 
 ### Output
 
