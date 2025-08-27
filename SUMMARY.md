@@ -23,6 +23,8 @@
 * [Async](book/async.md)
 * [Custom Embedded](book/custom-embedded.md)
 * [Design](book/design.md)
+* [Paradigms](book/paradigms/README.md)
+  * [Arenas](book/paradigms/arenas.md)
 
 ## libraries
 
