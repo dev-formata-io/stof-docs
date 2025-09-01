@@ -24,28 +24,30 @@ layout:
 **Plot twist: This format actually unifies them all (even complex data, like PDF, DocX, Images, etc.).**
 {% endhint %}
 
-Stop juggling YAML, JSON, TOML, and custom scripts. Define once and use everywhere, with Stof, the simplest and safest way to unify and transform data in a singular, programmable data interface.
+Stop juggling YAML, JSON, TOML, and custom scripts. Define once and use everywhere, with Stof, the simplest and safest way to unify and transform data in a singular, programmable interface.
 
-> Combines the simplicity and flexibility of JSON with the power of programming when you need it, always under your control.
+> <mark style="color:$primary;">Stof is code that acts like data, and data that can think.</mark>
+
+> <mark style="color:$primary;">A simple, secure, and portable data logic platform for AI, plugins, infra-as-code, and config-heavy workflows.</mark>
 
 {% hint style="info" %}
-Works **with** other data formats (both import & export), so you don't have to pick & choose.
+Works **with other data formats** (both import & export), so you don't have to pick & choose.
 {% endhint %}
 
 ## :earth\_americas: Real-World Use-Cases
 
-* **Data-Mesh, Integration, & Orchestration** glue-layer between systems
+* **Data-Mesh, Integration, & Orchestration** glue-layer
 * **Universal LLM & AI** workflows, tools, & conversational data
-* **Smart Configs** with logic, units, and validation
-* **AI Model Configs** that package ML models with preprocessing logic
+* **Smart Configs** with logic, units, and self-validation
+* **AI Model Configs** that contain preprocessing logic
 * **API Definitions** and transformations with [schemas](book/schemas.md)
-* **Self-Describing Datasets** that automatically tag and validate themselves
+* **Self-Describing Datasets** that self-tag and self-validate
 * **Data pipelines** with built-in processing and optimization
-* **Templates** that generate other formats
+* **Templates** that generate anything, from YAML to PDFs
 
 ## :crystal\_ball: The Difference: It's All Just Data
 
-Unlike traditional programming languages, **everything in Stof is data (functions too)**:
+Unlike traditional programming languages, **everything in Stof is data**:
 
 {% hint style="success" %}
 Drop-in replacement that works with your existing JSON/YAML/TOML (and many other) files.
