@@ -24,17 +24,30 @@ layout:
 **Plot twist: This one actually unifies them all (even the complex ones, like PDF, 3D, etc.).**
 {% endhint %}
 
-Stop juggling YAML, JSON, TOML, and custom configs. Write once, use everywhere, with the power of a programming language built right in. Stof is the simplest way to combine and transform data in a singular interface.
+Stop juggling YAML, JSON, TOML, and custom scripts. Write once and use everywhere, with Stof, the simplest way to combine and transform data in a singular interface.
 
-* [Repository](https://github.com/dev-formata-io/stof)
-* [Discord](https://discord.gg/Up5kxdeXZt)
-* [Contact](https://stof.dev/contact-us)
+Looks and feels like a programming language when you need it, or simple JSON when you don't.
+
+{% hint style="info" %}
+Works with all other data formats (both import & export), so you don't have to pick & choose.
+{% endhint %}
+
+## :earth\_americas: Real-World Use-Cases
+
+* **Data-Mesh/Orchestration** glue-layer between systems
+* **Universal LLM & AI** workflows, tools, & conversational data
+* **Smart Configs** with logic, units, and validation
+* **AI Model Configs** that package ML models with preprocessing logic
+* **API Definitions** and transformations with [schemas](book/schemas.md)
+* **Self-Describing Datasets** that automatically tag and validate themselves
+* **Data pipelines** with built-in processing and optimization
+* **Templates** that generate other formats
 
 ## :bulb: Why Developers Need Lots of Stof
 
 ### "Holy sh\*t, my configs actually work now"
 
-Configurations with logic and validation will give you a full night's sleep.
+Configurations with logic and validation that won't fail you when it matters.
 
 ```rust
 database: {
@@ -117,25 +130,15 @@ fn custom_endpoint_handler() -> Response {
 // ✅ They CAN solve their problems
 ```
 
-## :earth\_americas: Real-World Examples
-
-* **Data-Mesh/Orchestration** glue-layer between systems
-* **Smart Configs** with logic, units, and validation
-* **AI Model Configs** that package ML models with preprocessing logic
-* **API request/response** transformations and [schemas](book/schemas.md)
-* **Self-Describing Datasets** that automatically tag and validate themselves
-* **Data pipelines** with built-in processing and optimization
-* **Templates** that generate other formats
-
 ## :crystal\_ball: The Magic: It's All Just Data
 
 Unlike traditional programming languages, **everything in Stof is data**:
 
-* Store it in databases
-* Send it over APIs
-* Version control it
-* Merge, split, import, & export
-* Convert to any format
+* **Store it in databases**
+* **Send it over the wire with APIs**
+* **Merge, split, import, & export data**
+* **Convert data between formats & systems**
+* **Embed within the environment of your choice**
 
 ```rust
 const list users: [              // optional field type and const
@@ -182,7 +185,7 @@ JSON object & field syntax is also supported.
 ### Crates & Versions
 
 {% hint style="info" %}
-[Stof](https://crates.io/crates/stof):  `v0.8.*`
+[Stof](https://crates.io/crates/stof): `v0.8.*`
 
-[CLI](https://crates.io/crates/stof-cli):  `v0.11.*`
+[CLI](https://crates.io/crates/stof-cli): `v0.11.*`
 {% endhint %}
