@@ -21,20 +21,20 @@ layout:
 ## [Stof](https://stof.dev/): Because 47 Data Formats Weren't Enough
 
 {% hint style="success" %}
-**Plot twist: This one actually unifies them all (even the complex ones, like PDF, 3D, etc.).**
+**Plot twist: This format actually unifies them all (even complex data, like PDF, DocX, Images, etc.).**
 {% endhint %}
 
-Stop juggling YAML, JSON, TOML, and custom scripts. Write once and use everywhere, with Stof, the simplest and safest way to combine and transform data in a singular interface.
+Stop juggling YAML, JSON, TOML, and custom scripts. Define once and use everywhere, with Stof, the simplest and safest way to unify and transform data in a singular, programmable data interface.
 
-> Power of programming when you need it, simplicity of JSON when you don't.
+> Combines the simplicity and flexibility of JSON with the power of programming when you need it, always under your control.
 
 {% hint style="info" %}
-Works with all other data formats (both import & export), so you don't have to pick & choose.
+Works **with** other data formats (both import & export), so you don't have to pick & choose.
 {% endhint %}
 
 ## :earth\_americas: Real-World Use-Cases
 
-* **Data-Mesh/Orchestration** glue-layer between systems
+* **Data-Mesh, Integration, & Orchestration** glue-layer between systems
 * **Universal LLM & AI** workflows, tools, & conversational data
 * **Smart Configs** with logic, units, and validation
 * **AI Model Configs** that package ML models with preprocessing logic
@@ -42,6 +42,16 @@ Works with all other data formats (both import & export), so you don't have to p
 * **Self-Describing Datasets** that automatically tag and validate themselves
 * **Data pipelines** with built-in processing and optimization
 * **Templates** that generate other formats
+
+## :crystal\_ball: The Magic: It's All Just Data
+
+Unlike traditional programming languages, **everything in Stof is data**:
+
+* **Store it** in databases
+* **Send it** over the wire with/as APIs (types and functions too)
+* **Merge, split, import, & export** data in the format(s) of your choice
+* **Transform** data between systems
+* **Embed** within the environment of your choice
 
 ## :bulb: Why Developers Need Lots of Stof
 
@@ -130,15 +140,7 @@ fn custom_endpoint_handler() -> Response {
 // ✅ They CAN solve their problems
 ```
 
-## :crystal\_ball: The Magic: It's All Just Data
-
-Unlike traditional programming languages, **everything in Stof is data**:
-
-* **Store it in databases**
-* **Send it over the wire with APIs**
-* **Merge, split, import, & export data**
-* **Convert data between formats & systems**
-* **Embed within the environment of your choice**
+## :eyes: Quick Overview
 
 ```rust
 const list users: [              // optional field type and const
