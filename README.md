@@ -28,7 +28,7 @@ Stop juggling YAML, JSON, TOML, and custom scripts. Define once and use everywhe
 
 > <mark style="color:$primary;">Stof is code that acts like data, and data that can think.</mark>
 
-> <mark style="color:$primary;">A simple, secure, and portable data logic platform for AI, plugins, infra-as-code, and config-heavy workflows.</mark>
+> <mark style="color:$primary;">A smart, declarative runtime for data workflows.</mark>
 
 {% hint style="info" %}
 Works **with other data formats** (both import & export), so you don't have to pick & choose.
@@ -63,7 +63,7 @@ Drop-in replacement that works with your existing JSON/YAML/TOML (and many other
 
 ### "Holy sh\*t, my configs actually work now"
 
-Configurations with logic and validation that won't fail you when it matters.
+Configurations with expressive logic and validation that won't fail when it matters.
 
 ```rust
 database: {
