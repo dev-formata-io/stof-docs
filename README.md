@@ -24,9 +24,9 @@ layout:
 **Plot twist: This one actually unifies them all (even the complex ones, like PDF, 3D, etc.).**
 {% endhint %}
 
-Stop juggling YAML, JSON, TOML, and custom scripts. Write once and use everywhere, with Stof, the simplest way to combine and transform data in a singular interface.
+Stop juggling YAML, JSON, TOML, and custom scripts. Write once and use everywhere, with Stof, the simplest and safest way to combine and transform data in a singular interface.
 
-Looks and feels like a programming language when you need it, or simple JSON when you don't.
+> Power of programming when you need it, simplicity of JSON when you don't.
 
 {% hint style="info" %}
 Works with all other data formats (both import & export), so you don't have to pick & choose.
