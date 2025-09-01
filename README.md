@@ -43,9 +43,13 @@ Works **with** other data formats (both import & export), so you don't have to p
 * **Data pipelines** with built-in processing and optimization
 * **Templates** that generate other formats
 
-## :crystal\_ball: The Magic: It's All Just Data
+## :crystal\_ball: The Difference: It's All Just Data
 
-Unlike traditional programming languages, **everything in Stof is data**:
+Unlike traditional programming languages, **everything in Stof is data (functions too)**:
+
+{% hint style="success" %}
+Drop-in replacement that works with your existing JSON/YAML/TOML (and many other) files.
+{% endhint %}
 
 * **Store it** in databases
 * **Send it** over the wire with/as APIs (types and functions too)
