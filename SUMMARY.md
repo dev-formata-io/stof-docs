@@ -10,6 +10,7 @@
 * [Fields](book/fields.md)
 * [Root Objects](book/root-objects.md)
 * [Functions](book/functions.md)
+* [Attributes](book/attributes.md)
 * [Types](book/types/README.md)
   * [Numbers](book/types/numbers.md)
   * [Prototypes](book/types/prototypes.md)

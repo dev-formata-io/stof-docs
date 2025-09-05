@@ -11,7 +11,7 @@ fn main() {
 }
 ```
 
-Name this file "hello.stof" and run it with the CLI: `stof run hello.stof`. The run command will execute all functions with a #\[main] attribute, each as a separate async process (no async keyword or attribute needed).
+Name this file "hello.stof" and run it with the CLI: `stof run hello.stof`. The run command will execute all functions with a `#[main]` attribute, each as a separate async process (no async keyword or attribute needed).
 
 {% hint style="info" %}
 This function uses the `Std.pln` library function to print to the standard output stream. The `Std` library is special in that the `Std` portion is optional. Try replacing the statement with `Std.pln("Hello, world!")`.
