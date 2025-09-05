@@ -54,3 +54,9 @@ person: {
 ```
 {% endtab %}
 {% endtabs %}
+
+{% hint style="info" %}
+Challenge: what if `drop(this)` is called within a function? The "this" references the current function as a "fn" pointer, so it would work just fine, removing the currently executing function from the document (surprisingly helpful in some cases).
+
+In Stof, everything is data and can be manipulated as such, including the currently running environment.
+{% endhint %}
