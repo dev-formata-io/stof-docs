@@ -16,6 +16,10 @@ One strategy to combat this, however, is to put APIs in a separate root object (
 Keep in mind that this ability is very useful despite the potential learning curve - especially when sending API + data over the wire for another system to use in its own sandbox of Stof.
 {% endhint %}
 
+{% hint style="info" %}
+Second Note: [prototypes](types/prototypes.md) are a thing in Stof and are extremely useful if you need to avoid mixing both fields and functions within the same objects. You can import/create raw data, then cast the object to the prototype of your choice for a complete API with schemas, validations, types, etc.
+{% endhint %}
+
 ```rust
 Coffee: {
     const bool decaf: false // never!!
