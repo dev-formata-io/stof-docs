@@ -113,6 +113,10 @@ Blobs are useful for representing abstract binary data or as an exchange between
 fn main() {
     const bytes: blob = "hello"; // blob <-> str is utf-8
     assert_eq(bytes as str, "hello");
+    
+    // syntax for blob initialization (not a list)
+    const msg = |104, 101, 108, 108, 111, 44, 32, 119, 111, 114, 108, 100|;
+    assert_eq(msg as str, 'hello, world');
 }
 ```
 
