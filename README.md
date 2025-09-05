@@ -24,14 +24,38 @@ layout:
 **Plot twist: This format actually unifies them all (even complex data, like PDF, DocX, Images, etc.).**
 {% endhint %}
 
-Stop juggling YAML, JSON, TOML, and custom scripts. Define once and use everywhere, with Stof, the simplest and safest way to unify and transform data in a singular, programmable interface.
+> <mark style="color:$primary;">Stof exists to solve the fragmentation and brittleness of data and configuration across systems.</mark>
 
-> <mark style="color:$primary;">Stof is code that acts like data, and data that can think.</mark>
+Modern software (especially AI/ML, infra, cloud, CI/CD, and workflows) increasingly relies on structured data that needs to be:
 
-> <mark style="color:$primary;">A smart, declarative runtime for data workflows.</mark>
+* Human-readable
+* Machine-validatable
+* Extendable with logic
+* Executable safely
+* Translatable between formats
+* Versioned and inspectable
+
+But the tools we have for this are _primitive and fragmented_:
+
+* JSON/YAML/TOML carry structure, but rely on other tools for behavior, units, schemas, or validations.
+* External tools create complexity between systems and often require configuration themselves.
+* Configs drift and break across environments.
+* Runtime logic and validation are scattered across codebases, devops scripts, and data definitions.
+
+> <mark style="color:$primary;">Stof unifies</mark> <mark style="color:$primary;"></mark><mark style="color:$primary;">**structure + validation + behavior**</mark> <mark style="color:$primary;"></mark><mark style="color:$primary;">into</mark> <mark style="color:$primary;"></mark><mark style="color:$primary;">**one coherent, inspectable, portable artifact**</mark><mark style="color:$primary;">.</mark>
+
+{% hint style="success" %}
+Think of Stof as a smart, declarative runtime for data workflows, offering code that acts like data, and data that can think.
+{% endhint %}
 
 {% hint style="info" %}
-Works **with other data formats** (both import & export), so you don't have to pick & choose.
+Stof works **with** other data formats (both import & export), so you don't have to pick & choose.
+{% endhint %}
+
+{% hint style="warning" %}
+You can replicate most of what Stof does using JSON + code + libraries; it just takes more effort and lacks formality, unification, etc. (also nightmarish for cross-boundary systems, like APIs, teams, and services).
+
+If you're doing simple config loading or small and static data modeling (and are not already familiar with Stof), it might feel like overkill.
 {% endhint %}
 
 ## :earth\_americas: Real-World Use-Cases

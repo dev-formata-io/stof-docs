@@ -46,8 +46,8 @@ Contact me at cj@stof dot dev for anything else. Always happy to chat with fello
 * [x] [PDF Library](libraries/pdf-library-pdf.md) w/Basics (extract text & extract images)
 * [x] [HTTP Library](libraries/http-network-library-http.md) with async background [fetch](libraries/http-network-library-http.md#async-http.fetch-url-str-method-str-get-body-str-or-blob-null-headers-map-null-timeout-seconds-null)
 * [ ] Format Updates
-  * [ ] Stof Format String Export
-  * [ ] Optional Binary Export Encryption
+  * [x] Stof Format String Export
+  * [x] Optional Binary Export Encryption
   * [ ] XML & HTML
 * [ ] WebAssembly
   * [ ] Embed Stof in JS/browser environments
