@@ -34,7 +34,7 @@ Make an HTTP request, using the thread pool in the background so that other Stof
 
 ```rust
 const resp = await Http.fetch("https://restcountries.com/v3.1/region/europe");
-assert(resp.get('text').len() > 100);
+assert(resp.get('bytes').len() > 100);
 ```
 
 ## Http.parse(response: map, context: obj = self) -> obj
