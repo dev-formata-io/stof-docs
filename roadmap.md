@@ -42,6 +42,7 @@ Contact me at cj@stof dot dev for anything else. Always happy to chat with fello
   * [x] Now & Diff
   * [x] [RFC-2822](libraries/time-library-time.md#time.to_rfc2822-time-float-greater-than-str) & [RFC-3339](libraries/time-library-time.md#time.to_rfc3339-time-float-greater-than-str)
   * [ ] Set Timeout & Intervals
+* [x] Prompt primitive type and library
 * [x] [Image Library](libraries/image-library-image.md) w/Basics (flip, brighten, contrast, thumbnail, etc.)
 * [x] [PDF Library](libraries/pdf-library-pdf.md) w/Basics (extract text & extract images)
 * [x] [HTTP Library](libraries/http-network-library-http.md) with async background [fetch](libraries/http-network-library-http.md#async-http.fetch-url-str-method-str-get-body-str-or-blob-null-headers-map-null-timeout-seconds-null)
@@ -50,7 +51,7 @@ Contact me at cj@stof dot dev for anything else. Always happy to chat with fello
   * [x] Optional Binary Export Encryption
   * [ ] XML & HTML
 * [ ] WebAssembly
-  * [ ] Embed Stof in JS/browser environments
+  * [x] Embed Stof in JS/browser environments
   * [ ] WebAssembly native to Stof (lib & types)
 * [ ] Language Support
   * [ ] Go, Python, C, etc. (hop into Discord to discuss)

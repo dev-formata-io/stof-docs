@@ -186,6 +186,57 @@ fn main() {
 }
 ```
 
+### Prompts
+
+A prompt in Stof is a string with an optional XML tag and child prompts (a tree structure). It can be treated like a string when needed, or as a tree when building/maintaining.
+
+The prompt type is useful when working with AI workflows in Stof.
+
+{% hint style="info" %}
+Before the prompt type was added to Stof in v0.8.47, it was common to use a small #\[type] object for building prompt trees. It would have the fields "text", "tag", and a list of child prompts.
+
+Its output would be the text and any child prompt outputs pushed together, all wrapped in the XML tag if present.
+
+This was so common that it made sense to make it a primitive type, removing the memory management overhead and making working with AI much more human-friendly and maintainable.
+{% endhint %}
+
+```rust
+fn create_prompt() -> prompt {
+    const llm_prompt = prompt();
+
+    // newlines just for the example...
+    // prompts are passed by ref by default (like collections)
+    const add_to_llm = (pmt: prompt, llm: prompt) => {
+        llm.push(pmt);
+        llm.push("\n");
+    };
+
+    const data = prompt(tag="data");
+    data.push("seamless str <-> prompt casting");
+    add_to_llm(data, llm_prompt);
+
+    const format = prompt(tag="format");
+    format.push("1. first thing. ");
+    format.push("2. second thing.");
+    add_to_llm(format, llm_prompt);
+
+    const instructions = prompt(
+        text="LLMs are good at textual data, humans are not. Stof helps.",
+        tag="instructions"
+    );
+    add_to_llm(instructions, llm_prompt);
+    llm_prompt.pop(); // pop final newline prompt (yes, there's a lib)
+
+    llm_prompt
+}
+
+#[main]
+fn main() {
+    const prompt = self.create_prompt();
+    pln(prompt as str);
+}
+```
+
 ## Semantic Version
 
 Versioning is an important aspect of APIs, and because Stof is so useful for defining, combining, and interfacing with APIs, it has a built-in version type. See [Semantic Versioning](https://semver.org/) for more information on versions.

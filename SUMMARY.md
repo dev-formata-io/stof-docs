@@ -44,6 +44,7 @@
   * [String Library (Str)](libraries/type-libraries/string-library-str.md)
   * [Tuple Library (Tup)](libraries/type-libraries/tuple-library-tup.md)
   * [Semantic Version Library (Ver)](libraries/type-libraries/semantic-version-library-ver.md)
+  * [Prompt Library (Prompt)](libraries/type-libraries/prompt-library-prompt.md)
 * [Time Library (Time)](libraries/time-library-time.md)
 * [File System Library (fs)](libraries/file-system-library-fs.md)
 * [Markdown Library (Md)](libraries/markdown-library-md.md)
