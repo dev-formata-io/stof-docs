@@ -1,7 +1,6 @@
 # Table of contents
 
-* [🚀 Welcome](README.md)
-* [🗓️ Roadmap](roadmap.md)
+* [🚀 Stof](README.md)
 
 ## Book
 

@@ -16,208 +16,226 @@ layout:
     visible: true
 ---
 
-# 🚀 Welcome
+# 🚀 Stof
 
-## [Stof](https://stof.dev/): Because 47 Data Formats Weren't Enough
-
-{% hint style="success" %}
-**Plot twist: This format actually unifies them all (even complex data, like PDF, DocX, Images, etc.).**
-{% endhint %}
-
-> <mark style="color:$primary;">Stof exists to solve the fragmentation and brittleness of data and configuration across systems.</mark>
-
-Modern software (especially AI/ML, infra, cloud, CI/CD, and workflows) increasingly relies on structured data that needs to be:
-
-* Human-readable
-* Machine-validatable
-* Extendable with logic
-* Executable safely
-* Translatable between formats
-* Versioned and inspectable
-
-But the tools we have for this are _primitive and fragmented_:
-
-* JSON/YAML/TOML carry structure, but rely on other tools for behavior, units, schemas, or validations.
-* External tools create complexity between systems and often require configuration themselves.
-* Configs drift and break across environments.
-* Runtime logic and validation are scattered across codebases, devops scripts, and data definitions.
-
-> <mark style="color:$primary;">Stof unifies</mark> <mark style="color:$primary;"></mark><mark style="color:$primary;">**structure + validation + behavior**</mark> <mark style="color:$primary;"></mark><mark style="color:$primary;">into</mark> <mark style="color:$primary;"></mark><mark style="color:$primary;">**one coherent, inspectable, portable artifact**</mark><mark style="color:$primary;">.</mark>
+## Standard Transformation and Organization Format
 
 {% hint style="success" %}
-Think of Stof as a smart, declarative runtime for data workflows, offering code that acts like data, and data that can think.
+Executable Data for Distributed Systems, AI/ML workflows, Smart Configs, & Pipelines
 {% endhint %}
 
-{% hint style="info" %}
-Stof works **with** other data formats (both import & export), so you don't have to pick & choose.
-{% endhint %}
+A unified data format that works seamlessly with other formats to bridge the gap between static data and programmable documents.
 
-{% hint style="warning" %}
-You can replicate most of what Stof does using JSON + code + libraries; it just takes more effort and lacks formality, unification, etc. (also nightmarish for cross-boundary systems, like APIs, teams, and services).
+Based on an "Everything as Data" approach, in which fields, functions, PDFs, images, binaries, or any other type of data are neatly combined, while keeping single-document simplicity and portability.
 
-If you're doing simple config loading or small and static data modeling (and are not already familiar with Stof), it might feel like overkill.
-{% endhint %}
+This provides many benefits:
 
-## :earth\_americas: Real-World Use-Cases
+* Write data once, use it everywhere, in any format
+* Sandboxed logic + execution in your data (as data)
+* Send functions over APIs
+* Doesn't need a large ecosystem to work
+* Format-agnostic (works with JSON, YAML, TOML, PDF, binaries, etc.)
 
-* **Data-Mesh, Integration, & Orchestration** glue-layer
-* **Universal LLM & AI** workflows, tools, & conversational data
-* **Smart Configs** with logic, units, and self-validation
-* **AI Model Configs** that contain preprocessing logic
-* **API Definitions** and transformations with [schemas](book/schemas.md)
-* **Self-Describing Datasets** that self-tag and self-validate
-* **Data pipelines** with built-in processing and optimization
-* **Templates** that generate anything, from YAML to PDFs
+## Example Use-Cases
 
-## :crystal\_ball: The Difference: It's All Just Data
+* Smart configs with validation and logic
+* Prompts as human-readable & maintainable data + code
+* AI/LLM workflows/pipelines & model configs
+* Data pipelines with built-in processing & validation
+* Integration glue between systems
+* Self-describing datasets
+* ... basically anywhere data meets logic
 
-Unlike traditional programming languages, **everything in Stof is data**:
+## Sample
 
-{% hint style="success" %}
-Drop-in replacement that works with your existing JSON/YAML/TOML (and many other) files.
-{% endhint %}
-
-* **Store it** in databases
-* **Send it** over the wire with/as APIs (types and functions too)
-* **Merge, split, import, & export** data in the format(s) of your choice
-* **Transform** data between systems
-* **Embed** within the environment of your choice
-
-## :bulb: Why Developers Need Lots of Stof
-
-### "Holy sh\*t, my configs actually work now"
-
-Configurations with expressive logic and validation that won't fail when it matters.
+Check out the [online playground](https://play.stof.dev/) for real examples you can play with right now.
 
 ```rust
-database: {
-    const str host: env("DB_HOST") ?? "localhost" // logic & types!
-    int max_connections: 100
-    ms timeout: 3s                                // units!
-    GiB storage: 2TiB
+#[attributes("optional exec control | metadata | meta-logic")]
+// A field on the doc "root" node.
+field: 42
+
+// JSON-like data & function organization
+stats: {
+    // Optional field types & expressions
+    prompt context: prompt("trees of strings", tag="optional-xml-tag",
+        prompt("behaves like a tree for workflows & functions"),
+        prompt("just cast to/from str anywhere strings are needed")
+        // Std.prompt(..) can take N prompts as sub-prompts
+    );
     
-    // validation
-    fn validate() -> bool {
-        const connections = self.max_connections;
-        connections > 0 && connections < 1_000 && self.timeout > 100ms
-    }
-    
-    // fixes itself
-    fn tune(load: int) {
-        self.max_connections = min(load * 2, 500);
-    }
+    // Units as types with conversions & casting
+    cm height: 6ft + 2in
+    MiB ram: 2TB + 50GiB - 5GB
 }
 
 #[main]
-// deploy with confidence
-fn deploy() {
-    assert(self.database.validate());
-    
-    // ops team will thank you
-}
-```
+/// The CLI (and other envs) use the #[main] attribute for which fns to call on run.
+fn do_something() {
+    // Dot separated path navigation of the document (self is the current node/obj)
+    let gone = self.self_destruction();
+    assert(gone);
 
-### "Wait, I can stop maintaining 17 different files?"
-
-Before Stof, you probably had:
-
-* `docker-compose.yml` (but different for each env)
-* `kubernetes/production.yaml` (copy-pasted from dev)
-* `monitoring/alerts.json` (never updated)
-* so many more...
-
-#### After Stof:
-
-```rust
-import "@docker"; // I/O any type of data (Stof, JSON, TOML, PDF, DOCX, PNG, etc.)
-import "template.yml" as self.ComposeTemplate;
-
-const app: {
-    name: "my-service";  // optional comma or semi-colon (trailing too)
-    version: 1.2.3-beta  // semantic versions as a base type
-}
-
-fn docker_compose(env: str = "staging") -> DockerCompose {
-    /* generate compose using self.ComposeTemplate fields */
-}
-fn kubernetes_manifest(env: str = "staging") -> obj { /* generate k8s obj */ }
-// ... anything else you need
-
-// One source of truth, infinite possibilities
-```
-
-### "My users can finally script safely"
-
-With Stof's customizable sandbox, control every aspect of how users can interact:
-
-```rust
-#[handler]
-// Untrusted user code, sent with the request
-fn custom_endpoint_handler() -> Response {
-    let c = fs.read("path"); // error - file sys not available inside sandbox
-    
-    new Response {
-        user_id: data.user.id,
-        timestamp: Time.now() as seconds,
-        processed: true,
+    // async functions, blocks, and expressions always available
+    async {
+        const now = Time.now();
+        loop {
+            sleep(20ms);
+            if (Time.diff(now) > 2s) break;
+        }
     }
+
+    // partial I/O with any format
+    pln(stringify("toml", self.stats));
 }
 
-// You sleep peacefully knowing:
-// ❌ They can't access your filesystem  
-// ❌ They can't make network calls
-// ❌ They can't see other users' data
-// ✅ They CAN solve their problems
-```
-
-## :eyes: Quick Overview
-
-```rust
-const list users: [              // optional field type and const
-    {
-        name: "Joe Schmo",       // commas or semi-colons accepted, but optional
-        cm height: 6ft + 1in     // unit types and declarations are expressions
-        age: +32;                // trailing commas or semi-colons
-    },                           // trailing commas in arrays
-]
-
-fn joe() -> obj {                // functions, fields, and complex data
-    for (const user in self.users) {
-        if (user.name.lower().contains("joe")) return user;
-    }
-    null
-}
-
-#[main]                          // func & field attributes for control
-#[custom({'ex': true})]          // metadata values (funcs, maps, objs, etc.)
-fn main() {
-    const joe = self.joe();
-    assert(this.attributes().get("custom").get("ex"));
-    
-    async {                                // async at the core (funcs & exprs too)
-        let body = stringify("toml", joe); // format I/O (binary & parse too)
-        body.push("stof = true\n");
-        pln(body);
-    }
+/**
+ * A function that removes itself from this document when executed.
+ */
+fn self_destruction() -> bool {
+    pln(self.field); // Std.pln(..) print line function
+    drop(this);      // "this" is always the last fn on the call stack
+    true             // "return" keyword is optional (no ";")
 }
 ```
 
-```bash
-> stof run example.stof
-age = 32
-height = 185.42
-name = "Joe Schmo"
-stof = true
-```
+## Embedded
+
+Stof is written in Rust and can be embedded today in TypeScript/JavaScript (via WebAssembly), or within your Rust project.
 
 {% hint style="success" %}
-JSON object & field syntax is also supported.
+Several languages are planned, including Python, Go, and a hosted Runtime-as-a-Service. Please reach out via Discord to discuss timelines and prioritization.
 {% endhint %}
 
-### Crates & Versions
+### Rust
 
-{% hint style="info" %}
-[Stof](https://crates.io/crates/stof): `v0.8.*`
+```toml
+[dependencies]
+stof = "0.8.*"
+```
 
-[CLI](https://crates.io/crates/stof-cli): `v0.11.*`
-{% endhint %}
+```rust
+use stof::model::Graph;
+
+fn main() {
+    let mut graph = Graph::default();
+    
+    graph.parse_stof_src(r#"
+        #[main]
+        fn main() {
+            pln("Hello, world!");
+        }
+    "#, None).unwrap();
+
+    match graph.run(None, true) {
+        Ok(res) => println!("{res}"),
+        Err(err) => panic!("{err}"),
+    }
+}
+```
+
+### TypeScript
+
+The package is hosted on [JSR](https://jsr.io/@formata/stof) for you to use in the JS environment of your choice.
+
+```typescript
+import { StofDoc } from '@formata/stof';
+const doc = await StofDoc.new();
+
+doc.lib('Std', 'pln', (... vars: unknown[]) => console.log(...vars));
+doc.lib('Example', 'nested', async (): Promise<Map<string, string>> => {
+    const res = new Map();
+    res.set('msg', 'hello, there');
+    res.set('nested', await (async (): Promise<string> => 'this is a nested async JS fn (like fetch)')());
+    return res;
+}, true);
+
+doc.parse(`
+    field: 42
+    fn main() -> int {
+        const res = await Example.nested();
+        pln(res);
+        self.field
+    }
+`);
+const field = await doc.call('main');
+console.log(field);
+
+/*
+Map(2) {                                                                                                                                                                                                                       
+  "msg" => "hello, there",
+  "nested" => "this is a nested async JS fn (like fetch)"
+}
+42
+*/
+```
+
+## Why Now?
+
+In the current technology landscape, every program is distributed, utilizing multiple systems in parallel to deliver value. In distributed systems, everything is about moving either data to computation or computation to data.
+
+> Stof proposes: Why not move them together as a unified entity?
+
+Stof explores:
+
+* Practical code mobility at scale with modern type systems
+* Unifying data transformation with code distribution
+* Security models for distributed computation-as-data
+* Performance characteristics of serializable computation vs traditional RPC/message-passing
+* Formal semantics for "code as data" in distributed systems
+* Edge computing, data pipelines, and collaborative systems
+
+### The Serializable Computation Problem
+
+Code mobility involves either strong mobility (moving code, data, and execution state) or weak mobility (moving just code and data). This has been a challenge for decades. Stof's "Everything as Data" approach, including functions and types that can be serialized and sent over APIs, directly addresses this.
+
+### Actor Model + Data-Oriented Programming
+
+What if you could send not just messages, but **executable transformations** as data between actors? This bridges:
+
+* The actor model's isolation and message-passing
+* Data-oriented programming's focus on data transformation pipelines
+* Code mobility's ability to move compuation to data
+
+### Edge Computing & Data Locality
+
+Rather than fixing the interface to a resource, a minimal interface can be defined and code implementing higher-level interfaces placed alongside it as required, allowing application-specific interaction patterns.
+
+Imagine: An IoT sensor network where you push Stof transformation functions to edge devices. The functions are data, so they can be:
+
+* Versioned and rolled back
+* Inspected for resource usage before execution
+* Composed and optimized at runtime
+* Migrated between nodes based on data locality
+
+### Distributed Data Pipelines
+
+Self-describing data with embedded transformations reduces the complexity of distributed data pipelines compared to current orchestration-heavy approaches.
+
+* Transformations travel with the data
+* Self-validating data that includes its own processing logic
+* Dynamic pipeline reconfiguration without redeployment
+
+### Secure Multi-Party Computation
+
+Sandboxing restricts mobile code to a controlled environment with limited system resource access. Stof's sandbox + serializable functions enable:
+
+* Controlled computation on sensitive data
+* Verifiable transformations (the code is inspectable data)
+* Dynamic permission models (capabilities as data)
+
+### Collaborative Editing & CRDTs
+
+Conflict-free Replicated Data Types (CRDTs) struggle with complex business logic. Stof's operations as first-class data enable richer collaborative systems than current CRDT approaches.
+
+* Merged and reordered data
+* Validated before application
+* Composed with other operations & structures
+
+## Feedback & Community
+
+We welcome contributors and feedback! The community is growing, and this is a new project with a lot of potential.
+
+* Open issues or discussions on [GitHub](https://github.com/dev-formata-io/stof)
+* Please join the [Discord](https://discord.gg/Up5kxdeXZt) to get involved and/or discuss Stof
+* Email **info@stof.dev** to contact us directly

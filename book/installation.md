@@ -6,6 +6,10 @@ description: First steps.
 
 Stof is meant to be embeddable in the environment of your choice. However, for these docs and getting started, it's recommended to use the [Stof CLI](https://crates.io/crates/stof-cli).
 
+{% hint style="success" %}
+The [online playground](https://play.stof.dev/) allows you to get started immediately without needing to install the CLI.
+{% endhint %}
+
 {% hint style="info" %}
 We're working on making Stof more accessible in other languages and with additional distribution.
 {% endhint %}
@@ -30,7 +34,7 @@ After installation, check to make sure the binary is available in your PATH. If 
 stof -V
 ```
 
-This will print the installed version of the CLI. You can check to see if it is the most recent by visiting crates.io or by looking at the bottom of the [..](../ "mention") page.
+This will print the installed version of the CLI. You can check to see if it is the most recent by visiting crates.io or by looking at the bottom of the [Broken link](/broken/pages/IDzx4Ay7z2mm6MaTSV1m "mention") page.
 
 ## VS Code Syntax Highlighting
 
