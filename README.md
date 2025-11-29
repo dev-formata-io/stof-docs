@@ -24,6 +24,10 @@ layout:
 Executable Data for Distributed Systems, AI/ML workflows, Smart Configs, & Pipelines
 {% endhint %}
 
+{% hint style="info" %}
+Use the [playground](https://play.stof.dev/) to see examples and get started with Stof
+{% endhint %}
+
 A unified data format that works seamlessly with other formats to bridge the gap between static data and programmable documents.
 
 Based on an "Everything as Data" approach, in which fields, functions, PDFs, images, binaries, or any other type of data are neatly combined, while keeping single-document simplicity and portability.
