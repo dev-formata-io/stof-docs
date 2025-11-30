@@ -335,12 +335,82 @@ await handler(`
 Invalid server config... ignoring apply
 ```
 
+## Completed Example
+
+Here is the completed example as just Stof (minus the `Server.apply` TS lib function). Paste into the [online playground](https://play.stof.dev/) and run to try for yourself.
+
+```rust
+/*!
+ * Simple Server Config (Stof).
+ */
+
+version: 0.2.1-server.example
+
+#[type]
+Config: {
+    #[schema((target_val: str): bool => target_val.len() > 0)]
+    str name: "www.example.com:80"
+
+    #[schema((target_val: str): bool => target_val.len() > 0)]
+    str root_dir: "/etc/httpd"
+
+    #[schema((target_val: ms): bool => target_val > 100ms)]
+    ms timeout: 3s
+
+    #[schema((target: obj, target_val: ms): bool => {
+        !target.keep_alive || target_val > 100ms
+    })]
+    ms keep_alive_timeout: 5s
+    bool keep_alive: true
+    
+    #[schema((target_val: GiB): bool => target_val > 2GiB)]
+    GiB ram: 32GiB
+
+    #[run]
+    /// Apply this configuration via Obj.schemafy & Obj.run (see docs)
+    fn apply() -> bool {
+        // <Config> syntax is a path resolution to the "Config" prototype obj
+        // "self" is an instance of "Config", not guaranteed to be the prototype
+        if (<Config>.schemafy(self)) {
+            pln(stringify("toml", self));
+            true
+        } else {
+            pln("Invalid server config... ignoring apply");
+            false
+        }
+    }
+}
+
+// additional constraints/APIs from client
+fn set_timeout(config: Config, time: ms) -> bool {
+    if (time > 1s) {
+        config.timeout = time;
+        true
+    } else false
+}
+
+#[main]
+fn main() {
+    const config = new Config {
+        name: "better.example.com"
+        ram: 64000MiB
+    };
+    assert(self.set_timeout(config, 5s));
+    assert_not(self.set_timeout(config, -100ms));
+
+    config.run(); // recursively apply all #[run] funcs, fields, etc.
+
+    config.ram = 500MiB;
+    config.run(); // ignores apply
+}
+```
+
 ## Next Steps
 
 Now that you have a foundation, play around with a few practical next steps:
 
-* Persistent base configuration Stof document instead of a string
+* Persistent base configuration Stof document instead of a string in TS
   * Prevents having to parse the base config type, libs, etc. each time
-* Use imported TOML, JSON, or YAML for base configuration values and/or APIs
+* Use imported TOML, JSON, or YAML for base configuration values
 * Create more specific apply functions and/or a complete server Stof API
 * Try using the CLI, Rust, or the online playground with these new concepts
