@@ -23,7 +23,27 @@ Name this file "hello.stof" and run it with the CLI: `stof run hello.stof`. The 
 This function uses the `Std.pln` library function to print to the standard output stream. The `Std` library is special in that the `Std` portion is optional. Try replacing the statement with **`Std.`**`pln("Hello, world!")`.
 {% endhint %}
 
-Stof is a document of data, though, so we can define our message as a field too:
+#### Alternatively, embed Stof within a host (Ex. TypeScript)
+
+```typescript
+import { StofDoc } from "jsr:@formata/stof";
+
+const doc = await StofDoc.new();
+doc.lib('Std', 'pln', (...args: unknown[])=>console.log(...args));
+doc.parse(`
+    #[main]
+    fn main() {
+        pln('Hello, world!');
+    }
+`);
+await doc.run(); // Hello, world!
+```
+
+{% hint style="info" %}
+For simplicity & minimizing code block size, we'll continue using the CLI for these examples.
+{% endhint %}
+
+Stof is a document of data, so we can define our message as a field too:
 
 ```rust
 message: "Hello, world!"
@@ -34,7 +54,7 @@ fn main() {
 }
 ```
 
-In this context, "self" is the main root (called "root") object for the document. It helps to think of JSON as an example here (and this will work just fine as-is):
+In this context, "self" is the main root (called "root") object for the document. It helps to think of JSON for comparison, adding functions to it rather than the other way around (valid Stof as-is):
 
 ```rust
 {
