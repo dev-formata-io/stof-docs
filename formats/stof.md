@@ -7,7 +7,7 @@ description: Stof format (application/stof).
 Stof language is implemented as a Stof format, just like the others (JSON, YAML, TOML, etc.). This makes it available to use with `Std.parse(..)` also!
 
 {% hint style="info" %}
-Check out [custom-embedded.md](../book/custom-embedded.md "mention") and [imports.md](../book/imports.md "mention") for more information.
+Check out [custom-embedded.md](../learn-stof/custom-embedded.md "mention") and [imports.md](../learn-stof/imports.md "mention") for more information.
 {% endhint %}
 
 {% hint style="warning" %}

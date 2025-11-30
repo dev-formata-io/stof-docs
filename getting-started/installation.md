@@ -1,5 +1,5 @@
 ---
-description: First steps.
+description: Local Development
 ---
 
 # Installation
@@ -11,7 +11,7 @@ The [online playground](https://play.stof.dev/) allows you to get started immedi
 {% endhint %}
 
 {% hint style="info" %}
-We're working on making Stof more accessible in other languages and with additional distribution.
+Stof is also embeddable within JavaScript/TypeScript using the [JSR](https://jsr.io/@formata/stof) package. We're working on making Stof more accessible in other languages and with additional distribution.
 {% endhint %}
 
 The easiest way to install the CLI currently is by installing Rust (cargo) and running a quick install command.
@@ -34,7 +34,7 @@ After installation, check to make sure the binary is available in your PATH. If 
 stof -V
 ```
 
-This will print the installed version of the CLI. You can check to see if it is the most recent by visiting crates.io or by looking at the bottom of the [Broken link](/broken/pages/IDzx4Ay7z2mm6MaTSV1m "mention") page.
+This will print the installed version of the CLI. You can check to see if it is the most recent by visiting [crates.io](https://crates.io/crates/stof-cli).
 
 ## VS Code Syntax Highlighting
 

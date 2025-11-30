@@ -2,31 +2,35 @@
 
 * [🚀 Stof](README.md)
 
-## Book
+## Getting Started
 
-* [Installation](book/installation.md)
-* [🌎 Hello, World](book/hello-world.md)
-* [Fields](book/fields.md)
-* [Root Objects](book/root-objects.md)
-* [Functions](book/functions.md)
-* [Attributes](book/attributes.md)
-* [Types](book/types/README.md)
-  * [Numbers](book/types/numbers.md)
-  * [Prototypes](book/types/prototypes.md)
-* [Variables & References](book/variables-and-references.md)
-* [Null & Initialization](book/null-and-initialization.md)
-* [Error Handling](book/error-handling.md)
-* [Loops](book/loops.md)
-* [Imports](book/imports.md)
-* [Exports](book/exports.md)
-* [Testing](book/testing.md)
-* [Schemas](book/schemas.md)
-* [Object Run](book/object-run.md)
-* [Async](book/async.md)
-* [Custom Embedded](book/custom-embedded.md)
-* [Design](book/design.md)
-* [Paradigms](book/paradigms/README.md)
-  * [Arenas](book/paradigms/arenas.md)
+* [Installation](getting-started/installation.md)
+* [Quick Start (5 min)](getting-started/quick-start-5-min.md)
+* [Tutorial: Your First Config](getting-started/tutorial-your-first-config.md)
+
+## Learn Stof
+
+* [Fields](learn-stof/fields.md)
+* [Root Objects](learn-stof/root-objects.md)
+* [Functions](learn-stof/functions.md)
+* [Attributes](learn-stof/attributes.md)
+* [Types](learn-stof/types/README.md)
+  * [Numbers](learn-stof/types/numbers.md)
+  * [Prototypes](learn-stof/types/prototypes.md)
+* [Variables & References](learn-stof/variables-and-references.md)
+* [Null & Initialization](learn-stof/null-and-initialization.md)
+* [Error Handling](learn-stof/error-handling.md)
+* [Loops](learn-stof/loops.md)
+* [Imports](learn-stof/imports.md)
+* [Exports](learn-stof/exports.md)
+* [Testing](learn-stof/testing.md)
+* [Schemas](learn-stof/schemas.md)
+* [Object Run](learn-stof/object-run.md)
+* [Async](learn-stof/async.md)
+* [Custom Embedded](learn-stof/custom-embedded.md)
+* [Design](learn-stof/design.md)
+* [Paradigms](learn-stof/paradigms/README.md)
+  * [Arenas](learn-stof/paradigms/arenas.md)
 
 ## libraries
 
