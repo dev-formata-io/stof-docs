@@ -8,6 +8,11 @@
 * [Quick Start (5 min)](getting-started/quick-start-5-min.md)
 * [Tutorial: Stof + TypeScript Config](getting-started/tutorial-stof-+-typescript-config.md)
 
+## Stof + AI <a href="#stof-ai" id="stof-ai"></a>
+
+* [Stof Workflows](stof-ai/stof-workflows.md)
+* [Tutorial: Hot-Swappable AI Agents](stof-ai/tutorial-hot-swappable-ai-agents.md)
+
 ## Learn Stof
 
 * [Fields](learn-stof/fields.md)
