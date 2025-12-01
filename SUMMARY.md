@@ -1,12 +1,12 @@
 # Table of contents
 
-* [🚀 Stof](README.md)
+* [🚀 Stof: The Executable Data Format](README.md)
 
 ## Getting Started
 
 * [Installation](getting-started/installation.md)
 * [Quick Start (5 min)](getting-started/quick-start-5-min.md)
-* [Tutorial: Your First Config](getting-started/tutorial-your-first-config.md)
+* [Tutorial: Stof + TypeScript Config](getting-started/tutorial-stof-+-typescript-config.md)
 
 ## Learn Stof
 

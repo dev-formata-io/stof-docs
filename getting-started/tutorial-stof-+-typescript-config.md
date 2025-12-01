@@ -1,8 +1,8 @@
 ---
-description: Simple, self-validating config using TypeScript + Stof
+description: Simple, self-validating config using Stof + TypeScript
 ---
 
-# Tutorial: Your First Config
+# Tutorial: Stof + TypeScript Config
 
 In our hypothetical scenario, we have a server that is running a configurable environment for clients. We'll use Stof as the glue between systems to ensure our environment can be safely configured from afar.
 

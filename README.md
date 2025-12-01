@@ -16,19 +16,17 @@ layout:
     visible: true
 ---
 
-# 🚀 Stof
-
-## Standard Transformation and Organization Format
+# 🚀 Stof: The Executable Data Format
 
 {% hint style="success" %}
-Executable Data for Distributed Systems, AI/ML workflows, Smart Configs, & Pipelines
+Executable Data for Distributed Systems, AI/ML workflows, Smart Configs, & Pipelines.
 {% endhint %}
 
 {% hint style="info" %}
-Use the [playground](https://play.stof.dev/) to see examples and get started with Stof
+Stof stands for "Standard Transformation and Organization Format", and also means "fabric" in Dutch.
 {% endhint %}
 
-A unified data format that works seamlessly with other formats to bridge the gap between static data and programmable documents.
+A unified data-logic format that works seamlessly with other formats to bridge the gap between static data and programmable documents.
 
 Based on an "Everything as Data" approach, in which fields, functions, PDFs, images, binaries, or any other type of data are neatly combined, while keeping single-document simplicity and portability.
 
@@ -52,7 +50,9 @@ This provides many benefits:
 
 ## Sample
 
+{% hint style="success" %}
 Check out the [online playground](https://play.stof.dev/) for real examples you can play with right now.
+{% endhint %}
 
 ```rust
 #[attributes("optional exec control | metadata | meta-logic")]
