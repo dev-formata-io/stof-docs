@@ -389,6 +389,45 @@ I understand you're experiencing a problem with your T-shirt order #34567. I'm h
 Which option would work best for you? I want to make this as smooth as possible and get you the right shirt quickly.
 ```
 
+## Further Improvements & Ideas
+
+Stof provides a lot of flexibility in your implementation, including importing/managing customer records and data, validations, schemas, etc.
+
+Try importing customer records from JSON/TS that fit a Stof type, then alter the agent's behavior, customizing it to the customer dynamically.
+
+{% hint style="info" %}
+Organize data within your Stof document by root object or by sub-objects, where you can be sure imports/APIs don't collide (or do so gracefully).
+{% endhint %}
+
+```rust
+// example loaded customer Stof data
+#[type]
+Customer: {
+    str tier: "premium"
+    float sentiment: 0.6
+    
+    // Customer Stof API for managing records
+    // Import/Export from JSON, TOML, YAML, etc. as needed
+    fn set_sentiment(value: float, min: float = 0, max: float = 1) {
+        if (max == min) throw("Max cannot equal min value");
+        value = min(max(value, min), max);
+        self.sentiment = (value - min) / (max - min);
+    }
+}
+
+// Generated per customer!
+fn handle_message(user_msg: str, customer: Customer) -> str {
+  const customer_tier = customer.tier; // "premium" | "standard"
+  const customer_sentiment = customer.sentiment;
+  
+  // Logic adapts based on who they are
+  const temperature = customer_tier == "premium" ? 0.8 : 0.5;
+  const system_prompt = customer_sentiment < 0.3 ? "Be extra empathetic and offer proactive help" : "Be efficient and solution-focused";
+  
+  // ... rest of implementation
+}
+```
+
 ## Takeaways
 
 {% hint style="info" %}
