@@ -41,6 +41,7 @@ This provides many benefits:
 ## Example Use-Cases
 
 * Smart configs with validation and logic
+* Data interchange with sandboxed execution
 * Prompts as human-readable & maintainable data + code
 * AI/LLM workflows/pipelines & model configs
 * Data pipelines with built-in processing & validation
@@ -70,7 +71,7 @@ stats: {
     
     // Units as types with conversions & casting
     cm height: 6ft + 2in
-    MiB ram: 2TB + 50GiB - 5GB
+    MiB ram: 14GiB + 50GiB - 5GB
 }
 
 #[main]
