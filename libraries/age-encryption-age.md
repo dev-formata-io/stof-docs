@@ -8,7 +8,11 @@ description: Age Data Library ("age_encrypt" feature)
 
 This is useful when you have a portion of a Stof document that you want to encrypt before sending to someone else (Ex. distributed systems, collaborative AI, etc.).
 
-The API itself is a simple extension of the [standard library (Std)](standard-library-std.md) parse & blobify functions. To encrypt, use the `Age.blobify` function with Age public key(s) (recipients) as the first argument. To decrypt, use the `Age.parse` function with a `Data<Age>` component associated with one of the public keys used to encrypt as the first argument (generate one with `Age.generate` and get its public key via `Age.public`).
+The API itself is a simple extension of the [standard library (Std)](standard-library-std.md) parse & blobify functions.
+
+* To encrypt, use the `Age.blobify` function with Age public key(s) (recipients) as the first argument.
+* To decrypt, use the `Age.parse` function with a `Data<Age>` component associated with one of the public keys used to encrypt as the first argument.
+* Generate a new Age data component with `Age.generate` and retrieve its public key via `Age.public`.
 
 ## Example
 
@@ -20,7 +24,7 @@ The Age library is included in the JS bindings, so copy the below example into t
 /// Public keys could come from DB, HTTP, etc.
 Receiver: {
     #[private]
-    passport: Age.generate()
+    const passport: Age.generate()
 
     fn key() -> str {
         self.passport.public()
@@ -62,18 +66,18 @@ fn sending_sensitive() {
 Speaking: hey there, this is secret
 ```
 
-## Age.blobify(recipients: str | list | Data, format: str = 'stof', context?: obj) -> blob
+## Age.blobify(recipients: str | list | Data\<Age>, format: str = 'stof', context?: obj) -> blob
 
 Std.blobify, but with age public-key recipients. The resulting blob can only be parsed by a recipient's private key.
 
-## Age.generate(context: obj = self) -> Data
+## Age.generate(context: obj = self) -> Data\<Age>
 
 Generate a new Age Identity (Data) on the given context object (default is self).
 
-## Age.parse(age: Data, bin: blob, context: obj = self, format: str = "stof") -> bool
+## Age.parse(age: Data\<Age>, bin: blob, context: obj = self, format: str = "stof") -> bool
 
 Parse an age-encrypted binary. Similar to Std.parse, but requires an Age identity (secret private key).
 
-## Age.public(age: Data) -> str
+## Age.public(age: Data\<Age>) -> str
 
 Get the public key for a given age identity.
