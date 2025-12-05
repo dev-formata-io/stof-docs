@@ -59,6 +59,7 @@
 * [HTTP Network Library (Http)](libraries/http-network-library-http.md)
 * [Image Library (Image)](libraries/image-library-image.md)
 * [PDF Library (Pdf)](libraries/pdf-library-pdf.md)
+* [Age Encryption (Age)](libraries/age-encryption-age.md)
 
 ## formats
 
