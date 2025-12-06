@@ -11,7 +11,7 @@ An example of a multi-threaded async process is the `Http.fetch(..)` function in
 {% endhint %}
 
 {% hint style="info" %}
-Take a look at [functions.md](functions.md "mention") for more information on async functions & expressions.
+Take a look at [functions.md](../core-concepts/functions.md "mention") for more information on async functions & expressions.
 {% endhint %}
 
 To separate terminology from Rust a bit, we use the name "process" in Stof to denote an asynchronous task.

@@ -4,7 +4,12 @@ description: Stof functions.
 
 # Functions
 
-A function is a type of data, just like a field. As such, they are referenced by path in the same way!
+In Stof, functions are first-class data. You can:
+
+* Store them in variables
+* Pass them around as values
+* Send them over APIs
+* Execute them anywhere
 
 {% hint style="info" %}
 Note: functions and field data in practice should often come from different places, only mixed at runtime in Stof for manipulation & usage (most export formats only consider fields anyways).

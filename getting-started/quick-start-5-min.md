@@ -99,7 +99,7 @@ const str initialized: { // field values are actually expressions (block expr he
 ```
 
 {% hint style="info" %}
-See [types](../learn-stof/types/ "mention") for more information on types in Stof.
+See [types](../core-concepts/types/ "mention") for more information on types in Stof.
 {% endhint %}
 
 ## Paths

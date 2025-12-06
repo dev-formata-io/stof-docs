@@ -6,7 +6,7 @@ description: Arena memory management.
 
 [Arena (Region-based) memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) is not a new concept. However, it's worth pointing out as a pattern for Stof because it can be beneficial for controlling object memory within a Stof document.
 
-Every time an [object](https://docs.stof.dev/book/types#objects) is created in Stof, a node is created within the document. This is a [general bucket](../design.md) for fields, functions, and other complex data.
+Every time an [object](https://docs.stof.dev/book/types#objects) is created in Stof, a node is created within the document. This is a [general bucket](../../core-concepts/design.md) for fields, functions, and other complex data.
 
 A common situation that arises when creating objects functionally is where in the document should that object exist so that it can be dropped later on?
 
@@ -21,7 +21,7 @@ In this example, there is a Prompt type with a function "new" for creating new p
 {% hint style="info" %}
 In real life, these functions may be nested, making the arena pattern even more beneficial.
 
-Typically, this pattern arises when using "static" functions or calling functions on [prototypes](../types/prototypes.md) directly.
+Typically, this pattern arises when using "static" functions or calling functions on [prototypes](../../core-concepts/types/prototypes.md) directly.
 {% endhint %}
 
 <pre class="language-rust" data-line-numbers><code class="lang-rust">#[type] // definition of a prototype object named "Prompt"

@@ -133,7 +133,7 @@ export async function createStofDoc(): Promise<StofDoc> {
 
 ### Agent & Handler
 
-We'll use the following two functions as a simulated handler and Stof agent interaction. In the real world, this would be more fleshed out, involving a Stof pipeline (typically using [Run](../learn-stof/object-run.md) and other Stof features).
+We'll use the following two functions as a simulated handler and Stof agent interaction. In the real world, this would be more fleshed out, involving a Stof pipeline (typically using [Run](../common-patterns/object-run.md) and other Stof features).
 
 {% hint style="info" %}
 For getAgent, you'd most likely store a Stof API in your DB and supply a function that uses that API. The entire agent API would then be hot-swappable.

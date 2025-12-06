@@ -45,7 +45,7 @@ GeoPoint: {
 And then a main Stof file is placed in the current working directory that imports the package:
 
 {% hint style="info" %}
-Note: remember "@" gets converted into "stof/" by the parser ([imports.md](../learn-stof/imports.md "mention")).
+Note: remember "@" gets converted into "stof/" by the parser ([imports.md](../advanced-features/imports.md "mention")).
 {% endhint %}
 
 ```rust

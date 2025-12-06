@@ -77,7 +77,7 @@ In many languages, the "?." chaining operator exists to check whether the value 
 You're welcome to use "?." in Stof also! However, in most cases, this doesn't have an effect, and what you're really looking for is the "?" prefix operator.
 {% endhint %}
 
-One way to handle this is the [try-catch block](error-handling.md).
+One way to handle this is the [try-catch block](../common-patterns/error-handling.md).
 
 Another way is the "?" prefix operator, which null-checks an entire chain of operations at once (no matter how many function calls are in the chain).
 

@@ -16,40 +16,52 @@ layout:
     visible: true
 ---
 
-# 🚀 Stof: The Executable Data Format
+# 🚀 Stof: Data that carries its own logic
+
+Send functions + data over APIs, write configs that validate themselves, build data pipelines where transformations travel with the data, store logic + data in a database, etc.
 
 {% hint style="success" %}
-Executable Data for Distributed Systems, AI/ML workflows, Smart Configs, & Pipelines.
+Works with JSON, YAML, TOML, etc. - no migration needed.
+
+Add/import logic only where required.
 {% endhint %}
+
+Treats everything uniformly - fields, functions, PDFs, images, binaries, etc. - as data that can be combined in a single portable document.
 
 {% hint style="info" %}
-Stof stands for "Standard Transformation and Organization Format", and also means "fabric" in Dutch.
+Stof is the Standard Transformation and Organization Format.
 {% endhint %}
 
-A unified data-logic format that works seamlessly with other formats to bridge the gap between static data and programmable documents.
+## :wave: New to Stof?
 
-Based on an "Everything as Data" approach, in which fields, functions, PDFs, images, binaries, or any other type of data are neatly combined, while keeping single-document simplicity and portability.
+1. Read the 5-minute [Quick Start](getting-started/quick-start-5-min.md)
+2. Try the [online playground](https://play.stof.dev/)
+3. Follow the [TypeScript Config Tutorial](getting-started/tutorial-stof-+-typescript-config.md)
 
-This provides many benefits:
+## Benefits
 
-* Write data once, use it everywhere, in any format
+* Write data + logic once, use it everywhere (JS, Rust, Python, anywhere your app lives)
+* Format-agnostic I/O (works with JSON, YAML, TOML, PDF, binaries, etc.)
 * Sandboxed logic + execution in your data (as data)
 * Send functions over APIs
 * Doesn't need a large ecosystem to work
-* Format-agnostic (works with JSON, YAML, TOML, PDF, binaries, etc.)
 
-## Example Use-Cases
+## Use-Cases
 
 * Smart configs with validation and logic
 * Data interchange with sandboxed execution
 * Prompts as human-readable & maintainable data + code
-* AI/LLM workflows/pipelines & model configs
-* Data pipelines with built-in processing & validation
+* AI/LLM workflows and model configs
+* Data pipelines with built-in processing
 * Integration glue between systems
 * Self-describing datasets
 * ... basically anywhere data meets logic
 
-## Sample
+## Stof Example
+
+Here's what Stof looks like in practice. Notice how functions, data, and even unit conversions live together in one document.
+
+Stof documents can be executed locally with the [CLI](getting-started/installation.md), embedded within the language of your choice, or on your browser via the online playground.
 
 {% hint style="success" %}
 Check out the [online playground](https://play.stof.dev/) for real examples you can play with right now.
@@ -71,7 +83,8 @@ stats: {
     
     // Units as types with conversions & casting
     cm height: 6ft + 2in
-    MiB ram: 14GiB + 50GiB - 5GB
+    MiB memory: 2MB + 50GiB - 5GB + 1TB
+    ms ttl: 300s
 }
 
 #[main]

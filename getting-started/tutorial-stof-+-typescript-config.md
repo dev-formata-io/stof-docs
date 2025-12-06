@@ -236,7 +236,7 @@ Let's use some Stof features to clean this up a bit and formalise our configurat
 Up until now, our workflow is very similar to a config written in JSON, TOML, YAML, etc. Using Stof's type system with a couple [Obj library](../libraries/type-libraries/object-library-obj.md) functions (run & schemafy), we can create self-validating types that can be composed, extended, etc.
 
 {% hint style="info" %}
-See [schemas.md](../learn-stof/schemas.md "mention") for a more in-depth look at `Obj.schemafy`, and [object-run.md](../learn-stof/object-run.md "mention") for a more in-depth look at `Obj.run`.
+See [schemas.md](../common-patterns/schemas.md "mention") for a more in-depth look at `Obj.schemafy`, and [object-run.md](../common-patterns/object-run.md "mention") for a more in-depth look at `Obj.run`.
 {% endhint %}
 
 <pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "jsr:@formata/stof";

@@ -51,5 +51,5 @@ everything
 {% hint style="info" %}
 Challenge: replace the "meta" map attribute value with an object [via the "new" syntax ](types/#objects)(finally, metadata with types, validation, etc.).
 
-Next, use the same metadata for many fields at once (you can see how this gets [useful and fun](schemas.md)).
+Next, use the same metadata for many fields at once (you can see how this gets [useful and fun](../common-patterns/schemas.md)).
 {% endhint %}

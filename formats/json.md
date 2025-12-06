@@ -9,7 +9,7 @@ JSON is Stof's closest relative format. The Stof parser accepts JSON field & obj
 Stof, unlike JSON, is not limited to just fields of data, however. Because of this, the JSON format implementation is a lossy export, but captures everything on import.
 
 {% hint style="info" %}
-Take a look at [imports.md](../learn-stof/imports.md "mention") and [exports.md](../learn-stof/exports.md "mention") if you haven't already.
+Take a look at [imports.md](../advanced-features/imports.md "mention") and [exports.md](../advanced-features/exports.md "mention") if you haven't already.
 {% endhint %}
 
 {% tabs %}

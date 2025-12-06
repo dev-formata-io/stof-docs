@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🚀 Stof: The Executable Data Format](README.md)
+* [🚀 Stof: Data that carries its own logic](README.md)
 
 ## Getting Started
 
@@ -13,29 +13,35 @@
 * [Stof Workflows](stof-ai/stof-workflows.md)
 * [Tutorial: Hot-Swappable AI Agents](stof-ai/tutorial-hot-swappable-ai-agents.md)
 
-## Learn Stof
+## Core Concepts
 
-* [Fields](learn-stof/fields.md)
-* [Root Objects](learn-stof/root-objects.md)
-* [Functions](learn-stof/functions.md)
-* [Attributes](learn-stof/attributes.md)
-* [Types](learn-stof/types/README.md)
-  * [Numbers](learn-stof/types/numbers.md)
-  * [Prototypes](learn-stof/types/prototypes.md)
-* [Variables & References](learn-stof/variables-and-references.md)
-* [Null & Initialization](learn-stof/null-and-initialization.md)
-* [Error Handling](learn-stof/error-handling.md)
-* [Loops](learn-stof/loops.md)
-* [Imports](learn-stof/imports.md)
-* [Exports](learn-stof/exports.md)
-* [Testing](learn-stof/testing.md)
-* [Schemas](learn-stof/schemas.md)
-* [Object Run](learn-stof/object-run.md)
-* [Async](learn-stof/async.md)
-* [Custom Embedded](learn-stof/custom-embedded.md)
-* [Design](learn-stof/design.md)
-* [Paradigms](learn-stof/paradigms/README.md)
-  * [Arenas](learn-stof/paradigms/arenas.md)
+* [How Stof Works](core-concepts/design.md)
+* [Fields](core-concepts/fields.md)
+* [Root Objects](core-concepts/root-objects.md)
+* [Functions](core-concepts/functions.md)
+* [Attributes](core-concepts/attributes.md)
+* [Types](core-concepts/types/README.md)
+  * [Numbers](core-concepts/types/numbers.md)
+  * [Prototypes](core-concepts/types/prototypes.md)
+* [Variables & References](core-concepts/variables-and-references.md)
+* [Null & Initialization](core-concepts/null-and-initialization.md)
+* [Loops](core-concepts/loops.md)
+
+## Common Patterns
+
+* [Error Handling](common-patterns/error-handling.md)
+* [Schemas](common-patterns/schemas.md)
+* [Object Run](common-patterns/object-run.md)
+* [Testing](common-patterns/testing.md)
+* [Paradigms](common-patterns/paradigms/README.md)
+  * [Arenas](common-patterns/paradigms/arenas.md)
+
+## Advanced Features
+
+* [Async](advanced-features/async.md)
+* [Exports](advanced-features/exports.md)
+* [Imports](advanced-features/imports.md)
+* [Custom Embedded](advanced-features/custom-embedded.md)
 
 ## libraries
 
