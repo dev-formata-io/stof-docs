@@ -6,9 +6,7 @@ description: First Steps
 
 ## Hello, World!
 
-{% hint style="success" %}
-Also check out the HelloWorld.stof example in the [online playground](https://play.stof.dev/).
-{% endhint %}
+{% embed url="https://play.stof.dev" %}
 
 ```rust
 #[main]

@@ -1,6 +1,11 @@
 # Table of contents
 
 * [🚀 Stof: Data that carries its own logic](README.md)
+* [Where Does Stof Fit?](where-does-stof-fit.md)
+* [Stof vs. WebAssembly](stof-vs.-webassembly.md)
+* [Stof vs. Configuration Languages](stof-vs.-configuration-languages.md)
+* [Stof vs. Temporal/Airflow](stof-vs.-temporal-airflow.md)
+* [Stof vs. JSON Schema](stof-vs.-json-schema.md)
 
 ## Getting Started
 

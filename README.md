@@ -18,6 +18,8 @@ layout:
 
 # 🚀 Stof: Data that carries its own logic
 
+{% embed url="https://play.stof.dev" %}
+
 Send functions + data over APIs, write configs that validate themselves, build data pipelines where transformations travel with the data, store logic + data in a database, etc.
 
 {% hint style="success" %}
