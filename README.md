@@ -46,6 +46,7 @@ Stof is the Standard Transformation and Organization Format.
 * Format-agnostic I/O (works with JSON, YAML, TOML, PDF, binaries, etc.)
 * Sandboxed logic + execution in your data (as data)
 * Send functions over APIs
+* Store data + logic in your database
 * Doesn't need a large ecosystem to work
 
 ## Use-Cases
