@@ -18,8 +18,6 @@ layout:
 
 # 🚀 Stof: Data that carries its own logic
 
-{% embed url="https://play.stof.dev" %}
-
 Send functions + data over APIs, write configs that validate themselves, build data pipelines where transformations travel with the data, store logic + data in a database, etc.
 
 {% hint style="success" %}
@@ -33,6 +31,8 @@ Treats everything uniformly - fields, functions, PDFs, images, binaries, etc. - 
 {% hint style="info" %}
 Stof is the Standard Transformation and Organization Format.
 {% endhint %}
+
+{% embed url="https://play.stof.dev" %}
 
 ## :wave: New to Stof?
 
@@ -59,7 +59,20 @@ Stof is the Standard Transformation and Organization Format.
 * Self-describing datasets
 * ... basically anywhere data meets logic
 
-## Stof Example
+## Who is using Stof?
+
+Stof is being used by many organizations already:
+
+{% hint style="info" %}
+Contact me via Discord and I'll put your logo and link in the docs (free advertising!).
+{% endhint %}
+
+| Company                                           | Description                                                                                      | Contributor Status                                                  |
+| ------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| ![Formata](<.gitbook/assets/Formata (3) (1).png>) | [Formata](https://www.formata.io/) is the Customer Intelligence Infrastructure for RevOps teams. | :white\_check\_mark: Contributor and a committed maintainer         |
+| Your logo here                                    | Contact me on [Discord](https://discord.gg/Up5kxdeXZt)                                           | Check out the [GitHub repo](https://github.com/dev-formata-io/stof) |
+
+## Examples
 
 Here's what Stof looks like in practice. Notice how functions, data, and even unit conversions live together in one document.
 
@@ -69,55 +82,247 @@ Stof documents can be executed locally with the [CLI](getting-started/installati
 Check out the [online playground](https://play.stof.dev/) for real examples you can play with right now.
 {% endhint %}
 
-```rust
-#[attributes("optional exec control | metadata | meta-logic")]
-// A field on the doc "root" node.
-field: 42
+### Data Format + Logic
 
-// JSON-like data & function organization
-stats: {
-    // Optional field types & expressions
-    prompt context: prompt("trees of strings", tag="optional-xml-tag",
-        prompt("behaves like a tree for workflows & functions"),
-        prompt("just cast to/from str anywhere strings are needed")
-        // Std.prompt(..) can take N prompts as sub-prompts
-    );
+Stof is a data format, much like JSON, YAML, TOML, etc., with functions.
+
+```rust
+// Defines data (fields, funcs, etc.)
+server: {
+    port: 8080
+    address: "localhost"
+    memory: 500GiB + 50MB
+    ttl: 300s
     
-    // Units as types with conversions & casting
-    cm height: 6ft + 2in
-    MiB memory: 2MB + 50GiB - 5GB + 1TB
-    ms ttl: 300s
+    fn url() -> str {
+        "https://" + self.address + ":" + self.port
+    }
+    fn valid() -> bool {
+        self.port > 1024 && self.port <= 65536 && self.address != ""
+    }
+}
+```
+
+### Data Transformation
+
+Manipulate the document using the functional data housed within it.
+
+```rust
+data: [1, 2, 3, 4, 5]
+
+#[main]
+fn main() {
+    for (let i in &self.data) i *= 2;
+    pln(self.data);
+}
+
+/* Output:
+[2, 4, 6, 8, 10]
+*/
+```
+
+### Workflows & Pipelines
+
+Stof is a lightweight document format where workflows are portable, executable data. See an example [here](getting-started/tutorial-stof-+-typescript-config.md#completed-example).
+
+{% hint style="success" %}
+Stof has [prototypes](core-concepts/types/prototypes.md), which make workflows much simpler, more powerful, and more maintainable.
+{% endhint %}
+
+{% code expandable="true" %}
+```rust
+workflow: {
+    #[run(0)]
+    remote-api: {
+        address: "https://my-server.com"
+        
+        #[run]
+        fn load_remote_stof_api() {
+            const resp = await Http.fetch(self.address);
+            Std.assert(Http.success(resp));
+            
+            // parse more stof data + logic into this doc as root obj named Api
+            const stof = Http.text(resp);
+            Std.parse(stof, "Api", format="stof");
+            
+            assert(Api.version); // Std lib is implied
+            assert(Api.version > 1.4.4);
+        }
+    }
+    
+    #[run(1)]
+    call-api: {
+        #[run]
+        fn use_loaded_api() {
+            // do something with the loaded Stof API
+        }
+    }
 }
 
 #[main]
-/// The CLI (and other envs) use the #[main] attribute for which fns to call on run.
-fn do_something() {
-    // Dot separated path navigation of the document (self is the current node/obj)
-    let gone = self.self_destruction();
-    assert(gone);
-
-    // async functions, blocks, and expressions always available
-    async {
-        const now = Time.now();
-        loop {
-            sleep(20ms);
-            if (Time.diff(now) > 2s) break;
-        }
-    }
-
-    // partial I/O with any format
-    pln(stringify("toml", self.stats));
-}
-
-/**
- * A function that removes itself from this document when executed.
- */
-fn self_destruction() -> bool {
-    pln(self.field); // Std.pln(..) print line function
-    drop(this);      // "this" is always the last fn on the call stack
-    true             // "return" keyword is optional (no ";")
+fn main() {
+    // Obj.run(obj) recursively runs all #[run] fields & funcs with opt order
+    self.workflow.run();
 }
 ```
+{% endcode %}
+
+### Self-Validating Data
+
+Beyond simple functions, Stof supports comprehensive [schemas](common-patterns/schemas.md) for validations and transformations.
+
+{% code expandable="true" %}
+```rust
+#[type]
+Server: {
+    #[schema((target_val: int):bool => target_val > 1024 && target_val <= 65536)]
+    int port: 8080
+
+    #[schema((target_val: str):bool => target_val != "")]
+    // the ! at the end of a type means "never null", will throw if null is assigned
+    str! address: "localhost"
+
+    #[schema((target_val: MiB):bool => target_val > 2MB)]
+    MiB memory: 500GiB
+
+    #[schema((target_val: ms):bool => target_val > 1s)]
+    ms ttl: 300s
+
+    fn url() -> str {
+        `${self.address.starts_with("http") ? "" : "https://"}${self.address}:${self.port}`
+    }
+
+    fn validate() {
+        // <Server> is a path resolution to the prototype obj
+        // self is the actual instance obj (in this case has a prototype of Server)
+        assert(<Server>.schemafy(self));
+    }
+}
+
+// import into the doc from TOML, JSON, YAML, etc.
+old_json: r#"
+{
+    "port": 4000,
+    "address": "https://my-server.com",
+    "memory": 3000,
+    "ttl": 5000
+}
+"#
+
+#[main]
+fn main() {
+    const my_server = new {};
+    parse(self.old_json, my_server, "json");
+    my_server as Server;   // cast to the Server prototype
+
+    my_server.validate();
+    pln(my_server.url());
+    
+    pln(stringify("toml", my_server)); // export TOML
+}
+
+/* Output:
+https://my-server.com:4000
+address = "https://my-server.com"
+memory = 3000.0
+port = 4000
+ttl = 5000.0
+*/
+```
+{% endcode %}
+
+### Prompt Management
+
+Primitive types designed for modern needs & workflows (prompts, unit types, const fields, etc.).
+
+{% code expandable="true" %}
+```rust
+fn background() -> prompt {
+    const background = prompt(tag="background");
+    background.push("\nSeamless str <-> prompt casting & flows.");
+    background.push("\nMakes working with AI more maintainable for humans.\n");
+    background
+}
+
+fn format() -> prompt {
+    // Std.prompt(..) can take N sub-prompts as a tree after text & tag
+    prompt("", tag="formatting",
+        "\n",
+        prompt("Introduction", tag="first"),
+        "\n",
+        prompt("Presentation", tag="second"),
+        "\n"
+    )
+}
+
+fn my_prompt() -> prompt {
+    const res = prompt();
+    res.push(self.background());
+    res.push("\n");
+    res.push(self.format());
+    res.push("\n");
+    res.push(prompt("Do something cool, AI", "instructions"));
+    res
+}
+
+#[main]
+fn main() {
+    // prompt is a tree of strings when you're working with it
+    // and casts to a string when you need it to be
+    const str_prompt: str = self.my_prompt();
+    pln(str_prompt);
+}
+
+/* Output:
+<background>
+Seamless str <-> prompt casting & flows.
+Makes working with AI more maintainable for humans.
+</background>
+<formatting>
+<first>Introduction</first>
+<second>Presentation</second>
+</formatting>
+<instructions>Do something cool, AI</instructions>
+*/
+```
+{% endcode %}
+
+### Foundations for Tooling
+
+Stof provides a foundation for portable challenge/response logic, programmatic sharing and invocation of APIs, and more.
+
+{% code expandable="true" %}
+```rust
+Data<Age> passport: Age.generate() 
+blob encrypted_json: null
+
+fn init_encrypted() {
+    let payload = new { version: 0.1.5-agent.beta, msg: "Hello, world!" };
+    let res = Age.blobify(self.passport, "json", payload);
+    self.encrypted_json = res;
+    drop(payload);
+    pln("Init Encrypted:\n", stringify("toml", self));
+}
+
+#[main]
+fn main() {
+    self.init_encrypted();
+
+    let decrypted = new {};
+    Age.parse(self.passport, self.encrypted_json, decrypted, "json");
+    pln("\nDecrypted TOML:\n", stringify("toml", decrypted));
+}
+
+/* Output:
+Init Encrypted:
+encrypted_json = [97, 103, 101, 45, 101, 110, 99, 114, 121, 112, 116, 105, 111, 110, 46, 111, 114, 103, 47, 118, 49, 10, 45, 62, 32, 88, 50, 53, 53, 49, 57, 32, 98, 82, 86, 70, 55, 103, 88, 112, 84, 53, 106, 80, 112, 108, 71, 77, 100, 83, 67, 65, 122, 121, 113, 49, 49, 85, 107, 66, 72, 70, 48, 117, 100, 111, 115, 73, 114, 53, 88, 76, 82, 106, 56, 10, 88, 72, 50, 108, 81, 117, 74, 83, 82, 81, 117, 71, 88, 110, 90, 112, 99, 98, 49, 119, 57, 102, 55, 66, 111, 76, 100, 51, 66, 73, 54, 54, 77, 81, 102, 107, 116, 66, 50, 43, 67, 89, 48, 10, 45, 62, 32, 96, 62, 103, 91, 60, 35, 40, 45, 103, 114, 101, 97, 115, 101, 32, 84, 79, 35, 43, 95, 41, 122, 54, 32, 61, 84, 96, 71, 105, 94, 103, 10, 80, 79, 54, 86, 67, 47, 112, 56, 113, 113, 108, 86, 101, 122, 66, 56, 112, 78, 67, 119, 105, 49, 67, 50, 87, 113, 87, 106, 83, 106, 65, 101, 110, 117, 68, 73, 65, 86, 76, 55, 65, 104, 102, 102, 71, 107, 67, 108, 54, 101, 108, 56, 119, 84, 55, 81, 72, 113, 103, 10, 45, 45, 45, 32, 98, 75, 76, 106, 109, 115, 108, 54, 101, 57, 78, 80, 97, 55, 49, 114, 49, 76, 76, 78, 116, 116, 88, 68, 112, 48, 90, 106, 109, 57, 48, 81, 53, 89, 48, 113, 114, 75, 65, 48, 81, 47, 107, 10, 229, 30, 32, 67, 211, 112, 104, 120, 146, 182, 247, 254, 133, 248, 67, 77, 75, 133, 218, 19, 138, 2, 70, 197, 74, 184, 109, 156, 89, 51, 116, 254, 221, 80, 223, 31, 246, 199, 1, 200, 202, 130, 45, 165, 55, 50, 74, 191, 123, 103, 241, 139, 244, 17, 163, 14, 31, 27, 162, 217, 151, 196, 101, 85, 251, 69, 7, 5, 205, 154, 118, 196, 113, 51, 38, 75, 5, 155, 186, 150, 132, 57, 218, 213]
+
+Decrypted TOML:
+msg = "Hello, world!"
+version = "0.1.5-agent.beta"
+*/
+```
+{% endcode %}
 
 ## Embedded
 
