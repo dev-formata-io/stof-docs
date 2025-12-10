@@ -64,14 +64,10 @@ Stof is the Standard Transformation and Organization Format.
 
 Stof is being used by many organizations already:
 
-{% hint style="info" %}
-Contact me via Discord and I'll put your logo and link in the docs (free advertising!).
-{% endhint %}
-
 | Company                                           | Description                                                                                      | Contributor Status                                                  |
 | ------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
 | ![Formata](<.gitbook/assets/Formata (3) (1).png>) | [Formata](https://www.formata.io/) is the Customer Intelligence Infrastructure for RevOps teams. | :white\_check\_mark: Contributor and a committed maintainer         |
-| Your logo here                                    | Contact me on [Discord](https://discord.gg/Up5kxdeXZt)                                           | Check out the [GitHub repo](https://github.com/dev-formata-io/stof) |
+| Your logo here                                    | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                            | Check out the [GitHub repo](https://github.com/dev-formata-io/stof) |
 
 ## Examples
 
@@ -85,7 +81,7 @@ Check out the [online playground](https://play.stof.dev/) for real examples you 
 
 ### Data Format + Logic
 
-Stof is a data format, much like JSON, YAML, TOML, etc., with functions.
+Stof is a data format, similar to JSON, YAML, TOML, etc., with functions.
 
 ```rust
 // Defines data (fields, funcs, etc.)
@@ -106,7 +102,11 @@ server: {
 
 ### Data Transformation
 
-Manipulate the document using the functional data housed within it.
+Manipulate the document using the functional data it contains.
+
+{% hint style="info" %}
+Try this example in the [playground](https://play.stof.dev/blank?content=%0Adata%3A%20%5B1%2C%202%2C%203%2C%204%2C%205%5D%0A%0A%23%5Bmain%5D%0Afn%20main%28%29%20%7B%0A%20%20%20%20for%20%28let%20i%20in%20%26self.data%29%20i%20%2A%3D%202%3B%0A%20%20%20%20pln%28self.data%29%3B%0A%7D%0A%0A%2F%2A%20Output%3A%0A%5B2%2C%204%2C%206%2C%208%2C%2010%5D%0A%2A%2F%0A).
+{% endhint %}
 
 ```rust
 data: [1, 2, 3, 4, 5]
