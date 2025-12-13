@@ -64,10 +64,10 @@ Stof is the Standard Transformation and Organization Format.
 
 Stof is being used by many organizations already:
 
-| Company                                           | Description                                                                                      | Contributor Status                                                  |
-| ------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| ![Formata](<.gitbook/assets/Formata (3) (1).png>) | [Formata](https://www.formata.io/) is the Customer Intelligence Infrastructure for RevOps teams. | :white\_check\_mark: Contributor and a committed maintainer         |
-| Your logo here                                    | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                            | Check out the [GitHub repo](https://github.com/dev-formata-io/stof) |
+| Company                                                           | Description                                                                                      | Contributor Status                                                  |
+| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
+| ![Formata](<.gitbook/assets/Formata purple logo transparent.png>) | [Formata](https://www.formata.io/) is the Customer Intelligence Infrastructure for RevOps teams. | :white\_check\_mark: Contributor and a committed maintainer         |
+| Your logo here                                                    | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                            | Check out the [GitHub repo](https://github.com/dev-formata-io/stof) |
 
 ## Examples
 
@@ -327,10 +327,10 @@ version = "0.1.5-agent.beta"
 
 ## Embedded
 
-Stof is written in Rust and can be embedded today in TypeScript/JavaScript (via WebAssembly), or within your Rust project.
+Stof is written in Rust and can be embedded today in Python, TypeScript/JavaScript (via WebAssembly), or within your Rust project.
 
 {% hint style="success" %}
-Several languages are planned, including Python, Go, and a hosted Runtime-as-a-Service. Please reach out via Discord to discuss timelines and prioritization.
+Several languages are planned. Please reach out on Discord to get involved.
 {% endhint %}
 
 ### Rust
@@ -358,6 +358,37 @@ fn main() {
         Err(err) => panic!("{err}"),
     }
 }
+```
+
+### Python
+
+Stof is available on [PyPi](https://pypi.org/project/stof), just `pip install stof` and `import pystof` module to get started.
+
+```python
+from pystof import Doc
+
+STOF = """
+#[main]
+fn main() {
+    const name = Example.name('Stof,', 'with Python');
+    pln(`Hello, ${name}!!`)
+}
+"""
+
+def name(first, last):
+    return first + ' ' + last
+
+def main():
+    doc = Doc()
+    doc.lib('Example', 'name', name)
+    doc.parse(STOF)
+    doc.run()
+
+if __name__ == "__main__":
+    main()
+
+# Output:
+# Hello, Stof, with Python!!
 ```
 
 ### TypeScript

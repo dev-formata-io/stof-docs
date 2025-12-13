@@ -25,7 +25,7 @@ Both let you:
 | Computation    | :x: Static definitions only                 | :white\_check\_mark: Data can compute itself           |
 | Portability    | :white\_check\_mark: JSON everywhere        | :white\_check\_mark: Works with JSON, YAML, TOML, etc. |
 | Execution      | :x: Schema is separate from runtime         | :white\_check\_mark: Sandboxed execution included      |
-| Ecosystem      | :white\_check\_mark: Large (most languages) | :yellow\_circle: Growing (Rust, JS/TS, Python planned) |
+| Ecosystem      | :white\_check\_mark: Large (most languages) | :yellow\_circle: Growing (Rust, JS/TS, Python, etc.)   |
 
 ### When to use JSON Schema
 
