@@ -1,10 +1,51 @@
-# Where Does Stof Fit?
+# Why Stof, and When?
 
-Stof occupies a unique space in the software ecosystem: **executable data that's lightweight enough to send over APIs**. This page helps you understand how Stof compares to existing tools and when to choose it.
+Stof occupies a unique space in the software ecosystem: code + static data in a singular, lightweight, and portable document that can be run to modify itself.
+
+It's light enough to send over APIs, store in databases, and embed within existing tools, but powerful enough to completely describe & execute AI workflows, APIs, and plugins.
+
+## Why Stof?
+
+Stof can be used in a lot of places - anywhere from configuration, data interchange, workflows & pipelines to distributed systems, model definitions, and portable runtimes.
+
+So why choose it instead of other tools?
+
+### Not a New Idea
+
+First, code mobility is **NOT** a new idea or need. Portable logic has been utilized for a long time in:
+
+* Plugin systems & user-facing executable code
+* DSLs for embedded logic & workflow builders
+* APIs with a lot of flexibility (expands, coordination, etc.)
+* Edge computing & distributed workloads
+* Cloud-hosted functions & services
+* Any pipeline ever defined with JSON, YAML, TOML, etc.
+* ETL, ELT, and most data pipelines (remote execution & automation)
+* The list keeps going....
+
+### Difference
+
+Instead of separate code & data (Ex. Python importing JSON), Stof proposes: why not put code and data together as a unified entity (Ex. Python adds logic to Stof & runs it)?
+
+{% hint style="info" %}
+Essentially, what if we add formal logic/functions to formats like JSON, YAML, TOML, etc. that allow it to safely change the data within, wherever it happens to be?
+{% endhint %}
+
+It turns out that this comes with numerous benefits:
+
+* Format/parse complexities are handled by Stof (works with YAML, TOML, JSON, Images, PDFs, etc.)
+* APIs & SDKs can be inside the Stof document, ready to use wherever the document is
+* The Stof document can self-expand/contract to fit the context it currently finds itself in
+* Security primitives and operations can be embedded within a Stof document
+  * Opportunities for a much more secure web & open protocols
+  * Could "login" to a document to see its contents or have _it_ fetch the real contents
+* Clear isolation & sandboxed behavior, always separate and controlled by the host
+* Higher-order operations in a post-AI world (meta-code, portable agents, dynamic toolsets, etc.)
+  * Portable programs that change themselves to fit the current context
 
 ## **The Landscape**
 
-Here's how Stof relates to major categories of tools:
+Here's how Stof relates to major categories of established tools:
 
 ```
 Configuration Languages     Serialization Formats      Workflow Engines
