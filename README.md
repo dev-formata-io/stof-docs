@@ -68,11 +68,11 @@ Check out our [GitHub](https://github.com/dev-formata-io/stof) & [Discord](https
 
 Stof is being used by many organizations already, with feedback and support from the following organizations:
 
-| Company                                                              | Description                                                                                 |
-| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| ![Formata](<.gitbook/assets/Formata purple logo transparent.png>)    | [Formata](https://www.formata.io/) - Customer Intelligence Infrastructure for RevOps teams. |
-| ![Virnika](<.gitbook/assets/Virnika Logo Lockup — Dark Varient.svg>) | [Virnika](https://www.virnika.ai/) - AI Phone Agents for Restaurants.                       |
-| Your logo here                                                       | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                       |
+| Company                                                                                                                                                                                        | Description                                                                                 |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| ![Formata](<.gitbook/assets/Formata purple logo transparent.png>)                                                                                                                              | [Formata](https://www.formata.io/) - Customer Intelligence Infrastructure for RevOps teams. |
+| <picture><source srcset="https://www.virnika.ai/full_logo.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/Virnika Logo Lockup — Dark Varient.svg" alt="Virnika"></picture> | [Virnika](https://www.virnika.ai/) - AI Phone Agents for Restaurants.                       |
+| Your logo here                                                                                                                                                                                 | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                       |
 
 ## Examples
 
