@@ -1,7 +1,7 @@
 # Table of contents
 
 * [🚀 Stof: Data that carries its own logic](README.md)
-* [Why Stof, and When?](why-stof-and-when.md)
+* [Why Stof and When?](why-stof-and-when.md)
 * [Stof vs. WebAssembly](stof-vs.-webassembly.md)
 * [Stof vs. Configuration Languages](stof-vs.-configuration-languages.md)
 * [Stof vs. Temporal/Airflow](stof-vs.-temporal-airflow.md)
