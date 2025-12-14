@@ -60,14 +60,19 @@ Stof is the Standard Transformation and Organization Format.
 * Self-describing datasets
 * ... basically anywhere data meets logic
 
-## Who is using Stof?
+## Sponsors & Contributors
 
-Stof is being used by many organizations already:
+{% hint style="info" %}
+Check out our [GitHub](https://github.com/dev-formata-io/stof) & [Discord](https://discord.gg/Up5kxdeXZt) server to get involved, or contact us at info@stof.dev.
+{% endhint %}
 
-| Company                                                           | Description                                                                                      | Contributor Status                                                  |
-| ----------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------- |
-| ![Formata](<.gitbook/assets/Formata purple logo transparent.png>) | [Formata](https://www.formata.io/) is the Customer Intelligence Infrastructure for RevOps teams. | :white\_check\_mark: Contributor and a committed maintainer         |
-| Your logo here                                                    | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                            | Check out the [GitHub repo](https://github.com/dev-formata-io/stof) |
+Stof is being used by many organizations already, with feedback and support from the following organizations:
+
+| Company                                                              | Description                                                                                 |
+| -------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| ![Formata](<.gitbook/assets/Formata purple logo transparent.png>)    | [Formata](https://www.formata.io/) - Customer Intelligence Infrastructure for RevOps teams. |
+| ![Virnika](<.gitbook/assets/Virnika Logo Lockup — Dark Varient.svg>) | [Virnika](https://www.virnika.ai/) - AI Phone Agents for Restaurants.                       |
+| Your logo here                                                       | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                       |
 
 ## Examples
 
