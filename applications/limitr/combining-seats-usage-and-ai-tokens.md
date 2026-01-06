@@ -374,3 +374,20 @@ console.log(policy.subjects());
   }
 }
 ```
+
+## Getting Started <a href="#getting-started" id="getting-started"></a>
+
+1. Define your credits for tokens and entitlements for each plan
+2. Attach subjects (users/orgs/api keys) to plans
+3. Increment meters as API calls happen
+4. Listen for events to handle overages or billing
+
+Limitr lets you start simple (free vs pro) and scale up to complex AI pricing without touching your application code.
+
+{% hint style="success" %}
+Star the GitHub repo, create a bug/ticket, reach out on Discord, and get involved.
+
+I use Limitr with Stripe, so if you want more details on this, let me know (cj@stof.dev).
+{% endhint %}
+
+{% embed url="https://github.com/dev-formata-io/limitr" %}
