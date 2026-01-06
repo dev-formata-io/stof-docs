@@ -10,6 +10,7 @@
 ## Applications
 
 * [Limitr](applications/limitr/README.md)
+  * [Usage-Based Pricing with Limitr](applications/limitr/usage-based-pricing-with-limitr.md)
   * [AI Token Pricing with Limitr](applications/limitr/ai-token-pricing-with-limitr.md)
 
 ## Getting Started
