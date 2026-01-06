@@ -6,6 +6,14 @@ description: Metering usage, enforcing limits, and handling resets.
 
 {% embed url="https://github.com/dev-formata-io/limitr" %}
 
+{% hint style="info" %}
+This example shows how Limitr replaces `usage.ts` and `plan checks` with a single policy document that enforces usage limits locally.
+
+See [combining-seats-usage-and-ai-tokens.md](combining-seats-usage-and-ai-tokens.md "mention") to see how Limitr replaces `tokens.ts` and enforces seats and AI tokens in the same policy document.
+
+See [.](./ "mention") for more general information, and the [GitHub repo](https://github.com/dev-formata-io/limitr) to get involved.
+{% endhint %}
+
 ## Why Usage-Based Pricing Breaks Down
 
 Usage-based pricing (storage, bandwidth, tokens, compute) usually starts simple:
