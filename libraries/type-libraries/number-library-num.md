@@ -343,6 +343,17 @@ assert_eq((10).to_string(), "10");
 assert_eq(str(10), "10"); // prefer Std.str(..)
 ```
 
+## Num.to\_units(val: int | float, units: str | float) -> units
+
+Returns val cast to the given units (either a str or another number with units).
+
+```rust
+const val = 10kg;
+const units = 'g';
+assert_eq(val.to_units(units), 10_000g);
+assert_eq(val, 10kg); // unmodified
+```
+
 ## Num.trunc(val: int | float) -> int | float
 
 Return the integer part of the given value.

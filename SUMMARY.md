@@ -7,6 +7,11 @@
 * [Stof vs. Temporal/Airflow](stof-vs.-temporal-airflow.md)
 * [Stof vs. JSON Schema](stof-vs.-json-schema.md)
 
+## Applications
+
+* [Limitr](applications/limitr/README.md)
+  * [AI Token Pricing with Limitr](applications/limitr/ai-token-pricing-with-limitr.md)
+
 ## Getting Started
 
 * [Installation](getting-started/installation.md)
