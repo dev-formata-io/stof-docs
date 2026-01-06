@@ -12,6 +12,7 @@
 * [Limitr](applications/limitr/README.md)
   * [Usage-Based Pricing with Limitr](applications/limitr/usage-based-pricing-with-limitr.md)
   * [AI Token Pricing with Limitr](applications/limitr/ai-token-pricing-with-limitr.md)
+  * [Combining Seats, Usage, and AI Tokens](applications/limitr/combining-seats-usage-and-ai-tokens.md)
 
 ## Getting Started
 
