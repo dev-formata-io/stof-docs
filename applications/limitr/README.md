@@ -185,8 +185,8 @@ Your application code becomes simpler and more explicit:
 ```ts
 const policy = await Limitr.new(`# policy goes here`, 'yaml'); // creates stof doc
 
-await policy.meter(subjectId, 'tokens', 3000);
-await policy.increment(subjectId, 'seats'); // shorthand for metering by a standard inc
+await policy.allow(subjectId, 'tokens', 3000);
+await policy.increment(subjectId, 'seats'); // shorthand allow a standard usage increment
 
 const seats = await policy.value(subjectId, 'seats'); // current 'seats' value (meter)
 ```
@@ -208,11 +208,11 @@ Limitr does not assume billing behavior; it only enforces truth.
 
 ***
 
-## Meters, Entitlements, and Subjects
+## Meters, Entitlements, and Customers
 
 Limitr uses a small set of concepts:
 
-* **Subjects**\
+* **Customers**\
   Entities being limited (users, orgs, API keys, etc.)
 * **Entitlements**\
   Named capabilities attached to plans (e.g. `seats`, `tokens`)

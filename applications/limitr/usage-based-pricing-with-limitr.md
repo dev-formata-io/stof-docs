@@ -40,7 +40,7 @@ Limitr moves this logic into a **policy document**, enforced consistently at run
 * **Entitlements** define what can be consumed and how much
 * **Meters** track usage per subject
 * **Limits** enforce caps and reset behavior
-* **Subjects** represent users, orgs, API keys, etc.
+* **Customers** represent users, orgs, API keys, etc.
 
 ***
 
@@ -79,13 +79,13 @@ policy:
             reset_inc: 24hr
 `, 'yaml');
 
-// Load subjects (users, orgs, Stripe customers, etc.)
-await policy.addSubject('free_user', 'free');
-await policy.addSubject('pro_user', 'pro');
+// Load customers (users, orgs, Stripe customers, etc.)
+await policy.addCustomer('free_user', 'free');
+await policy.addCustomer('pro_user', 'pro');
 
 // Meter usage and let Limitr enforce limits
-assert(await policy.meter('free_user', 'usage', '20.5MB'));
-assert(await policy.meter('free_user', 'usage', 500));
+assert(await policy.allow('free_user', 'usage', '20.5MB'));
+assert(await policy.allow('free_user', 'usage', 500));
 
 // Inspect meter state
 assertEquals(policy.value('free_user', 'usage'), 520.5);
@@ -93,7 +93,7 @@ assertEquals(Math.round(policy.balance('free_user', 'usage') as number), 479);
 assertEquals(Math.round(policy.limit('free_user', 'usage') as number), 1000);
 
 // Hard limit reached → denied + meter-limit event
-assertFalse(await policy.meter('free_user', 'usage', '1GB'));
+assertFalse(await policy.allow('free_user', 'usage', '1GB'));
 
 // Inspect entitlement state (plan or subject level)
 console.log(policy.entitlement('free', 'usage'));
@@ -137,8 +137,8 @@ This defines:
 
 ## Meters
 
-* Stored per subject per entitlement
-* Automatically incremented via `policy.meter(...)`
+* Stored per customer per entitlement
+* Automatically incremented via `policy.allow(...)`
 * Reset automatically based on policy rules
 * Fully inspectable and serializable
 
@@ -154,7 +154,7 @@ Limitr handles meter resets internally:
 
 Resets are evaluated **at runtime** based on:
 
-* last reset timestamp (per subject meter)
+* last reset timestamp (per customer meter)
 * `reset_inc`
 * current time
 

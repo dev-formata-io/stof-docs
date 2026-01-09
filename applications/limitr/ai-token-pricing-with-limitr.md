@@ -22,7 +22,7 @@ Limitr separates **usage policy** from **application logic**.
 
 * Define **credits** for tokens
 * Attach **entitlements** to plans
-* Track **meters** per subject
+* Track **meters** per customer
 * Enforce **limits** at runtime
 * Emit **events** when limits are reached
 
@@ -69,22 +69,22 @@ import { Limitr } from "jsr:@formata/limitr";
 // create a limitr policy (from db, server, local string, etc.)
 const policy = await Limitr.new(`# policy goes here`, 'yaml');
 
-// create test subjects (or load some saved ones, Stripe ones, etc.)
-await policy.addSubject('free_user', 'free');
-await policy.addSubject('pro_user', 'pro');
+// create test customers (or load some saved ones, Stripe ones, etc.)
+await policy.addCustomer('free_user', 'free');
+await policy.addCustomer('pro_user', 'pro');
 
 // add event handlers either in doc (its just stof) or to policy as pre-defined (App.meter_overage, etc..)
-policy.doc.lib('App', 'meter_overage', (json: string) => { const r = JSON.parse(json); console.log('Overage subject: ', r.subject, r.balance); });
-policy.doc.lib('Custom', 'example_event_handler', (user: string, balance: number) => { console.log("firing a custom event handler for", user, balance); });
+policy.doc.lib('App', 'meter_overage', (json: string) => { const r = JSON.parse(json); console.log('Overage subject: ', r.subject, r.remaining); });
+policy.doc.lib('Custom', 'example_event_handler', (user: string, remaining: number) => { console.log("firing a custom event handler for", user, remaining); });
 policy.doc.parse(`
     #[meter-overage]
     fn meter_over_limit(val: obj) {
-        ?Custom.example_event_handler(val.subject.id, val.balance);
+        ?Custom.example_event_handler(val.subject.id, val.remaining);
     }
 `);
 
 // determin allowed or not while metering usage
-const allowed = await policy.meter('free_user', 'tokens', 1400);
+const allowed = await policy.allow('free_user', 'tokens', 1400);
 if (!allowed) console.log('Free user is not allowed');
 ```
 
@@ -102,7 +102,7 @@ Overage subject:  {
 } -400
 ```
 
-* `policy.meter` automatically updates the **meter** if a hard limit hasn't been reached
+* `policy.allow` automatically updates the **meter** if a hard limit hasn't been reached
 * Events (`meter-limit`, `meter-overage`, etc.) fire on threshold violations
 * The app decides how to respond (block, warn, bill, or notify)
 
@@ -134,7 +134,7 @@ policy:
 ```
 
 * Each entitlement tracks a specific model or token type
-* Meters are stored per subject
+* Meters are stored per customer
 * Overages emit events per entitlement, giving granular insight
 
 ***
@@ -163,7 +163,7 @@ This allows AI products to **warn users** or **record overages** before enforcin
 ## Getting Started
 
 1. Define your credits for tokens and entitlements for each plan
-2. Attach subjects (users/orgs/api keys) to plans
+2. Attach customers (users/orgs/api keys) to plans
 3. Increment meters as API calls happen
 4. Listen for events to handle overages or billing
 

@@ -23,7 +23,7 @@ Limitr lets you express all of these **in a single policy**, while tracking and 
 > **Plans describe entitlements.**\
 > **Entitlements define limits.**\
 > **Meters track usage.**\
-> **Subjects own state.**
+> **Customers own state.**
 
 Each dimension can:
 
@@ -112,7 +112,7 @@ policy:
 
 ***
 
-## Subjects and Scope
+## Customers and Scope
 
 In this example:
 
@@ -127,11 +127,11 @@ import { assert, assertEquals, assertFalse } from 'jsr:@std/assert@^1.0.16';
 // load a policy from wherever you keep policies (db, local string, server, etc.)
 const policy = await Limitr.new(`# yaml from above`, 'yaml');
 
-// Create an org subject with free plan
-await policy.addSubject('free_org', 'free', 'org', 'Free Org');
+// Create an org customer with free plan
+await policy.addCustomer('free_org', 'free', 'org', 'Free Org');
 
-// Create a user linked to the org with an alternate ID
-await policy.addSubject(
+// Create a user linked to the org plan with an additional, alternate ID
+await policy.addCustomer(
   'free_user',
   '',
   undefined,
@@ -147,7 +147,7 @@ await policy.addSubject(
 
 ```ts
 assert(await policy.increment(policy.subjectOrg('free_user') as string, 'seats'));
-assert(await policy.meter(policy.subjectOrg('cus_alt') as string, 'seats', 2));
+assert(await policy.allow(policy.subjectOrg('cus_alt') as string, 'seats', 2));
 
 assertFalse(
   await policy.increment('free_org', 'seats')
@@ -156,7 +156,7 @@ assertFalse(
 
 **What’s happening:**
 
-* Seats are enforced on the org subject
+* Seats are enforced on the org customer
 * Any user tied to the org consumes from the same meter
 * Limitr prevents exceeding the plan limit
 
@@ -165,11 +165,11 @@ assertFalse(
 ## AI Token Enforcement (User-Level)
 
 ```ts
-assert(await policy.meter('free_user', 'davinci_tokens', 300));
-assertFalse(await policy.meter('free_user', 'davinci_tokens', 201));
+assert(await policy.allow('free_user', 'davinci_tokens', 300));
+assertFalse(await policy.allow('free_user', 'davinci_tokens', 201)); // over limit by 1
 
-assert(await policy.meter('free_user', 'curie_tokens', 1000));
-assertFalse(await policy.meter('free_user', 'curie_tokens', 1001));
+assert(await policy.allow('free_user', 'curie_tokens', 1000));
+assertFalse(await policy.allow('free_user', 'curie_tokens', 1001)); // over limit by 1
 ```
 
 **Key detail:**
@@ -183,11 +183,11 @@ assertFalse(await policy.meter('free_user', 'curie_tokens', 1001));
 ## Usage Enforcement with Units
 
 ```ts
-assert(await policy.meter('cus_alt', 'usage', '20MB'));
+assert(await policy.allow('cus_alt', 'usage', '20MB'));
 assertEquals(policy.value('free_user', 'usage') as number, 20);
 
 assertFalse(
-  await policy.meter('free_user', 'usage', '1GB')
+  await policy.allow('free_user', 'usage', '1GB')
 ); // exceeds daily cap
 ```
 
@@ -200,27 +200,27 @@ assertFalse(
 ## Plan Changes Without Redeploy
 
 ```ts
-assert(await policy.setSubjectPlan('free_org', 'pro'));
+assert(await policy.setCustomerPlan('free_org', 'pro'));
 
-assert(await policy.meter('cus_alt', 'curie_tokens', 12200));
+assert(await policy.allow('cus_alt', 'curie_tokens', 12200));
 assertEquals(policy.value('cus_alt', 'curie_tokens'), 13200);
 
 assertFalse(
-  await policy.meter('cus_alt', 'curie_tokens', 7000)
+  await policy.allow('cus_alt', 'curie_tokens', 7000)
 );
 ```
 
-Changing the plan immediately affects enforcement — no code changes, no redeploy. Alternatively, just change the plan field in the subject (if referencing a remote subject record).
+Changing the plan immediately affects enforcement — no code changes, no redeploy. Alternatively, just change the plan field in the customer (if referencing a remote subject record).
 
 ***
 
 ## Persisting State
 
 ```ts
-console.log(policy.subjects());
+console.log(policy.customers());
 ```
 
-All subject state (meters, balances, resets, plans) can be:
+All customer state (meters, balances, resets, plans) can be:
 
 * serialized
 * stored in a database
@@ -313,38 +313,38 @@ policy:
             value: 20000
 `, 'yaml');
 
-// Load subjects (users, orgs, Stripe customers, etc.)
-// First lets create an org subject (for seats and anything tracked per org)
-await policy.addSubject('free_org', 'free', 'org', 'Free Org');
+// Load customers (users, orgs, Stripe customers, etc.)
+// First lets create an org customer (for seats and anything tracked per org)
+await policy.addCustomer('free_org', 'free', 'org', 'Free Org');
 
-// Now lets create a user test subject linked to the org plan, with an additional ID (Stripe customer ID, app ID, API key, etc.)
-await policy.addSubject('free_user', '', undefined, undefined, 'free_org', ['cus_alt']);
+// Now lets create a user test customer linked to the org plan, with an additional ID (Stripe customer ID, app ID, API key, etc.)
+await policy.addCustomer('free_user', '', undefined, undefined, 'free_org', ['cus_alt']);
 
 // Now we're all set to track things for the org and user together!
 // Lets increment a few seats on the org first.
 assert(await policy.increment(policy.subjectOrg('free_user') as string, 'seats'));
-assert(await policy.meter(policy.subjectOrg('cus_alt') as string, 'seats', 2));
+assert(await policy.allow(policy.subjectOrg('cus_alt') as string, 'seats', 2));
 assertFalse(await policy.increment('free_org', 'seats')); // cannot add a 4th seat to the org
 
-// Lets track model tokens individually, not on the org
-assert(await policy.meter('free_user', 'davinci_tokens', 300));
-assertFalse(await policy.meter('free_user', 'davinci_tokens', 201)); // over by 1
-assert(await policy.meter('free_user', 'curie_tokens', 1000));
-assertFalse(await policy.meter('free_user', 'curie_tokens', 1001)); // over by 1
+// Lets track model tokens individually per user
+assert(await policy.allow('free_user', 'davinci_tokens', 300));
+assertFalse(await policy.allow('free_user', 'davinci_tokens', 201)); // over by 1
+assert(await policy.allow('free_user', 'curie_tokens', 1000));
+assertFalse(await policy.allow('free_user', 'curie_tokens', 1001)); // over by 1
 
 // Usage is tracked per user as well, and we can use any alt ID for the user
-assert(await policy.meter('cus_alt', 'usage', 20 + 'MB'));
+assert(await policy.allow('cus_alt', 'usage', 20 + 'MB'));
 assertEquals(policy.value('free_user', 'usage') as number, 20); // always units of credit (MB)
-assertFalse(await policy.meter('free_user', 'usage', '1GB')); // max of 1GB, so over by 20MB
+assertFalse(await policy.allow('free_user', 'usage', '1GB')); // max of 1GB, so over by 20MB
 
 // Now lets switch the plan for the org
-assert(await policy.setSubjectPlan('free_org', 'pro'));
-assert(await policy.meter('cus_alt', 'curie_tokens', 12200));
+assert(await policy.setCustomerPlan('free_org', 'pro'));
+assert(await policy.allow('cus_alt', 'curie_tokens', 12200));
 assertEquals(policy.value('cus_alt', 'curie_tokens') as number, 13200); // already had 1k from above
-assertFalse(await policy.meter('cus_alt', 'curie_tokens', 7000)); // would be over by 200
+assertFalse(await policy.allow('cus_alt', 'curie_tokens', 7000)); // would be over by 200
 
-// Now lets store our subjects (entire state info)
-console.log(policy.subjects());
+// Now lets store our customers (entire state info)
+console.log(policy.customers());
 ```
 
 ```bash
@@ -378,7 +378,7 @@ console.log(policy.subjects());
 ## Getting Started <a href="#getting-started" id="getting-started"></a>
 
 1. Define your credits for tokens and entitlements for each plan
-2. Attach subjects (users/orgs/api keys) to plans
+2. Attach customers (users/orgs/api keys) to plans
 3. Increment meters as API calls happen
 4. Listen for events to handle overages or billing
 
