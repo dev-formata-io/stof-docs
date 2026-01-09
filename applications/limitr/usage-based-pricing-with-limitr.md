@@ -38,7 +38,7 @@ Limitr moves this logic into a **policy document**, enforced consistently at run
 
 * **Credits** define the unit of measurement (MB, tokens, seconds)
 * **Entitlements** define what can be consumed and how much
-* **Meters** track usage per subject
+* **Meters** track usage per customer
 * **Limits** enforce caps and reset behavior
 * **Customers** represent users, orgs, API keys, etc.
 
@@ -95,7 +95,7 @@ assertEquals(Math.round(policy.limit('free_user', 'usage') as number), 1000);
 // Hard limit reached → denied + meter-limit event
 assertFalse(await policy.allow('free_user', 'usage', '1GB'));
 
-// Inspect entitlement state (plan or subject level)
+// Inspect entitlement definition (plan or customer ID)
 console.log(policy.entitlement('free', 'usage'));
 ```
 

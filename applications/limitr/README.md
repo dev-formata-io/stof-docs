@@ -79,7 +79,7 @@ Instead of encoding limits in code, you describe them in a policy document and e
 
 Your application asks Limitr:
 
-> “Can this subject consume this right now?”
+> “Can this customer consume this right now?”
 
 Limitr answers with:
 
@@ -217,7 +217,7 @@ Limitr uses a small set of concepts:
 * **Entitlements**\
   Named capabilities attached to plans (e.g. `seats`, `tokens`)
 * **Meters**\
-  Stateful counters stored per subject per entitlement
+  Stateful counters stored per customer per entitlement
 * **Limits**\
   Rules that control how meters are allowed to change
 * **Credits**\
@@ -260,7 +260,7 @@ Instead, it acts as the **source of truth** for usage and limits.
 Billing systems (Stripe, Paddle, internal tooling) can:
 
 * subscribe to Limitr events
-* read subject usage state
+* read customer usage state
 * calculate invoices independently
 
 This keeps enforcement and money cleanly separated.

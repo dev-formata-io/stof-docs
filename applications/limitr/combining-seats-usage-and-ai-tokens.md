@@ -29,7 +29,7 @@ Each dimension can:
 
 * use its own unit
 * reset independently
-* apply to different subjects
+* apply to different customers
 * emit its own events
 
 All without branching logic in application code.
@@ -210,7 +210,7 @@ assertFalse(
 );
 ```
 
-Changing the plan immediately affects enforcement — no code changes, no redeploy. Alternatively, just change the plan field in the customer (if referencing a remote subject record).
+Changing the plan immediately affects enforcement — no code changes, no redeploy. Alternatively, just change the plan field in the customer (if referencing a remote customer record).
 
 ***
 

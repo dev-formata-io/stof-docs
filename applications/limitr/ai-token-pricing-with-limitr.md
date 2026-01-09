@@ -74,7 +74,7 @@ await policy.addCustomer('free_user', 'free');
 await policy.addCustomer('pro_user', 'pro');
 
 // add event handlers either in doc (its just stof) or to policy as pre-defined (App.meter_overage, etc..)
-policy.doc.lib('App', 'meter_overage', (json: string) => { const r = JSON.parse(json); console.log('Overage subject: ', r.subject, r.remaining); });
+policy.doc.lib('App', 'meter_overage', (json: string) => { const r = JSON.parse(json); console.log('Overage customer: ', r.customer, r.remaining); });
 policy.doc.lib('Custom', 'example_event_handler', (user: string, remaining: number) => { console.log("firing a custom event handler for", user, remaining); });
 policy.doc.parse(`
     #[meter-overage]
