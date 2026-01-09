@@ -91,7 +91,7 @@ if (!allowed) console.log('Free user is not allowed');
 ```bash
 > deno run example.ts
 firing a custom event handler for free_user -400
-Overage subject:  {
+Overage customer:  {
   id: "free_user",
   plan: "free",
   type: "user",
