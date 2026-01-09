@@ -185,10 +185,10 @@ Your application code becomes simpler and more explicit:
 ```ts
 const policy = await Limitr.new(`# policy goes here`, 'yaml'); // creates stof doc
 
-await policy.allow(subjectId, 'tokens', 3000);
-await policy.increment(subjectId, 'seats'); // shorthand allow a standard usage increment
+await policy.allow(customerId, 'tokens', 3000);
+await policy.increment(customerId, 'seats'); // shorthand allow a standard usage increment
 
-const seats = await policy.value(subjectId, 'seats'); // current 'seats' value (meter)
+const seats = await policy.value(customerId, 'seats'); // current 'seats' value (meter)
 ```
 
 If the limit is exceeded:

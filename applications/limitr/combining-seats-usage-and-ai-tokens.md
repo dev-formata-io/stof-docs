@@ -146,8 +146,8 @@ await policy.addCustomer(
 ## Seat Enforcement (Org-Level)
 
 ```ts
-assert(await policy.increment(policy.subjectOrg('free_user') as string, 'seats'));
-assert(await policy.allow(policy.subjectOrg('cus_alt') as string, 'seats', 2));
+assert(await policy.increment(policy.customerOrg('free_user') as string, 'seats'));
+assert(await policy.allow(policy.customerOrg('cus_alt') as string, 'seats', 2));
 
 assertFalse(
   await policy.increment('free_org', 'seats')
@@ -322,8 +322,8 @@ await policy.addCustomer('free_user', '', undefined, undefined, 'free_org', ['cu
 
 // Now we're all set to track things for the org and user together!
 // Lets increment a few seats on the org first.
-assert(await policy.increment(policy.subjectOrg('free_user') as string, 'seats'));
-assert(await policy.allow(policy.subjectOrg('cus_alt') as string, 'seats', 2));
+assert(await policy.increment(policy.customerOrg('free_user') as string, 'seats'));
+assert(await policy.allow(policy.customerOrg('cus_alt') as string, 'seats', 2));
 assertFalse(await policy.increment('free_org', 'seats')); // cannot add a 4th seat to the org
 
 // Lets track model tokens individually per user
