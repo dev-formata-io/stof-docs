@@ -79,7 +79,7 @@ policy.doc.lib('Custom', 'example_event_handler', (user: string, remaining: numb
 policy.doc.parse(`
     #[meter-overage]
     fn meter_over_limit(val: obj) {
-        ?Custom.example_event_handler(val.subject.id, val.remaining);
+        ?Custom.example_event_handler(val.customer.id, val.remaining);
     }
 `);
 
