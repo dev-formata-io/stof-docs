@@ -189,13 +189,15 @@ Return this graph's unique string ID.
 assert(graph_id().len() > 10);
 ```
 
-## Std.lib(lib: str) -> bool
+## Std.lib(lib: str, func?: str) -> bool
 
-Is the given library loaded/available to use?
+Is the given library (and optional function) loaded/available to use?
 
 ```rust
 assert(lib("Std")); // standard library is loaded
 assert_not(lib("Render")); // no "Render" library loaded
+
+assert(lib("Num", "abs")); // Num.abs(..) lib function is available
 ```
 
 ## Std.libs() -> set

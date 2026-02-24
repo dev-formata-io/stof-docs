@@ -1,53 +1,12 @@
 ---
 description: Introduction.
-layout:
-  width: default
-  title:
-    visible: true
-  description:
-    visible: false
-  tableOfContents:
-    visible: true
-  outline:
-    visible: true
-  pagination:
-    visible: true
-  metadata:
-    visible: true
 ---
 
-# 🚀 Stof: Data that carries its own logic
+# 🚀 Stof: Data + Logic
 
-Send functions + data over APIs, write configs that validate themselves, build data pipelines where transformations travel with the data, store logic + data in a database, etc.
-
-{% hint style="success" %}
-Works with JSON, YAML, TOML, etc. - no migration needed.
-
-Add/import logic only where required.
-{% endhint %}
-
-Treats everything uniformly - fields, functions, PDFs, images, binaries, etc. - as data that can be combined in a single portable document.
-
-{% hint style="info" %}
-Stof is the Standard Transformation and Organization Format.
-{% endhint %}
+JSON with functions that you can move around between services/APIs, add/remove/edit in transit, with a slim sandboxed WASM runtime and a clean interop model for host libraries.
 
 {% embed url="https://play.stof.dev" %}
-
-## :wave: New to Stof?
-
-1. Read the 5-minute [Quick Start](getting-started/quick-start-5-min.md)
-2. Try the [online playground](https://play.stof.dev/)
-3. Follow the [TypeScript Config Tutorial](getting-started/tutorial-stof-+-typescript-config.md)
-
-## Benefits
-
-* Write data + logic once, use it everywhere (JS, Rust, Python, anywhere your app lives)
-* Format-agnostic I/O (works with JSON, YAML, TOML, PDF, binaries, etc.)
-* Sandboxed logic + execution in your data (as data)
-* Send functions over APIs
-* Store data + logic in your database
-* Doesn't need a large ecosystem to work
 
 ## Use-Cases
 
@@ -60,25 +19,20 @@ Stof is the Standard Transformation and Organization Format.
 * Self-describing datasets
 * ... basically anywhere data meets logic
 
-## Sponsors & Contributors
+## Contributors
 
 {% hint style="info" %}
-Check out our [GitHub](https://github.com/dev-formata-io/stof) & [Discord](https://discord.gg/Up5kxdeXZt) server to get involved, or contact us at info@stof.dev.
+Check out our [GitHub](https://github.com/dev-formata-io/stof) & [Discord](https://discord.gg/Up5kxdeXZt) server to get involved, or email info@stof.dev.
 {% endhint %}
 
-Stof is being used by many organizations already, with feedback and support from the following organizations:
-
-| Company                                                                                                                                                                                                           | Description                                                                                 |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
-| <picture><source srcset=".gitbook/assets/Formata white logo transparent (1).svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/Formata purple logo transparent.png" alt="Formata"></picture>     | [Formata](https://www.formata.io/) - Customer Intelligence Infrastructure for RevOps teams. |
-| <picture><source srcset=".gitbook/assets/Virnika Logo Lockup — Light Varient.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/Virnika Logo Lockup — Dark Varient.svg" alt="Virnika"></picture> | [Virnika](https://www.virnika.ai/) - AI Phone Agents for Restaurants.                       |
-| Your logo here                                                                                                                                                                                                    | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                                       |
+| Company                                                                                                                                                                                                           | Description                                                          |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
+| <picture><source srcset=".gitbook/assets/limitr_white_logo.png" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/limitr_black_logo.png" alt=""></picture>                                           | [Limitr](https://limitr.dev/) - Complete Monetization for AI & SaaS. |
+| <picture><source srcset=".gitbook/assets/Virnika Logo Lockup — Light Varient.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/Virnika Logo Lockup — Dark Varient.svg" alt="Virnika"></picture> | [Virnika](https://www.virnika.ai/) - AI Agents for Restaurants.      |
+| <picture><source srcset=".gitbook/assets/kater-logo-dark-full-name-no-bg.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/kater-logo-light-full-name-no-bg.svg" alt=""></picture>              | [Kater](https://www.kater.ai/) - Comprehensive Data & Analytics.     |
+| Your logo here                                                                                                                                                                                                    | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                |
 
 ## Examples
-
-Here's what Stof looks like in practice. Notice how functions, data, and even unit conversions live together in one document.
-
-Stof documents can be executed locally with the [CLI](getting-started/installation.md), embedded within the language of your choice, or on your browser via the online playground.
 
 {% hint style="success" %}
 Check out the [online playground](https://play.stof.dev/) for real examples you can play with right now.
@@ -86,7 +40,7 @@ Check out the [online playground](https://play.stof.dev/) for real examples you 
 
 ### Data Format + Logic
 
-Stof is a data format, similar to JSON, YAML, TOML, etc., with functions.
+Stof is format-first, similar to JSON, YAML, TOML, etc., with functions that can transform the document they are defined in.
 
 ```rust
 // Defines data (fields, funcs, etc.)
@@ -293,43 +247,6 @@ Makes working with AI more maintainable for humans.
 ```
 {% endcode %}
 
-### Foundations for Tooling
-
-Stof provides a foundation for portable challenge/response logic, programmatic sharing and invocation of APIs, and more.
-
-{% code expandable="true" %}
-```rust
-Data<Age> passport: Age.generate() 
-blob encrypted_json: null
-
-fn init_encrypted() {
-    let payload = new { version: 0.1.5-agent.beta, msg: "Hello, world!" };
-    let res = Age.blobify(self.passport, "json", payload);
-    self.encrypted_json = res;
-    drop(payload);
-    pln("Init Encrypted:\n", stringify("toml", self));
-}
-
-#[main]
-fn main() {
-    self.init_encrypted();
-
-    let decrypted = new {};
-    Age.parse(self.passport, self.encrypted_json, decrypted, "json");
-    pln("\nDecrypted TOML:\n", stringify("toml", decrypted));
-}
-
-/* Output:
-Init Encrypted:
-encrypted_json = [97, 103, 101, 45, 101, 110, 99, 114, 121, 112, 116, 105, 111, 110, 46, 111, 114, 103, 47, 118, 49, 10, 45, 62, 32, 88, 50, 53, 53, 49, 57, 32, 98, 82, 86, 70, 55, 103, 88, 112, 84, 53, 106, 80, 112, 108, 71, 77, 100, 83, 67, 65, 122, 121, 113, 49, 49, 85, 107, 66, 72, 70, 48, 117, 100, 111, 115, 73, 114, 53, 88, 76, 82, 106, 56, 10, 88, 72, 50, 108, 81, 117, 74, 83, 82, 81, 117, 71, 88, 110, 90, 112, 99, 98, 49, 119, 57, 102, 55, 66, 111, 76, 100, 51, 66, 73, 54, 54, 77, 81, 102, 107, 116, 66, 50, 43, 67, 89, 48, 10, 45, 62, 32, 96, 62, 103, 91, 60, 35, 40, 45, 103, 114, 101, 97, 115, 101, 32, 84, 79, 35, 43, 95, 41, 122, 54, 32, 61, 84, 96, 71, 105, 94, 103, 10, 80, 79, 54, 86, 67, 47, 112, 56, 113, 113, 108, 86, 101, 122, 66, 56, 112, 78, 67, 119, 105, 49, 67, 50, 87, 113, 87, 106, 83, 106, 65, 101, 110, 117, 68, 73, 65, 86, 76, 55, 65, 104, 102, 102, 71, 107, 67, 108, 54, 101, 108, 56, 119, 84, 55, 81, 72, 113, 103, 10, 45, 45, 45, 32, 98, 75, 76, 106, 109, 115, 108, 54, 101, 57, 78, 80, 97, 55, 49, 114, 49, 76, 76, 78, 116, 116, 88, 68, 112, 48, 90, 106, 109, 57, 48, 81, 53, 89, 48, 113, 114, 75, 65, 48, 81, 47, 107, 10, 229, 30, 32, 67, 211, 112, 104, 120, 146, 182, 247, 254, 133, 248, 67, 77, 75, 133, 218, 19, 138, 2, 70, 197, 74, 184, 109, 156, 89, 51, 116, 254, 221, 80, 223, 31, 246, 199, 1, 200, 202, 130, 45, 165, 55, 50, 74, 191, 123, 103, 241, 139, 244, 17, 163, 14, 31, 27, 162, 217, 151, 196, 101, 85, 251, 69, 7, 5, 205, 154, 118, 196, 113, 51, 38, 75, 5, 155, 186, 150, 132, 57, 218, 213]
-
-Decrypted TOML:
-msg = "Hello, world!"
-version = "0.1.5-agent.beta"
-*/
-```
-{% endcode %}
-
 ## Embedded
 
 Stof is written in Rust and can be embedded today in Python, TypeScript/JavaScript (via WebAssembly), or within your Rust project.
@@ -338,11 +255,27 @@ Stof is written in Rust and can be embedded today in Python, TypeScript/JavaScri
 Several languages are planned. Please reach out on Discord to get involved.
 {% endhint %}
 
+### NPM
+
+`npm i @formata/stof`
+
+```typescript
+import { initStof, stof } from '@formata/stof';
+await initStof(); // init was once (see readme)
+
+const doc = stof`{
+    name: 'world',
+    fn hello() -> str { 'Hello, ' + self.name + '!' }
+}`;
+
+console.log(await doc.call('hello')); // Hello, world!
+```
+
 ### Rust
 
 ```toml
 [dependencies]
-stof = "0.8.*"
+stof = "0.9.*"
 ```
 
 ```rust
@@ -396,107 +329,7 @@ if __name__ == "__main__":
 # Hello, Stof, with Python!!
 ```
 
-### TypeScript
-
-The package is hosted on [JSR](https://jsr.io/@formata/stof) for you to use in the JS environment of your choice.
-
-```typescript
-import { StofDoc } from '@formata/stof';
-const doc = await StofDoc.new();
-
-doc.lib('Std', 'pln', (... vars: unknown[]) => console.log(...vars));
-doc.lib('Example', 'nested', async (): Promise<Map<string, string>> => {
-    const res = new Map();
-    res.set('msg', 'hello, there');
-    res.set('nested', await (async (): Promise<string> => 'this is a nested async JS fn (like fetch)')());
-    return res;
-}, true);
-
-doc.parse(`
-    field: 42
-    fn main() -> int {
-        const res = await Example.nested();
-        pln(res);
-        self.field
-    }
-`);
-const field = await doc.call('main');
-console.log(field);
-
-/*
-Map(2) {                                                                                                                                                                                                                       
-  "msg" => "hello, there",
-  "nested" => "this is a nested async JS fn (like fetch)"
-}
-42
-*/
-```
-
-## Why Now?
-
-In the current technology landscape, every program is distributed, utilizing multiple systems in parallel to deliver value. In distributed systems, everything is about moving either data to computation or computation to data.
-
-> Stof proposes: Why not move them together as a unified entity?
-
-Stof explores:
-
-* Practical code mobility at scale with modern type systems
-* Unifying data transformation with code distribution
-* Security models for distributed computation-as-data
-* Performance characteristics of serializable computation vs traditional RPC/message-passing
-* Formal semantics for "code as data" in distributed systems
-* Edge computing, data pipelines, and collaborative systems
-
-### The Serializable Computation Problem
-
-Code mobility involves either strong mobility (moving code, data, and execution state) or weak mobility (moving just code and data). This has been a challenge for decades. Stof's "Everything as Data" approach, including functions and types that can be serialized and sent over APIs, directly addresses this.
-
-### Actor Model + Data-Oriented Programming
-
-What if you could send not just messages, but **executable transformations** as data between actors? This bridges:
-
-* The actor model's isolation and message-passing
-* Data-oriented programming's focus on data transformation pipelines
-* Code mobility's ability to move compuation to data
-
-### Edge Computing & Data Locality
-
-Rather than fixing the interface to a resource, a minimal interface can be defined and code implementing higher-level interfaces placed alongside it as required, allowing application-specific interaction patterns.
-
-Imagine: An IoT sensor network where you push Stof transformation functions to edge devices. The functions are data, so they can be:
-
-* Versioned and rolled back
-* Inspected for resource usage before execution
-* Composed and optimized at runtime
-* Migrated between nodes based on data locality
-
-### Distributed Data Pipelines
-
-Self-describing data with embedded transformations reduces the complexity of distributed data pipelines compared to current orchestration-heavy approaches.
-
-* Transformations travel with the data
-* Self-validating data that includes its own processing logic
-* Dynamic pipeline reconfiguration without redeployment
-
-### Secure Multi-Party Computation
-
-Sandboxing restricts mobile code to a controlled environment with limited system resource access. Stof's sandbox + serializable functions enable:
-
-* Controlled computation on sensitive data
-* Verifiable transformations (the code is inspectable data)
-* Dynamic permission models (capabilities as data)
-
-### Collaborative Editing & CRDTs
-
-Conflict-free Replicated Data Types (CRDTs) struggle with complex business logic. Stof's operations as first-class data enable richer collaborative systems than current CRDT approaches.
-
-* Merged and reordered data
-* Validated before application
-* Composed with other operations & structures
-
 ## Feedback & Community
-
-We welcome contributors and feedback! The community is growing, and this is a new project with a lot of potential.
 
 * Open issues or discussions on [GitHub](https://github.com/dev-formata-io/stof)
 * Please join the [Discord](https://discord.gg/Up5kxdeXZt) to get involved and/or discuss Stof

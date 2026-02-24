@@ -24,7 +24,7 @@ This function uses the `Std.pln` library function to print to the standard outpu
 #### Alternatively, embed Stof within a host (Ex. TypeScript)
 
 ```typescript
-import { StofDoc } from "jsr:@formata/stof";
+import { StofDoc } from "@formata/stof";
 
 const doc = await StofDoc.new();
 doc.lib('Std', 'pln', (...args: unknown[])=>console.log(...args));

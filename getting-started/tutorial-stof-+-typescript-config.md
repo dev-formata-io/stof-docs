@@ -34,9 +34,9 @@ server: {
 }
 ```
 
-We'll use TypeScript and the JSR package to test our valid function:
+We'll use TypeScript to test our valid function:
 
-<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "jsr:@formata/stof";
+<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "@formata/stof";
 const doc = await StofDoc.new();
 
 // Parse the initial config (could be from file, API, DB, etc.)
@@ -87,7 +87,7 @@ If you don't want to use TypeScript, you can use the [CLI](installation.md) or t
 
 Next, let's add a simple `Server.apply` library function so that our server can apply the desired settings.
 
-<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "jsr:@formata/stof";
+<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "@formata/stof";
 const doc = await StofDoc.new();
 
 // Parse the initial config
@@ -149,7 +149,7 @@ Now that we have a very basic setup, let's add a function that mimics an endpoin
 
 Let's also move the apply logic to an "apply" function within the server's base Stof config, only calling the `Server.apply` lib function when the configuration is valid.
 
-<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "jsr:@formata/stof";
+<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "@formata/stof";
 
 const BASE_CONFIG: string = `
 /*!
@@ -239,7 +239,7 @@ Up until now, our workflow is very similar to a config written in JSON, TOML, YA
 See [schemas.md](../common-patterns/schemas.md "mention") for a more in-depth look at `Obj.schemafy`, and [object-run.md](../common-patterns/object-run.md "mention") for a more in-depth look at `Obj.run`.
 {% endhint %}
 
-<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "jsr:@formata/stof";
+<pre class="language-typescript"><code class="lang-typescript">import { StofDoc } from "@formata/stof";
 
 const BASE_CONFIG: string = `
 /*!

@@ -1,29 +1,12 @@
 # Table of contents
 
-* [🚀 Stof: Data that carries its own logic](README.md)
-* [Why Stof and When?](why-stof-and-when.md)
-* [Stof vs. WebAssembly](stof-vs.-webassembly.md)
-* [Stof vs. Configuration Languages](stof-vs.-configuration-languages.md)
-* [Stof vs. Temporal/Airflow](stof-vs.-temporal-airflow.md)
-* [Stof vs. JSON Schema](stof-vs.-json-schema.md)
-
-## Applications
-
-* [Limitr](applications/limitr/README.md)
-  * [Usage-Based Pricing with Limitr](applications/limitr/usage-based-pricing-with-limitr.md)
-  * [AI Token Pricing with Limitr](applications/limitr/ai-token-pricing-with-limitr.md)
-  * [Combining Seats, Usage, and AI Tokens](applications/limitr/combining-seats-usage-and-ai-tokens.md)
+* [🚀 Stof: Data + Logic](README.md)
 
 ## Getting Started
 
 * [Installation](getting-started/installation.md)
 * [Quick Start (5 min)](getting-started/quick-start-5-min.md)
 * [Tutorial: Stof + TypeScript Config](getting-started/tutorial-stof-+-typescript-config.md)
-
-## Stof + AI <a href="#stof-ai" id="stof-ai"></a>
-
-* [Stof Workflows](stof-ai/stof-workflows.md)
-* [Tutorial: Hot-Swappable AI Agents](stof-ai/tutorial-hot-swappable-ai-agents.md)
 
 ## Core Concepts
 
