@@ -1,12 +1,8 @@
 # Table of contents
 
 * [🚀 Stof: Data + Logic](README.md)
-
-## Getting Started
-
-* [Installation](getting-started/installation.md)
-* [Quick Start (5 min)](getting-started/quick-start-5-min.md)
-* [Tutorial: Stof + TypeScript Config](getting-started/tutorial-stof-+-typescript-config.md)
+* [Getting Started](getting-started.md)
+* [Interop](interop.md)
 
 ## Core Concepts
 

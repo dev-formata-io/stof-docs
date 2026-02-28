@@ -1,267 +1,166 @@
 ---
-description: Introduction.
+description: >-
+  Data and logic have always been separate. That makes things hard. Stof puts
+  them together.
+layout:
+  width: default
+  title:
+    visible: true
+  description:
+    visible: true
+  tableOfContents:
+    visible: true
+  outline:
+    visible: true
+  pagination:
+    visible: true
+  metadata:
+    visible: true
+  tags:
+    visible: true
 ---
 
 # 🚀 Stof: Data + Logic
 
-JSON with functions that you can move around between services/APIs, add/remove/edit in transit, with a slim sandboxed WASM runtime and a clean interop model for host libraries.
+A portable document format where validation, functions, and behavior live alongside the data they belong to, in one document, across any service, language, or runtime.
 
-{% embed url="https://play.stof.dev" %}
+***
 
-## Use-Cases
+## Why Stof?
 
-* Smart configs with validation and logic
-* Data interchange with sandboxed execution
-* Prompts as human-readable & maintainable data + code
-* AI/LLM workflows and model configs
-* Data pipelines with built-in processing
-* Integration glue between systems
-* Self-describing datasets
-* ... basically anywhere data meets logic
+### 1. Data that validates and computes itself
 
-## Contributors
+**The problem:** Your config file, your schema, and the application code that interprets them are three separate things that all have to stay in sync. When one changes, the others silently break.
 
-{% hint style="info" %}
-Check out our [GitHub](https://github.com/dev-formata-io/stof) & [Discord](https://discord.gg/Up5kxdeXZt) server to get involved, or email info@stof.dev.
-{% endhint %}
+**With Stof:** Validation rules and computed values live directly in the data, defined once, enforced everywhere, no separate schema file required.
 
-| Company                                                                                                                                                                                                           | Description                                                          |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------- |
-| <picture><source srcset=".gitbook/assets/limitr_white_logo.png" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/limitr_black_logo.png" alt=""></picture>                                           | [Limitr](https://limitr.dev/) - Complete Monetization for AI & SaaS. |
-| <picture><source srcset=".gitbook/assets/Virnika Logo Lockup — Light Varient.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/Virnika Logo Lockup — Dark Varient.svg" alt="Virnika"></picture> | [Virnika](https://www.virnika.ai/) - AI Agents for Restaurants.      |
-| <picture><source srcset=".gitbook/assets/kater-logo-dark-full-name-no-bg.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/kater-logo-light-full-name-no-bg.svg" alt=""></picture>              | [Kater](https://www.kater.ai/) - Comprehensive Data & Analytics.     |
-| Your logo here                                                                                                                                                                                                    | Reach out on [Discord](https://discord.gg/Up5kxdeXZt)                |
-
-## Examples
-
-{% hint style="success" %}
-Check out the [online playground](https://play.stof.dev/) for real examples you can play with right now.
-{% endhint %}
-
-### Data Format + Logic
-
-Stof is format-first, similar to JSON, YAML, TOML, etc., with functions that can transform the document they are defined in.
-
-```rust
-// Defines data (fields, funcs, etc.)
-server: {
-    port: 8080
-    address: "localhost"
-    memory: 500GiB + 50MB
-    ttl: 300s
-    
-    fn url() -> str {
-        "https://" + self.address + ":" + self.port
-    }
-    fn valid() -> bool {
-        self.port > 1024 && self.port <= 65536 && self.address != ""
-    }
-}
-```
-
-### Data Transformation
-
-Manipulate the document using the functional data it contains.
-
-{% hint style="info" %}
-Try this example in the [playground](https://play.stof.dev/blank?content=%0Adata%3A%20%5B1%2C%202%2C%203%2C%204%2C%205%5D%0A%0A%23%5Bmain%5D%0Afn%20main%28%29%20%7B%0A%20%20%20%20for%20%28let%20i%20in%20%26self.data%29%20i%20%2A%3D%202%3B%0A%20%20%20%20pln%28self.data%29%3B%0A%7D%0A%0A%2F%2A%20Output%3A%0A%5B2%2C%204%2C%206%2C%208%2C%2010%5D%0A%2A%2F%0A).
-{% endhint %}
-
-```rust
-data: [1, 2, 3, 4, 5]
-
-#[main]
-fn main() {
-    for (let i in &self.data) i *= 2;
-    pln(self.data);
-}
-
-/* Output:
-[2, 4, 6, 8, 10]
-*/
-```
-
-### Workflows & Pipelines
-
-Stof is a lightweight document format where workflows are portable, executable data. See an example [here](getting-started/tutorial-stof-+-typescript-config.md#completed-example).
-
-{% hint style="success" %}
-Stof has [prototypes](core-concepts/types/prototypes.md), which make workflows much simpler, more powerful, and more maintainable.
-{% endhint %}
-
-{% code expandable="true" %}
-```rust
-workflow: {
-    #[run(0)]
-    remote-api: {
-        address: "https://my-server.com"
-        
-        #[run]
-        fn load_remote_stof_api() {
-            const resp = await Http.fetch(self.address);
-            Std.assert(Http.success(resp));
-            
-            // parse more stof data + logic into this doc as root obj named Api
-            const stof = Http.text(resp);
-            Std.parse(stof, "Api", format="stof");
-            
-            assert(Api.version); // Std lib is implied
-            assert(Api.version > 1.4.4);
-        }
-    }
-    
-    #[run(1)]
-    call-api: {
-        #[run]
-        fn use_loaded_api() {
-            // do something with the loaded Stof API
-        }
-    }
-}
-
-#[main]
-fn main() {
-    // Obj.run(obj) recursively runs all #[run] fields & funcs with opt order
-    self.workflow.run();
-}
-```
-{% endcode %}
-
-### Self-Validating Data
-
-Beyond simple functions, Stof supports comprehensive [schemas](common-patterns/schemas.md) for validations and transformations.
-
-{% code expandable="true" %}
 ```rust
 #[type]
 Server: {
-    #[schema((target_val: int):bool => target_val > 1024 && target_val <= 65536)]
+    #[schema((target_val: int): bool => target_val > 1024 && target_val <= 65536)]
     int port: 8080
 
-    #[schema((target_val: str):bool => target_val != "")]
-    // the ! at the end of a type means "never null", will throw if null is assigned
+    #[schema((target_val: str): bool => target_val != "")]
     str! address: "localhost"
 
-    #[schema((target_val: MiB):bool => target_val > 2MB)]
+    #[schema((target_val: MiB): bool => target_val > 2MB)]
     MiB memory: 500GiB
 
-    #[schema((target_val: ms):bool => target_val > 1s)]
-    ms ttl: 300s
-
     fn url() -> str {
-        `${self.address.starts_with("http") ? "" : "https://"}${self.address}:${self.port}`
-    }
-
-    fn validate() {
-        // <Server> is a path resolution to the prototype obj
-        // self is the actual instance obj (in this case has a prototype of Server)
-        assert(<Server>.schemafy(self));
+        `https://${self.address}:${self.port}`
     }
 }
-
-// import into the doc from TOML, JSON, YAML, etc.
-old_json: r#"
-{
-    "port": 4000,
-    "address": "https://my-server.com",
-    "memory": 3000,
-    "ttl": 5000
-}
-"#
 
 #[main]
 fn main() {
-    const my_server = new {};
-    parse(self.old_json, my_server, "json");
-    my_server as Server;   // cast to the Server prototype
-
-    my_server.validate();
-    pln(my_server.url());
-    
-    pln(stringify("toml", my_server)); // export TOML
+    const server = new Server { port: 4000, address: "my-server.com" };
+    assert(<Server>.schemafy(server));
+    pln(server.url()); // https://my-server.com:4000
 }
-
-/* Output:
-https://my-server.com:4000
-address = "https://my-server.com"
-memory = 3000.0
-port = 4000
-ttl = 5000.0
-*/
 ```
-{% endcode %}
 
-### Prompt Management
+### 2. Prompts, Context, and AI workflows as maintainable data
 
-Primitive types designed for modern needs & workflows (prompts, unit types, const fields, etc.).
+**The problem:** Prompts are strings. Tool definitions are JSON blobs. Model configs live in application code. As your AI system grows, keeping all of it in sync becomes its own engineering problem.
 
-{% code expandable="true" %}
+**With Stof:** Prompts, instructions, and model behavior are structured, composable, and version-controlled as data, not scattered across your codebase as strings.
+
 ```rust
-fn background() -> prompt {
-    const background = prompt(tag="background");
-    background.push("\nSeamless str <-> prompt casting & flows.");
-    background.push("\nMakes working with AI more maintainable for humans.\n");
-    background
+background: {
+    identity: "You are a helpful assistant."
+    
+    fn prompt() -> prompt {
+        const p = prompt(tag="background");
+        p.push(self.identity);
+        p.push("Always respond in the user's language.");
+        p
+    }
 }
 
-fn format() -> prompt {
-    // Std.prompt(..) can take N sub-prompts as a tree after text & tag
-    prompt("", tag="formatting",
-        "\n",
-        prompt("Introduction", tag="first"),
-        "\n",
-        prompt("Presentation", tag="second"),
-        "\n"
+fn instructions() -> prompt {
+    prompt("", tag="instructions",
+        prompt("Be concise.", tag="style"),
+        prompt("Cite sources when possible.", tag="accuracy")
     )
 }
 
-fn my_prompt() -> prompt {
-    const res = prompt();
-    res.push(self.background());
-    res.push("\n");
-    res.push(self.format());
-    res.push("\n");
-    res.push(prompt("Do something cool, AI", "instructions"));
-    res
+fn system_prompt() -> prompt {
+    const p = prompt();
+    p.push(self.background.prompt());
+    p.push(self.instructions());
+    p
 }
 
 #[main]
 fn main() {
-    // prompt is a tree of strings when you're working with it
-    // and casts to a string when you need it to be
-    const str_prompt: str = self.my_prompt();
+    const str_prompt: str = self.system_prompt();
     pln(str_prompt);
 }
 
 /* Output:
 <background>
-Seamless str <-> prompt casting & flows.
-Makes working with AI more maintainable for humans.
+You are a helpful assistant.
+Always respond in the user's language.
 </background>
-<formatting>
-<first>Introduction</first>
-<second>Presentation</second>
-</formatting>
-<instructions>Do something cool, AI</instructions>
+<instructions>
+<style>Be concise.</style>
+<accuracy>Cite sources when possible.</accuracy>
+</instructions>
 */
 ```
-{% endcode %}
 
-## Embedded
+### 3. Logic that travels with your data across any boundary
 
-Stof is written in Rust and can be embedded today in Python, TypeScript/JavaScript (via WebAssembly), or within your Rust project.
+**The problem:** Every time data crosses a service boundary, the logic that operates on it has to be re-implemented, re-validated, or trusted blindly on the other side. The data arrives, but the behavior stays behind.
 
-{% hint style="success" %}
-Several languages are planned. Please reach out on Discord to get involved.
+**With Stof:** A document carries its own enforcement rules, validation, and behavior; parse it anywhere, run it anywhere, no dependencies required.
+
+```rust
+// A pricing policy that enforces itself wherever it runs.
+// Plans, credits, limits, and validation all in one document.
+// See Limitr: https://limitr.dev
+
+Limitr policy: {
+    credits: {
+        Credit token: {
+            label: "Claude Token"
+            description: "A currency used to monetize & place usage limits on LLM features"
+        }
+    }
+    plans: {
+        Plan pro: {
+            label: "Pro Plan"
+            price: { amount: 20, suffix: "/month" }
+            entitlements: {
+                Entitlement ai_chat: {
+                    description: "Plan access & usage limit for in-app AI chat feature"
+                    Limit limit: { credit: "token", mode: "soft", value: 100_000 }
+                }
+            }
+        }
+    }
+}
+```
+
+{% hint style="info" %}
+**Built with Stof:** [Limitr](https://limitr.dev/) is an open source pricing and enforcement engine. The entire policy - plans, credits, limits, validation logic - lives in a single Stof document.
 {% endhint %}
 
-### NPM
+***
 
-`npm i @formata/stof`
+## Embedded Anywhere
+
+Stof is written in Rust with a slim WASM runtime. Use it from TypeScript, Python, or Rust today.
+
+### TypeScript / JavaScript
+
+```bash
+npm i @formata/stof
+```
 
 ```typescript
 import { initStof, stof } from '@formata/stof';
-await initStof(); // init was once (see readme)
+await initStof(); // init wasm once (see readme)
 
 const doc = stof`{
     name: 'world',
@@ -278,59 +177,28 @@ console.log(await doc.call('hello')); // Hello, world!
 stof = "0.9.*"
 ```
 
-```rust
-use stof::model::Graph;
-
-fn main() {
-    let mut graph = Graph::default();
-    
-    graph.parse_stof_src(r#"
-        #[main]
-        fn main() {
-            pln("Hello, world!");
-        }
-    "#, None).unwrap();
-
-    match graph.run(None, true) {
-        Ok(res) => println!("{res}"),
-        Err(err) => panic!("{err}"),
-    }
-}
-```
-
 ### Python
 
-Stof is available on [PyPi](https://pypi.org/project/stof), just `pip install stof` and `import pystof` module to get started.
-
-```python
-from pystof import Doc
-
-STOF = """
-#[main]
-fn main() {
-    const name = Example.name('Stof,', 'with Python');
-    pln(`Hello, ${name}!!`)
-}
-"""
-
-def name(first, last):
-    return first + ' ' + last
-
-def main():
-    doc = Doc()
-    doc.lib('Example', 'name', name)
-    doc.parse(STOF)
-    doc.run()
-
-if __name__ == "__main__":
-    main()
-
-# Output:
-# Hello, Stof, with Python!!
+```bash
+pip install stof
 ```
 
-## Feedback & Community
+***
 
-* Open issues or discussions on [GitHub](https://github.com/dev-formata-io/stof)
-* Please join the [Discord](https://discord.gg/Up5kxdeXZt) to get involved and/or discuss Stof
-* Email **info@stof.dev** to contact us directly
+## Built with Stof
+
+| Company                                                                                                                                                                                                           | Description                                                      |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| <picture><source srcset=".gitbook/assets/limitr_white_logo.png" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/limitr_black_logo.png" alt=""></picture>                                           | [Limitr](https://limitr.dev/) - Monetize your AI & SaaS.         |
+| <picture><source srcset=".gitbook/assets/Virnika Logo Lockup — Light Varient.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/Virnika Logo Lockup — Dark Varient.svg" alt="Virnika"></picture> | [Virnika](https://www.virnika.ai/) - AI Agents for Restaurants.  |
+| <picture><source srcset=".gitbook/assets/kater-logo-dark-full-name-no-bg.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/kater-logo-light-full-name-no-bg.svg" alt=""></picture>              | [Kater](https://www.kater.ai/) - Comprehensive Data & Analytics. |
+| Your logo here                                                                                                                                                                                                    | [Discord](https://discord.gg/Up5kxdeXZt)                         |
+
+***
+
+## Get Involved
+
+* [Playground](https://play.stof.dev/) - Try Stof in your browser right now
+* [GitHub](https://github.com/dev-formata-io/stof) - Open issues, discussions, and contributions
+* [Discord](https://discord.gg/Up5kxdeXZt) - Talk to the team and community
+* [info@stof.dev](mailto:info@stof.dev) - Get in touch directly
