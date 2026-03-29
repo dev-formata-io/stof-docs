@@ -64,13 +64,10 @@ npm i @formata/stof
 **Run:**
 
 ```typescript
-import { initStof, StofDoc } from '@formata/stof';
-await initStof();
+import { stofAsync } from '@formata/stof';
 
-const doc = new StofDoc();
-doc.lib('Std', 'pln', (...args: unknown[]) => console.log(...args));
-doc.parse(`
-    str message: "Hello, Stof!"
+const doc = await stofAsync`
+    message: "Hello, Stof!"
 
     fn greet() -> str {
         \`\${self.message} Data and logic, together.\`
@@ -80,7 +77,11 @@ doc.parse(`
     fn main() {
         pln(self.greet());
     }
-`);
+`;
+
+// Bridge with your host environment
+doc.lib('Std', 'pln', (...args: unknown[]) => console.log(...args));
+
 await doc.run(); // Hello, Stof! Data and logic, together.
 ```
 

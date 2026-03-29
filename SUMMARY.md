@@ -1,6 +1,6 @@
 # Table of contents
 
-* [🚀 Stof: Data + Logic](README.md)
+* [Stof: Data + Logic](README.md)
 * [Getting Started](getting-started.md)
 * [Interop](interop.md)
 

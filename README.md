@@ -1,7 +1,7 @@
 ---
 description: >-
-  Data and logic have always been separate. That makes things hard. Stof puts
-  them together.
+  One document, runs anywhere. Send functions over the wire. Documents that
+  validate themselves.
 layout:
   width: default
   title:
@@ -20,135 +20,129 @@ layout:
     visible: true
 ---
 
-# 🚀 Stof: Data + Logic
+# Stof: Data + Logic
 
-A portable document format where validation, functions, and behavior live alongside the data they belong to, in one document, across any service, language, or runtime.
+Stof is a portable document format where functions, validation, and behavior live alongside the data they belong to.
+
+It's a superset of JSON - your existing data works as-is. Add logic only where you need it.
 
 ***
 
 ## Why Stof?
 
-### 1. Data that validates and computes itself
+### 1. Interop & interchange data across any boundary
+
+**The problem**: JSON alone is no longer enough - too much ambiguity, too much brittleness, and every API has its own flavor of interchange or DSL. There is no single correct way in distributed systems.
+
+**With Stof**: Stof doesn't try to replace them. It's the layer that works with all of them - parse JSON, YAML, TOML, STOF, binary, etc. into one document, add the logic that belongs with the data (functions), and send it anywhere. Export to any format as needed internally.
+
+```typescript
+import { stofAsync } from '@formata/stof';
+
+const doc = await stofAsync`
+#[type]
+Server: {
+    port: 8080
+    host: 'localhost'
+    secure: false
+    MiB memory: 500GiB
+
+    fn url() -> str {
+        let url = self.secure ? 'https://' : 'http://';
+        url += self.host + ':' + self.port;
+        url
+    }
+}`;
+
+// Parse STOF, JSON, YAML, binary, etc. into the same document
+doc.parse(`Server "prod": {
+    "host": "prod.example.com",
+    "port": 443,
+    "secure": true,
+    "memory": "2GB"
+}`);
+
+console.log(await doc.call('prod.url'));     // https://prod.example.com:443
+console.log(doc.get('prod.memory'));         // ~1907 MiB (auto-converted from GB)
+```
+
+### 2. Runtime self-assembly
+
+**The problem**: Every API integration is a static contract. When a service modifies its capabilities, every consumer has to update their client code and redeploy. Your system can only do what it shipped with.
+
+**With Stof**: Documents can parse new Stof into themselves at runtime, receiving code over the network and executing it immediately. The document grows while it runs, always sandboxed.
+
+```typescript
+import { stofAsync } from '@formata/stof';
+
+const doc = await stofAsync`
+    fn loaded() -> str {
+        const stof = await Ext.fetch();
+        parse(stof, self);
+        self.say_hello()
+    }
+`;
+
+// Bridge to your host environment (full async support)
+doc.lib('Ext', 'fetch', async () => {
+    return `fn say_hello() -> str { 'Hello, world!' }`;
+});
+
+console.log(await doc.call('loaded'));      // Hello, world!
+```
+
+### 3. Data that validates and computes itself
 
 **The problem:** Your config file, your schema, and the application code that interprets them are three separate things that all have to stay in sync. When one changes, the others silently break.
 
 **With Stof:** Validation rules and computed values live directly in the data, defined once, enforced everywhere, no separate schema file required.
 
-```rust
-#[type]
-Server: {
-    #[schema((target_val: int): bool => target_val > 1024 && target_val <= 65536)]
-    int port: 8080
-
-    #[schema((target_val: str): bool => target_val != "")]
-    str! address: "localhost"
-
-    #[schema((target_val: MiB): bool => target_val > 2MB)]
-    MiB memory: 500GiB
-
-    fn url() -> str {
-        `https://${self.address}:${self.port}`
-    }
-}
-
-#[main]
-fn main() {
-    const server = new Server { port: 4000, address: "my-server.com" };
-    assert(<Server>.schemafy(server));
-    pln(server.url()); // https://my-server.com:4000
-}
-```
-
-### 2. Prompts, Context, and AI workflows as maintainable data
-
-**The problem:** Prompts are strings. Tool definitions are JSON blobs. Model configs live in application code. As your AI system grows, keeping all of it in sync becomes its own engineering problem.
-
-**With Stof:** Prompts, instructions, and model behavior are structured, composable, and version-controlled as data, not scattered across your codebase as strings.
-
-```rust
-background: {
-    identity: "You are a helpful assistant."
-    
-    fn prompt() -> prompt {
-        const p = prompt(tag="background");
-        p.push(self.identity);
-        p.push("Always respond in the user's language.");
-        p
-    }
-}
-
-fn instructions() -> prompt {
-    prompt("", tag="instructions",
-        prompt("Be concise.", tag="style"),
-        prompt("Cite sources when possible.", tag="accuracy")
-    )
-}
-
-fn system_prompt() -> prompt {
-    const p = prompt();
-    p.push(self.background.prompt());
-    p.push(self.instructions());
-    p
-}
-
-#[main]
-fn main() {
-    const str_prompt: str = self.system_prompt();
-    pln(str_prompt);
-}
-
-/* Output:
-<background>
-You are a helpful assistant.
-Always respond in the user's language.
-</background>
-<instructions>
-<style>Be concise.</style>
-<accuracy>Cite sources when possible.</accuracy>
-</instructions>
-*/
-```
-
-### 3. Logic that travels with your data across any boundary
-
-**The problem:** Every time data crosses a service boundary, the logic that operates on it has to be re-implemented, re-validated, or trusted blindly on the other side. The data arrives, but the behavior stays behind.
-
-**With Stof:** A document carries its own enforcement rules, validation, and behavior; parse it anywhere, run it anywhere, no dependencies required.
-
-```rust
-// A pricing policy that enforces itself wherever it runs.
-// Plans, credits, limits, and validation all in one document.
-// See Limitr: https://limitr.dev
-
-Limitr policy: {
-    credits: {
-        Credit token: {
-            label: "Claude Token"
-            description: "A currency used to monetize & place usage limits on LLM features"
-        }
-    }
-    plans: {
-        Plan pro: {
-            label: "Pro Plan"
-            price: { amount: 20, suffix: "/month" }
-            entitlements: {
-                Entitlement ai_chat: {
-                    description: "Plan access & usage limit for in-app AI chat feature"
-                    Limit limit: { credit: "token", mode: "soft", value: 100_000 }
-                }
-            }
-        }
-    }
-}
-```
-
 {% hint style="info" %}
 **Built with Stof:** [Limitr](https://limitr.dev/) is an open source pricing and enforcement engine. The entire policy - plans, credits, limits, validation logic - lives in a single Stof document.
 {% endhint %}
 
+{% hint style="warning" %}
+[Limitr](https://limitr.dev/) policies have built-in validation (they're Stof documents).
+
+This example throws because it's not valid to have a negative time increment: `error: Limit reset increment value must be greater than zero`&#x20;
+
+The [schema](common-patterns/schemas.md) function on the reset\_inc field: `#[schema((target_val: float): bool => target_val > 0)]`
+{% endhint %}
+
+```typescript
+// A pricing policy that enforces itself wherever it runs.
+// Plans, credits, limits, and validation all in one document.
+// See Limitr: https://limitr.dev
+
+import { Limitr } from '@formata/limitr';
+
+const yamlPolicy = `
+policy:
+  credits:
+    token:
+      description: 'AI token'
+  plans:
+    growth:
+      label: 'Growth Plan'
+      entitlements:
+        ai_tokens:
+          description: 'Included tokens'
+          limit:
+            credit: token
+            value: 100_000
+            resets: true
+            reset_inc: -1hr
+`;
+
+const policy = await Limitr.new(yamlPolicy, 'yaml'); // Stof document
+
+// Usage limits - can this user use this many AI tokens right now?
+await policy.allow('user_456', 'ai_tokens', 4200);
+```
+
 ***
 
-## Embedded Anywhere
+## Use Everywhere
 
 Stof is written in Rust with a slim WASM runtime. Use it from TypeScript, Python, or Rust today.
 
@@ -159,13 +153,12 @@ npm i @formata/stof
 ```
 
 ```typescript
-import { initStof, stof } from '@formata/stof';
-await initStof(); // init wasm once (see readme)
+import { stofAsync } from '@formata/stof';
 
-const doc = stof`{
-    name: 'world',
+const doc = await stofAsync`
+    name: 'World'
     fn hello() -> str { 'Hello, ' + self.name + '!' }
-}`;
+`;
 
 console.log(await doc.call('hello')); // Hello, world!
 ```
@@ -182,17 +175,6 @@ stof = "0.9.*"
 ```bash
 pip install stof
 ```
-
-***
-
-## Built with Stof
-
-| Company                                                                                                                                                                                                           | Description                                                      |
-| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| <picture><source srcset=".gitbook/assets/limitr_white_logo.png" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/limitr_black_logo.png" alt=""></picture>                                           | [Limitr](https://limitr.dev/) - Monetize your AI & SaaS.         |
-| <picture><source srcset=".gitbook/assets/Virnika Logo Lockup — Light Varient.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/Virnika Logo Lockup — Dark Varient.svg" alt="Virnika"></picture> | [Virnika](https://www.virnika.ai/) - AI Agents for Restaurants.  |
-| <picture><source srcset=".gitbook/assets/kater-logo-dark-full-name-no-bg.svg" media="(prefers-color-scheme: dark)"><img src=".gitbook/assets/kater-logo-light-full-name-no-bg.svg" alt=""></picture>              | [Kater](https://www.kater.ai/) - Comprehensive Data & Analytics. |
-| Your logo here                                                                                                                                                                                                    | [Discord](https://discord.gg/Up5kxdeXZt)                         |
 
 ***
 
